@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Subscenes</h2><pre><code class="language-julia">using Makie
+
+ img = rand(RGBAf0, 100, 100)
+ scene = image(img, show_axis = false)
+ subscene = Scene(scene, IRect(100, 100, 300, 300))
+ scatter!(subscene, rand(100) * 200, rand(100) * 200, markersize = 4)
+ scene
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/subscenes/media/image.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

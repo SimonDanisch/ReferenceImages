@@ -21,6 +21,11 @@ using Makie
 ```
 ```@raw html
 
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">1<br><img src="/home/sd/ReferenceImages/recordings/3d_contour_with_2d_contour_slices/media/image.jpg" alt="1<br>">
-</p></div>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/3d_contour_with_2d_contour_slices/media/image.jpg" alt="">
+
+    </p>
+</div>
+
 ```

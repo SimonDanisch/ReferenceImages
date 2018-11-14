@@ -40,8 +40,18 @@ using Makie
 ```
 ```@raw html
 
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">1<br><img src="/home/sd/ReferenceImages/recordings/chess_game/media/chess_game-1.jpg" alt="1<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">2<br><img src="/home/sd/ReferenceImages/recordings/chess_game/media/chess_game-2.jpg" alt="2<br>">
-</p></div>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/chess_game/media/chess_game-1.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/chess_game/media/chess_game-2.jpg" alt="">
+
+    </p>
+</div>
+
 ```

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>FEM mesh 2D</h2><pre><code class="language-julia">using Makie
+
+ coordinates = [
+     0.0 0.0;
+     0.5 0.0;
+     1.0 0.0;
+     0.0 0.5;
+     0.5 0.5;
+     1.0 0.5;
+     0.0 1.0;
+     0.5 1.0;
+     1.0 1.0;
+ ]
+ connectivity = [
+     1 2 5;
+     1 4 5;
+     2 3 6;
+     2 5 6;
+     4 5 8;
+     4 7 8;
+     5 6 9;
+     5 8 9;
+ ]
+ color = [0.0, 0.0, 0.0, 0.0, -0.375, 0.0, 0.0, 0.0, 0.0]
+ scene = mesh(coordinates, connectivity, color = color, shading = false)
+ wireframe!(scene[end][1], color = (:black, 0.6), linewidth = 3)
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/fem_mesh_2d/media/image.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Simple meshscatter</h2><pre><code class="language-julia">using Makie
+
+ large_sphere = Sphere(Point3f0(0), 1f0)
+ positions = decompose(Point3f0, large_sphere)
+ meshscatter(positions, color = RGBAf0(0.9, 0.2, 0.4, 1), markersize = 0.05)
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/simple_meshscatter/media/image.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

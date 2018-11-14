@@ -42,6 +42,11 @@ using Makie
 ```
 ```@raw html
 
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">1<br><img src="/home/sd/ReferenceImages/recordings/line_gif/media/line_gif.gif" alt="1<br>">
-</p></div>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/line_gif/media/line_gif.gif" alt="">
+
+    </p>
+</div>
+
 ```

@@ -27,9 +27,14 @@ end
 ```
 ```@raw html
 
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">1<br><video controls autoplay loop muted>
-  <source src="/home/sd/ReferenceImages/recordings/animated_surface_and_wireframe/media/animated_surface_and_wireframe.mp4" type="video/mp4">
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <video controls autoplay loop muted>
+  <source src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/animated_surface_and_wireframe/media/animated_surface_and_wireframe.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
-</p></div>
+
+    </p>
+</div>
+
 ```

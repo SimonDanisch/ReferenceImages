@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Image on Geometry (Moon)</h2><pre><code class="language-julia">using Makie
+ using FileIO
+
+ moon = try
+     load(download(&quot;https://svs.gsfc.nasa.gov/vis/a000000/a004600/a004675/phases.0001_print.jpg&quot;))
+ catch e
+     @warn(&quot;Download the moon failed. Using random image, so this test will fail! (error: $e)&quot;)
+     rand(RGBAf0, 100, 100) # don&#39;t error test when e.g. offline
+ end
+ scene = mesh(Sphere(Point3f0(0), 1f0), color = moon, shading = false, show_axis = false, center = false)
+ update_cam!(scene, Vec3f0(-2, 2, 2), Vec3f0(0))
+ scene
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/image_on_geometry__moon_/media/image.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

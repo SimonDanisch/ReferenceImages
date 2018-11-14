@@ -24,14 +24,39 @@ using Makie
 ```
 ```@raw html
 
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">1<br><img src="/home/sd/ReferenceImages/recordings/color_legend/media/color_legend-1.jpg" alt="1<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">2<br><img src="/home/sd/ReferenceImages/recordings/color_legend/media/color_legend-2.jpg" alt="2<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">3<br><img src="/home/sd/ReferenceImages/recordings/color_legend/media/color_legend-3.jpg" alt="3<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">4<br><img src="/home/sd/ReferenceImages/recordings/color_legend/media/color_legend-4.jpg" alt="4<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">5<br><img src="/home/sd/ReferenceImages/recordings/color_legend/media/color_legend-5.jpg" alt="5<br>">
-</p></div>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-1.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-2.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-3.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-4.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-5.jpg" alt="">
+
+    </p>
+</div>
+
 ```

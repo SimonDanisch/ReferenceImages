@@ -45,28 +45,88 @@ using Makie
 ```
 ```@raw html
 
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">1<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-1.jpg" alt="1<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">2<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-10.jpg" alt="2<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">3<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-11.jpg" alt="3<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">4<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-12.jpg" alt="4<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">5<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-2.jpg" alt="5<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">6<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-3.jpg" alt="6<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">7<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-4.jpg" alt="7<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">8<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-5.jpg" alt="8<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">9<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-6.jpg" alt="9<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">10<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-7.jpg" alt="10<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">11<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-8.jpg" alt="11<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">12<br><img src="/home/sd/ReferenceImages/recordings/axis_theming/media/axis_theming-9.jpg" alt="12<br>">
-</p></div>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-1.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-10.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-11.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-12.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-2.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-3.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-4.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-5.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-6.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-7.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-8.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis_theming/media/axis_theming-9.jpg" alt="">
+
+    </p>
+</div>
+
 ```

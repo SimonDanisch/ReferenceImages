@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Marker offset</h2><pre><code class="language-julia">using Makie
+
+ scene = Scene(resolution = (500, 500))
+ points = Point2f0[(0,0), (1,1), (2,2)]
+ offset = rand(Point2f0, 3)./5
+ scatter!(scene, points)
+ scatter!(scene, points, marker_offset = offset, color = :red)
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/marker_offset/media/image.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Mouse Hover</h2><pre><code class="language-julia">using Makie
+ using Colors, Observables
+
+ r = range(0, stop=5pi, length=100)
+ scene = Scene(resolution = (500, 500))
+ lines!(scene, r, sin.(r), linewidth = 3)
+ lineplot = scene[end]
+ visible = node(:visible, false)
+ poprect = lift(scene.events.mouseposition) do mp
+     FRect((mp .+ 5), 250, 40)
+ end
+ textpos = lift(scene.events.mouseposition) do mp
+     Vec3f0((mp .+ 5 .+ (250/2, 40 / 2))..., 120)
+ end
+ popup = poly!(campixel(scene), poprect, raw = true, color = :white, strokewidth = 2, strokecolor = :black, visible = visible)
+ rect = popup[end]
+ translate!(rect, Vec3f0(0, 0, 100))
+ text!(popup, &quot;( 0.000,  0.000)&quot;, textsize = 30, position = textpos, color = :darkred, align = (:center, :center), raw = true, visible = visible)
+ text_field = popup[end]
+ scene
+ x = Node(false)
+ on(scene.events.mouseposition) do event
+     plot, idx = Makie.mouse_selection(scene)
+     if plot == lineplot &amp;&amp; idx &gt; 0
+         visible[] = true
+         text_field[1] = sprint(io-&gt; print(io, round.(Float64.(Tuple(lineplot[1][][idx])), digits = 3)))
+     else
+         visible[] = false
+     end
+     return
+ end
+ RecordEvents(scene, &quot;output&quot;)
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <video controls autoplay loop muted>
+  <source src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/mouse_hover/media/video.mp4" type="video/mp4">
+  Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
+</video>
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

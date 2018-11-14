@@ -34,10 +34,25 @@ using Makie
 ```
 ```@raw html
 
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">1<br><img src="/home/sd/ReferenceImages/recordings/stepper_demo/media/stepper_demo-1.jpg" alt="1<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">2<br><img src="/home/sd/ReferenceImages/recordings/stepper_demo/media/stepper_demo-2.jpg" alt="2<br>">
-</p></div>
-<div style="display:inline-block"><p style="display:inline-block; text-align: center">3<br><img src="/home/sd/ReferenceImages/recordings/stepper_demo/media/stepper_demo-3.jpg" alt="3<br>">
-</p></div>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/stepper_demo/media/stepper_demo-1.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/stepper_demo/media/stepper_demo-2.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/stepper_demo/media/stepper_demo-3.jpg" alt="">
+
+    </p>
+</div>
+
 ```

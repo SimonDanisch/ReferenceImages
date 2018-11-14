@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Comparing contours, image, surfaces and heatmaps</h2><pre><code class="language-julia">using Makie
+
+ N = 20
+ x = LinRange(-0.3, 1, N)
+ y = LinRange(-1, 0.5, N)
+ z = x .* y&#39;
+ hbox(
+     vbox(
+         contour(x, y, z, levels = 20, linewidth =3),
+         contour(x, y, z, levels = 0, linewidth = 0, fillrange = true),
+         heatmap(x, y, z),
+     ),
+     vbox(
+         image(x, y, z, colormap = :viridis),
+         surface(x, y, fill(0f0, N, N), color = z, shading = false),
+         image(-0.3..1, -1..0.5, Makie.logo())
+     )
+ )
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/comparing_contours,_image,_surfaces_and_heatmaps/media/image.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

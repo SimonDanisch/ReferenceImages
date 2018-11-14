@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>surface + contour3d</h2><pre><code class="language-julia">using Makie
+
+ vx = -1:0.01:1
+ vy = -1:0.01:1
+
+ f(x, y) = (sin(x*10) + cos(y*10)) / 4
+
+ p1 = surface(vx, vy, f)
+ p2 = contour3d(vx, vy, (x, y) -&gt; f(x,y), levels = 15, linewidth = 3)
+
+ scene = vbox(p1, p2)
+ text!(campixel(p1), &quot;surface&quot;, position = widths(p1) .* Vec(0.5, 1), align = (:center, :top), raw = true)
+ text!(campixel(p2), &quot;contour3d&quot;, position = widths(p2) .* Vec(0.5, 1), align = (:center, :top), raw = true)
+ scene
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/surface___contour3d/media/image.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

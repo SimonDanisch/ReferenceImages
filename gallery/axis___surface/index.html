@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Axis + Surface</h2><pre><code class="language-julia">using Makie
+
+ vx = -1:0.01:1
+ vy = -1:0.01:1
+
+ f(x, y) = (sin(x*10) + cos(y*10)) / 4
+ scene = Scene(resolution = (500, 500))
+ # One way to style the axis is to pass a nested dictionary / named tuple to it.
+ surface!(scene, vx, vy, f, axis = (frame = (linewidth = 2.0,),))
+ psurf = scene[end] # the surface we last plotted to scene
+ # One can also directly get the axis object and manipulate it
+ axis = scene[Axis] # get axis
+
+ # You can access nested attributes likes this:
+ axis[:names, :axisnames] = (&quot;\\bf{ℜ}[u]&quot;, &quot;\\bf{𝕴}[u]&quot;, &quot; OK\n\\bf{δ}\n γ&quot;)
+ tstyle = axis[:names] # or just get the nested attributes and work directly with them
+
+ tstyle[:textsize] = 10
+ tstyle[:textcolor] = (:red, :green, :black)
+ tstyle[:font] = &quot;helvetica&quot;
+
+
+ psurf[:colormap] = :RdYlBu
+ wh = widths(scene)
+ t = text!(
+     campixel(scene),
+     &quot;Multipole Representation of first resonances of U-238&quot;,
+     position = (wh[1] / 2.0, wh[2] - 20.0),
+     align = (:center,  :center),
+     textsize = 20,
+     font = &quot;helvetica&quot;,
+     raw = :true
+ )
+ c = lines!(scene, Circle(Point2f0(0.1, 0.5), 0.1f0), color = :red, offset = Vec3f0(0, 0, 1))
+ scene
+ #update surface
+ # TODO explain and improve the situation here
+ psurf.converted[3][] = f.(vx .+ 0.5, (vy .+ 0.5)&#39;)
+ scene
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis___surface/media/image.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Contour Function</h2><pre><code class="language-julia">using Makie
+
+ r = range(-10, stop = 10, length = 512)
+ z = ((x, y)-&gt; sin(x) + cos(y)).(r, r&#39;)
+ contour(r, r, z, levels = 5, color = :viridis, linewidth = 3)
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/contour_function/media/image.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

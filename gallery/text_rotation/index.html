@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Text rotation</h2><pre><code class="language-julia">using Makie
+
+ scene = Scene()
+ pos = (500, 500)
+ posis = Point2f0[]
+ for r in range(0, stop = 2pi, length = 20)
+     global pos, posis
+     p = pos .+ (sin(r)*100.0, cos(r) * 100)
+     push!(posis, p)
+     t = text!(
+         scene, &quot;test&quot;,
+         position = p,
+         textsize = 50,
+         rotation = 1.5pi - r,
+         align = (:center, :center)
+     )
+ end
+ scatter!(scene, posis, markersize = 10)
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/text_rotation/media/image.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

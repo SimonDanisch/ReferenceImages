@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Image on Geometry (Earth)</h2><pre><code class="language-julia">using Makie
+ using FileIO, Colors
+
+ earth = try
+     load(download(&quot;https://svs.gsfc.nasa.gov/vis/a000000/a002900/a002915/bluemarble-2048.png&quot;))
+ catch e
+     @warn(&quot;Downloading the earth failed. Using random image, so this test will fail! (error: $e)&quot;)
+     rand(RGBAf0, 100, 100) # don&#39;t error test when e.g. offline
+ end
+ m = GLNormalUVMesh(Sphere(Point3f0(0), 1f0), 60)
+ mesh(m, color = earth, shading = false)
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/image_on_geometry__earth_/media/image.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+
