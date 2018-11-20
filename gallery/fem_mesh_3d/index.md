@@ -2,9 +2,9 @@
 
 ```julia
 using Makie
- using GeometryTypes
+ using GeometryTypes, GLMakie
 
- cat = Makie.loadasset("cat.obj")
+ cat = GLMakie.loadasset("cat.obj")
  vertices = decompose(Point3f0, cat)
  faces = decompose(Face{3, Int}, cat)
  coordinates = [vertices[i][j] for i = 1:length(vertices), j = 1:3]
@@ -20,7 +20,7 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/fem_mesh_3d/media/image.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/fem_mesh_3d/media/image.jpg" alt="">
 
     </p>
 </div>

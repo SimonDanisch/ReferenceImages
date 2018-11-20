@@ -11,7 +11,7 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/scatter_colormap/media/image.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/scatter_colormap/media/image.jpg" alt="">
 
     </p>
 </div>

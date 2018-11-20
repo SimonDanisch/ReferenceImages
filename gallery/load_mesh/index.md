@@ -2,8 +2,9 @@
 
 ```julia
 using Makie
+ using GLMakie
 
- mesh(Makie.loadasset("cat.obj"))
+ mesh(GLMakie.loadasset("cat.obj"))
 
 
 ```
@@ -11,7 +12,7 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/load_mesh/media/image.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/load_mesh/media/image.jpg" alt="">
 
     </p>
 </div>

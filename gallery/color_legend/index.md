@@ -26,35 +26,35 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-1.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/color_legend/media/color_legend-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-2.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/color_legend/media/color_legend-2.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-3.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/color_legend/media/color_legend-3.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-4.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/color_legend/media/color_legend-4.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-5.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/color_legend/media/color_legend-5.jpg" alt="">
 
     </p>
 </div>

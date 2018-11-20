@@ -2,11 +2,12 @@
 
 ```julia
 using Makie
+ using GLMakie
 
  us = range(0, stop = 1, length = 100)
  scene = Scene()
  scene = linesegments!(scene, FRect3D(Vec3f0(0, -1, 0), Vec3f0(1, 2, 2)))
- p = lines!(scene, us, sin.(us .+ time()), zeros(100), linewidth = 3)[end]
+ p = lines!(scene, us, sin.(us .+ time()), zeros(100), linewidth = 3, transparency = true)[end]
  lineplots = [p]
  translate!(p, 0, 0, 0)
  colors = to_colormap(:RdYlBu)
@@ -24,7 +25,7 @@ using Makie
          pushfirst!(lineplots, p)
          translate!(p, 0, 0, 0)
          #TODO automatically insert new plots
-         insert!(Makie.GLMakie.global_gl_screen(), scene, p)
+         insert!(GLMakie.global_gl_screen(), scene, p)
      else
          lineplots = circshift(lineplots, 1)
          lp = first(lineplots)
@@ -44,7 +45,7 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/line_gif/media/line_gif.gif" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/line_gif/media/line_gif.gif" alt="">
 
     </p>
 </div>

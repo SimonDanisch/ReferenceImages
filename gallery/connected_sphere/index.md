@@ -16,7 +16,7 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/connected_sphere/media/image.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/connected_sphere/media/image.jpg" alt="">
 
     </p>
 </div>

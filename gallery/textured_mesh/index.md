@@ -2,11 +2,11 @@
 
 ```julia
 using Makie
- using FileIO
+ using FileIO, GLMakie
 
  scene = Scene(resolution = (500, 500))
- catmesh = FileIO.load(Makie.assetpath("cat.obj"), GLNormalUVMesh)
- mesh(catmesh, color = Makie.loadasset("diffusemap.tga"))
+ catmesh = FileIO.load(GLMakie.assetpath("cat.obj"), GLNormalUVMesh)
+ mesh(catmesh, color = GLMakie.loadasset("diffusemap.tga"))
 
 
 ```
@@ -14,7 +14,7 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/textured_mesh/media/image.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/textured_mesh/media/image.jpg" alt="">
 
     </p>
 </div>

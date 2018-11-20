@@ -42,14 +42,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/chess_game/media/chess_game-1.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/chess_game/media/chess_game-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/chess_game/media/chess_game-2.jpg" alt="">
+        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/chess_game/media/chess_game-2.jpg" alt="">
 
     </p>
 </div>
