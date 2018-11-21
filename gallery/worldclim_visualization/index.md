@@ -8,7 +8,6 @@ using Makie
  This example requires the GDAL package, from https://github.com/JuliaGeo/GDAL.jl
  For more information about GDAL, see the official documentation at: https://gdal.org/
  =#
-
  # register GDAL drivers
  GDAL.allregister()
 

@@ -37,35 +37,35 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/labels/media/labels-1.jpg" alt="">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/labels/media/labels-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/labels/media/labels-2.jpg" alt="">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/labels/media/labels-2.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/labels/media/labels-3.jpg" alt="">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/labels/media/labels-3.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/labels/media/labels-4.jpg" alt="">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/labels/media/labels-4.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/labels/media/labels-5.jpg" alt="">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/labels/media/labels-5.jpg" alt="">
 
     </p>
 </div>

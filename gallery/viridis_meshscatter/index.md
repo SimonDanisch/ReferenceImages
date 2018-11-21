@@ -18,7 +18,7 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/viridis_meshscatter/media/image.jpg" alt="">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/viridis_meshscatter/media/image.jpg" alt="">
 
     </p>
 </div>

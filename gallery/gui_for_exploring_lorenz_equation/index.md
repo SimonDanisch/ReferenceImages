@@ -56,7 +56,7 @@ using Makie
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/gui_for_exploring_lorenz_equation/media/video.mp4" type="video/mp4">
+  <source src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/gui_for_exploring_lorenz_equation/media/video.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

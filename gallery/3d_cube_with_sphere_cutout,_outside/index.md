@@ -16,7 +16,7 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="/home/sd/.julia/dev/MakieGallery/test/test_recordings/3d_cube_with_sphere_cutout,_outside/media/image.jpg" alt="">
+        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/3d_cube_with_sphere_cutout,_outside/media/image.jpg" alt="">
 
     </p>
 </div>
