@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>StatsMakie</h2><pre><code class="language-julia">using AbstractPlotting
+ using StatsMakie
+ using DataFrames, RDatasets
+ using StatsMakie: linear, smooth
+
+ N = 1000
+ a = rand(1:2, N) # a discrete variable
+ b = rand(1:2, N) # a discrete variable
+ x = randn(N) # a continuous variable
+ y = @. x * a + 0.8*randn() # a continuous variable
+ z = x .+ y # a continuous variable
+ @substep
+
+ scatter(x, y, markersize = 0.2)
+ @substep
+
+ scatter(Group(a), x, y, markersize = 0.2)
+ @substep
+
+ scatter(Group(a), x, y, color = [:black, :red], markersize = 0.2)
+ @substep
+
+ scatter(Group(marker = a), x, y, markersize = 0.2)
+ @substep
+
+ scatter(Group(marker = a, color = b), x, y, markersize = 0.2)
+ @substep
+
+ scatter(Group(marker = a), Style(color = z), x, y)
+ @substep
+
+ scatter(Group(color = a), x, y, Style(markersize = z ./ 10))
+ @substep
+
+ plot(linear, x, y)
+ @substep
+
+ plot(linear, Group(a), x, y)
+ @substep
+
+ scatter(Group(a), x, y, markersize = 0.2)
+ plot!(linear, Group(a), x, y)
+ @substep
+
+ plot(linear, Group(linestyle = a), x, y)
+ @substep
+
+ N = 200
+ x = 10 .* rand(N)
+ a = rand(1:2, N)
+ y = sin.(x) .+ 0.5 .* rand(N) .+ cos.(x) .* a
+ @substep
+
+ scatter(Group(a), x, y)
+ plot!(smooth, Group(a), x, y)
+ @substep
+
+ plot(histogram, y)
+ @substep
+
+ plot(histogram, x, y)
+
+ @substep
+
+ plot(histogram(nbins = 30), x, y)
+ @substep
+
+ wireframe(histogram(nbins = 30), x, y)
+ @substep
+
+ iris = RDatasets.dataset(&quot;datasets&quot;, &quot;iris&quot;)
+ scatter(Data(iris), Group(:Species), :SepalLength, :SepalWidth)
+ @substep
+ # use Position.stack to signal that you want bars stacked vertically rather than superimposed
+ plot(Position.stack, histogram, Data(iris), Group(:Species), :SepalLength)
+ @substep
+
+ wireframe(density(trim=true), Data(iris), Group(:Species), :SepalLength, :SepalWidth)
+ @substep
+
+ scatter(
+     Data(iris),
+     Group(marker = :Species, color = bycolumn),
+     :SepalLength, (:PetalLength, :PetalWidth)
+ )
+ @substep
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image10.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image11.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image12.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image14.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image15.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image16.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image17.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image18.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image19.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image2.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image20.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image21.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image22.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image3.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image4.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image5.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image6.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image7.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image8.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/statsmakie/media/image9.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+
