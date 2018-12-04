@@ -1,7 +1,7 @@
 ## contour
 
 ```julia
-using Makie
+using AbstractPlotting
 
  y = range(-0.997669, stop = 0.997669, length = 23)
  contour(range(-0.99, stop = 0.99, length = 23), y, rand(23, 23), levels = 10)
@@ -12,7 +12,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/contour_1/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycontour_1/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycontour_1/media/thumb.jpg" alt="">
 
     </p>
 </div>

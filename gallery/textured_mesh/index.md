@@ -1,7 +1,7 @@
 ## Textured Mesh
 
 ```julia
-using Makie
+using AbstractPlotting
  using FileIO, GLMakie
 
  scene = Scene(resolution = (500, 500))
@@ -14,7 +14,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/textured_mesh/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerytextured_mesh/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerytextured_mesh/media/thumb.jpg" alt="">
 
     </p>
 </div>

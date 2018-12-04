@@ -1,7 +1,7 @@
 ## Surface with image
 
 ```julia
-using Makie
+using AbstractPlotting
 
  N = 30
  function xy_data(x, y)
@@ -21,7 +21,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/surface_with_image/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerysurface_with_image/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerysurface_with_image/media/thumb.jpg" alt="">
 
     </p>
 </div>

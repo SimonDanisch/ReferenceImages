@@ -1,7 +1,7 @@
 ## Marker offset
 
 ```julia
-using Makie
+using AbstractPlotting
 
  scene = Scene(resolution = (500, 500))
  points = Point2f0[(0,0), (1,1), (2,2)]
@@ -15,7 +15,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/marker_offset/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerymarker_offset/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerymarker_offset/media/thumb.jpg" alt="">
 
     </p>
 </div>

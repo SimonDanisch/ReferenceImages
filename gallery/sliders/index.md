@@ -1,7 +1,7 @@
 ## sliders
 
 ```julia
-using Makie
+using AbstractPlotting
 
  s1 = slider(LinRange(0.01, 1, 100), raw = true, camera = campixel!, start = 0.3)
  s2 = slider(LinRange(-2pi, 2pi, 100), raw = true, camera = campixel!)
@@ -23,8 +23,15 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerysliders/media/thumb.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/sliders/media/video.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallerysliders/media/video.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

@@ -1,7 +1,7 @@
 ## Orthographic Camera
 
 ```julia
-using Makie
+using AbstractPlotting
  using GeometryTypes
 
  x = Vec3f0(0); baselen = 0.2f0; dirlen = 1f0
@@ -14,7 +14,7 @@ using Makie
  meshes = map(GLNormalMesh, rectangles)
  scene = mesh(merge(meshes))
  display(scene)
- cam = Makie.cameracontrols(scene)
+ cam = cameracontrols(scene)
  dir = scene.limits[].widths ./ 2.
  dir_scaled = Vec3f0(
      dir[1] * scene.transformation.scale[][1],
@@ -36,7 +36,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/orthographic_camera/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryorthographic_camera/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryorthographic_camera/media/thumb.jpg" alt="">
 
     </p>
 </div>

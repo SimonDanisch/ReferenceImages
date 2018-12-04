@@ -1,7 +1,7 @@
 ## Image on Geometry (Moon)
 
 ```julia
-using Makie
+using AbstractPlotting
  using FileIO
 
  moon = try
@@ -20,7 +20,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/image_on_geometry__moon_/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryimage_on_geometry__moon_/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryimage_on_geometry__moon_/media/thumb.jpg" alt="">
 
     </p>
 </div>

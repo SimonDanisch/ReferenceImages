@@ -1,7 +1,7 @@
 ## pong
 
 ```julia
-using Makie
+using AbstractPlotting
 
  xyvec = rand(Point2f0, (2)) .* 5 .+ 1
  velvec = rand(Point2f0, (2)) .* 10
@@ -41,9 +41,16 @@ end
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/pong/media/pong.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallerypong/media/pong.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerypong/media/thumb.jpg" alt="">
 
     </p>
 </div>

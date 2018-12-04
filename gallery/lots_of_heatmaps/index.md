@@ -1,7 +1,7 @@
 ## Lots of Heatmaps
 
 ```julia
-using Makie
+using AbstractPlotting
 
  function makeheatmaps(bufs)
      heatmaps = map(bufs) do buf
@@ -33,9 +33,16 @@ end
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/lots_of_heatmaps/media/lots_of_heatmaps.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallerylots_of_heatmaps/media/lots_of_heatmaps.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerylots_of_heatmaps/media/thumb.jpg" alt="">
 
     </p>
 </div>

@@ -1,7 +1,7 @@
 ## pulsing marker
 
 ```julia
-using Makie
+using AbstractPlotting
 
  N = 100
  scene = scatter([0], [0], marker = '❤', markersize = 0.5, color = :red, raw = true)
@@ -17,9 +17,16 @@ end
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/pulsing_marker/media/pulsing_marker.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallerypulsing_marker/media/pulsing_marker.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerypulsing_marker/media/thumb.jpg" alt="">
 
     </p>
 </div>

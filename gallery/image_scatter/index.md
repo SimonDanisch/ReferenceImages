@@ -1,7 +1,7 @@
 ## image scatter
 
 ```julia
-using Makie
+using AbstractPlotting
  using LinearAlgebra
 
  scatter(
@@ -10,7 +10,7 @@ using Makie
      markersize = 1,
      # can also be an array of images for each point
      # need to be the same size for best performance, though
-     marker = Makie.logo()
+     marker = AbstractPlotting.logo()
  )
 
 
@@ -19,7 +19,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/image_scatter/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryimage_scatter/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryimage_scatter/media/thumb.jpg" alt="">
 
     </p>
 </div>

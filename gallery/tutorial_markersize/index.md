@@ -1,7 +1,7 @@
 ## Tutorial markersize
 
 ```julia
-using Makie
+using AbstractPlotting
 
  x = 1:10
  y = 1:10
@@ -14,7 +14,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/tutorial_markersize/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerytutorial_markersize/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerytutorial_markersize/media/thumb.jpg" alt="">
 
     </p>
 </div>

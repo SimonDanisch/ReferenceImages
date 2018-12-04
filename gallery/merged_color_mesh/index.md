@@ -1,7 +1,7 @@
 ## Merged color Mesh
 
 ```julia
-using Makie
+using AbstractPlotting
  using GeometryTypes
 
  x = Vec3f0(0); baselen = 0.2f0; dirlen = 1f0
@@ -20,7 +20,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/merged_color_mesh/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerymerged_color_mesh/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerymerged_color_mesh/media/thumb.jpg" alt="">
 
     </p>
 </div>

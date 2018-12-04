@@ -1,7 +1,7 @@
 ## Axis + Surface
 
 ```julia
-using Makie
+using AbstractPlotting
 
  vx = -1:0.01:1
  vy = -1:0.01:1
@@ -47,7 +47,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/axis___surface/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis___surface/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis___surface/media/thumb.jpg" alt="">
 
     </p>
 </div>

@@ -1,7 +1,7 @@
 ## Line Function
 
 ```julia
-using Makie
+using AbstractPlotting
 
  scene = Scene()
  x = range(0, stop = 3pi)
@@ -14,7 +14,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/line_function/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryline_function/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryline_function/media/thumb.jpg" alt="">
 
     </p>
 </div>

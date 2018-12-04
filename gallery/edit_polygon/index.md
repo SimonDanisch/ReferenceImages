@@ -1,7 +1,7 @@
 ## Edit Polygon
 
 ```julia
-using Makie
+using AbstractPlotting
 
  points = node(:poly, Point2f0[(0, 0), (0.5, 0.5), (1.0, 0.0)])
  scene = Scene(resolution = (500, 500))
@@ -15,7 +15,7 @@ using Makie
      on(events(scene).mousedrag) do drag
          if ispressed(scene, Mouse.left)
              if drag == Mouse.down
-                 plot, _idx = Makie.mouse_selection(scene)
+                 plot, _idx = mouse_selection(scene)
                  if plot == pplot
                      idx[] = _idx; dragstart[] = true
                      startpos[] = to_world(scene, Point2f0(scene.events.mouseposition[]))
@@ -39,7 +39,7 @@ using Makie
              push!(points[], pos)
              points[] = points[]
          elseif ispressed(but, Mouse.right)
-             plot, idx = Makie.mouse_selection(scene)
+             plot, idx = mouse_selection(scene)
              if plot == pplot && checkbounds(Bool, points[], idx)
                  deleteat!(points[], idx)
                  points[] = points[]
@@ -59,8 +59,15 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryedit_polygon/media/thumb.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/edit_polygon/media/video.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/galleryedit_polygon/media/video.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

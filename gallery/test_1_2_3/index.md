@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using Makie
+using AbstractPlotting
 
  scene = poly([Rect(0, 0, 20, 20)])
  scatter!(Rect(0, 0, 20, 20), color = :red, markersize = 2)
@@ -12,7 +12,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/test_1_2_3/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerytest_1_2_3/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerytest_1_2_3/media/thumb.jpg" alt="">
 
     </p>
 </div>

@@ -1,7 +1,7 @@
 ## Subscenes
 
 ```julia
-using Makie
+using AbstractPlotting
 
  img = rand(RGBAf0, 100, 100)
  scene = image(img, show_axis = false)
@@ -15,7 +15,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/subscenes/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerysubscenes/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerysubscenes/media/thumb.jpg" alt="">
 
     </p>
 </div>

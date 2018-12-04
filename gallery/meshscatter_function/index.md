@@ -1,7 +1,7 @@
 ## Meshscatter Function
 
 ```julia
-using Makie
+using AbstractPlotting
  using GeometryTypes
 
  large_sphere = Sphere(Point3f0(0), 1f0)
@@ -16,7 +16,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/meshscatter_function/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerymeshscatter_function/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerymeshscatter_function/media/thumb.jpg" alt="">
 
     </p>
 </div>

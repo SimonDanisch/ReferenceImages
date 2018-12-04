@@ -1,7 +1,7 @@
 ## Spacecraft from a galaxy far, far away
 
 ```julia
-using Makie
+using AbstractPlotting
 
  N = 100
  r = range(-1, stop = 1, length = N)
@@ -42,7 +42,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/spacecraft_from_a_galaxy_far,_far_away/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryspacecraft_from_a_galaxy_far,_far_away/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryspacecraft_from_a_galaxy_far,_far_away/media/thumb.jpg" alt="">
 
     </p>
 </div>

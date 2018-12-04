@@ -1,7 +1,7 @@
 ## Animated surface and wireframe
 
 ```julia
-using Makie
+using AbstractPlotting
 
  scene = Scene();
  function xy_data(x, y)
@@ -14,8 +14,8 @@ using Makie
  z = surf_func(20)
  surf = surface!(scene, r, r, z)[end]
 
- wf = wireframe!(scene, r, r, Makie.lift(x-> x .+ 1.0, surf[3]),
-     linewidth = 2f0, color = Makie.lift(x-> to_colormap(x)[5], surf[:colormap])
+ wf = wireframe!(scene, r, r, lift(x-> x .+ 1.0, surf[3]),
+     linewidth = 2f0, color = lift(x-> to_colormap(x)[5], surf[:colormap])
  )
  N = 150
  scene
@@ -30,9 +30,16 @@ end
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/animated_surface_and_wireframe/media/animated_surface_and_wireframe.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/galleryanimated_surface_and_wireframe/media/animated_surface_and_wireframe.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryanimated_surface_and_wireframe/media/thumb.jpg" alt="">
 
     </p>
 </div>

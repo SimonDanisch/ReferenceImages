@@ -1,7 +1,7 @@
 ## Biohazard
 
 ```julia
-using Makie
+using AbstractPlotting
 
  (a, b) = -1, 2
  r = range(-5, stop = 5, length = 100)
@@ -16,7 +16,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/biohazard/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerybiohazard/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerybiohazard/media/thumb.jpg" alt="">
 
     </p>
 </div>

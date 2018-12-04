@@ -1,8 +1,8 @@
 ## Explicit frame rendering
 
 ```julia
-using Makie
- using ModernGL, Makie, GLMakie
+using AbstractPlotting
+ using ModernGL, GLMakie
  using GLFW
 
  GLMakie.opengl_renderloop[] = (screen) -> nothing
@@ -33,7 +33,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/explicit_frame_rendering/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryexplicit_frame_rendering/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryexplicit_frame_rendering/media/thumb.jpg" alt="">
 
     </p>
 </div>

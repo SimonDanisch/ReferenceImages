@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>Line GIF</h2><pre><code class="language-julia">using Makie
+    <div><h2>Line GIF</h2><pre><code class="language-julia">using AbstractPlotting
  using GLMakie
 
  us = range(0, stop = 1, length = 100)
@@ -17,7 +17,7 @@
  colors = to_colormap(:RdYlBu)
  #display(scene) # would be needed without the record
  N = 150
- path = record(scene, &quot;output.gif&quot;, 1:N) do i
+ path = record(scene, &quot;test.gif&quot;, 1:N) do i
      global lineplots, scene
      if length(lineplots) &lt; 20
          p = lines!(
@@ -46,7 +46,21 @@
 </code></pre>
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/line_gif/media/line_gif.gif" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryline_gif/media/line_gif.gif" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryline_gif/media/test.gif" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryline_gif/media/thumb.jpg" alt="">
 
     </p>
 </div>

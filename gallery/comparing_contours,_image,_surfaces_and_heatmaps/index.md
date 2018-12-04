@@ -1,7 +1,7 @@
 ## Comparing contours, image, surfaces and heatmaps
 
 ```julia
-using Makie
+using AbstractPlotting
 
  N = 20
  x = LinRange(-0.3, 1, N)
@@ -16,7 +16,7 @@ using Makie
      vbox(
          image(x, y, z, colormap = :viridis),
          surface(x, y, fill(0f0, N, N), color = z, shading = false),
-         image(-0.3..1, -1..0.5, Makie.logo())
+         image(-0.3..1, -1..0.5, AbstractPlotting.logo())
      )
  )
 
@@ -26,7 +26,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/comparing_contours,_image,_surfaces_and_heatmaps/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycomparing_contours,_image,_surfaces_and_heatmaps/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycomparing_contours,_image,_surfaces_and_heatmaps/media/thumb.jpg" alt="">
 
     </p>
 </div>

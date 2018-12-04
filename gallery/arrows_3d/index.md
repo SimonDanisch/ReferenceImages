@@ -1,7 +1,7 @@
 ## Arrows 3D
 
 ```julia
-using Makie
+using AbstractPlotting
  using LinearAlgebra
 
  function SphericalToCartesian(r::T,θ::T,ϕ::T) where T<:AbstractArray
@@ -23,7 +23,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/arrows_3d/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryarrows_3d/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryarrows_3d/media/thumb.jpg" alt="">
 
     </p>
 </div>

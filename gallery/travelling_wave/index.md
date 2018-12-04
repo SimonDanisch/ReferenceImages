@@ -1,7 +1,7 @@
 ## Travelling wave
 
 ```julia
-using Makie
+using AbstractPlotting
 
  scene = Scene()
  mytime = Node(0.0)
@@ -22,8 +22,15 @@ end
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerytravelling_wave/media/thumb.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/travelling_wave/media/travelling_wave.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallerytravelling_wave/media/travelling_wave.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

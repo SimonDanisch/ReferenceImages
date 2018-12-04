@@ -1,10 +1,10 @@
 ## Parallel Prefix Sum
 
 ```julia
-using Makie
+using AbstractPlotting
  import Base: getindex, setindex!, length, size
  import Base.+
- using Makie, GeometryTypes
+ using GeometryTypes
 
  function prefix_sum(y, func)
      l = length(y)
@@ -94,7 +94,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/parallel_prefix_sum/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryparallel_prefix_sum/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryparallel_prefix_sum/media/thumb.jpg" alt="">
 
     </p>
 </div>

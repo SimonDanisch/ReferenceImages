@@ -1,7 +1,7 @@
 ## Mouse Hover
 
 ```julia
-using Makie
+using AbstractPlotting
  using Colors, Observables
 
  r = range(0, stop=5pi, length=100)
@@ -23,7 +23,7 @@ using Makie
  scene
  x = Node(false)
  on(scene.events.mouseposition) do event
-     plot, idx = Makie.mouse_selection(scene)
+     plot, idx = mouse_selection(scene)
      if plot == lineplot && idx > 0
          visible[] = true
          text_field[1] = sprint(io-> print(io, round.(Float64.(Tuple(lineplot[1][][idx])), digits = 3)))
@@ -40,8 +40,15 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerymouse_hover/media/thumb.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/mouse_hover/media/video.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallerymouse_hover/media/video.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

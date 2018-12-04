@@ -1,7 +1,7 @@
 ## 3D cube with sphere cutout, inside
 
 ```julia
-using Makie
+using AbstractPlotting
 
  scene = Scene()
  r = range(-1, stop = 1, length = 100)
@@ -16,7 +16,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/3d_cube_with_sphere_cutout,_inside/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery3d_cube_with_sphere_cutout,_inside/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery3d_cube_with_sphere_cutout,_inside/media/thumb.jpg" alt="">
 
     </p>
 </div>

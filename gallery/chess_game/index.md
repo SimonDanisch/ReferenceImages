@@ -1,7 +1,7 @@
 ## Chess Game
 
 ```julia
-using Makie
+using AbstractPlotting
  using Base.Iterators: repeated
 
  r = 1:8
@@ -42,14 +42,21 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/chess_game/media/chess_game-1.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerychess_game/media/chess_game-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/chess_game/media/chess_game-2.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerychess_game/media/chess_game-2.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerychess_game/media/thumb.jpg" alt="">
 
     </p>
 </div>

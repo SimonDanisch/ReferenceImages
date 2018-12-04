@@ -1,7 +1,7 @@
 ## Colored Mesh
 
 ```julia
-using Makie
+using AbstractPlotting
 
  x = [0, 1, 2, 0]
  y = [0, 0, 1, 2]
@@ -20,7 +20,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/colored_mesh/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycolored_mesh/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycolored_mesh/media/thumb.jpg" alt="">
 
     </p>
 </div>

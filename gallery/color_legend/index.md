@@ -1,8 +1,7 @@
 ## Color Legend
 
 ```julia
-using Makie
- using Makie
+using AbstractPlotting
 
  s = surface(0..1, 0..1, rand(100, 100))
  ls = colorlegend(s[end], raw = true, camera = campixel!)
@@ -26,35 +25,42 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-1.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycolor_legend/media/color_legend-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-2.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycolor_legend/media/color_legend-2.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-3.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycolor_legend/media/color_legend-3.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-4.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycolor_legend/media/color_legend-4.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/color_legend/media/color_legend-5.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycolor_legend/media/color_legend-5.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerycolor_legend/media/thumb.jpg" alt="">
 
     </p>
 </div>

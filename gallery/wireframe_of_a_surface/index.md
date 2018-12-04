@@ -1,7 +1,7 @@
 ## Wireframe of a Surface
 
 ```julia
-using Makie
+using AbstractPlotting
 
  function xy_data(x, y)
      r = sqrt(x^2 + y^2)
@@ -19,7 +19,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/wireframe_of_a_surface/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerywireframe_of_a_surface/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerywireframe_of_a_surface/media/thumb.jpg" alt="">
 
     </p>
 </div>

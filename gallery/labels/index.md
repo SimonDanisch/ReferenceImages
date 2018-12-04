@@ -1,8 +1,7 @@
 ## Labels
 
 ```julia
-using Makie
- using Makie
+using AbstractPlotting
 
  scene = Scene(resolution = (500, 500))
  x = map([:dot, :dash, :dashdot], [2, 3, 4]) do ls, lw
@@ -14,7 +13,7 @@ using Makie
  end
  x = [x..., scatter!(range(1, stop=5, length=100), rand(100), rand(100))[end]]
  center!(scene)
- ls = Makie.legend(x, ["attribute $i" for i in 1:4], camera = campixel!, raw = true)
+ ls = AbstractPlotting.legend(x, ["attribute $i" for i in 1:4], camera = campixel!, raw = true)
 
  st = Stepper(vbox(scene, ls), "output")
  l = ls[end]
@@ -37,35 +36,42 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/labels/media/labels-1.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerylabels/media/labels-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/labels/media/labels-2.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerylabels/media/labels-2.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/labels/media/labels-3.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerylabels/media/labels-3.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/labels/media/labels-4.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerylabels/media/labels-4.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/labels/media/labels-5.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerylabels/media/labels-5.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerylabels/media/thumb.jpg" alt="">
 
     </p>
 </div>

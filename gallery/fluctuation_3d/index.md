@@ -1,7 +1,7 @@
 ## Fluctuation 3D
 
 ```julia
-using Makie
+using AbstractPlotting
  using GeometryTypes, Colors
 
  scene = Scene()
@@ -17,7 +17,7 @@ using Makie
  ne = size(edges, 1); np = size(pts, 1)
  # define markers meshes
  meshC = GLNormalMesh(
-     Makie.Cylinder{3, Float32}(
+     Cylinder{3, Float32}(
          Point3f0(0., 0., 0.),
          Point3f0(0., 0, 1.),
          Float32(1)
@@ -63,7 +63,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/fluctuation_3d/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryfluctuation_3d/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryfluctuation_3d/media/thumb.jpg" alt="">
 
     </p>
 </div>

@@ -1,7 +1,7 @@
 ## Normals of a Cat
 
 ```julia
-using Makie
+using AbstractPlotting
  using LinearAlgebra, GLMakie
 
  x = GLMakie.loadasset("cat.obj")
@@ -17,7 +17,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/normals_of_a_cat/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerynormals_of_a_cat/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerynormals_of_a_cat/media/thumb.jpg" alt="">
 
     </p>
 </div>

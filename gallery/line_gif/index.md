@@ -1,7 +1,7 @@
 ## Line GIF
 
 ```julia
-using Makie
+using AbstractPlotting
  using GLMakie
 
  us = range(0, stop = 1, length = 100)
@@ -13,7 +13,7 @@ using Makie
  colors = to_colormap(:RdYlBu)
  #display(scene) # would be needed without the record
  N = 150
- path = record(scene, "output.gif", 1:N) do i
+ path = record(scene, "test.gif", 1:N) do i
      global lineplots, scene
      if length(lineplots) < 20
          p = lines!(
@@ -45,7 +45,21 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/line_gif/media/line_gif.gif" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryline_gif/media/line_gif.gif" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryline_gif/media/test.gif" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryline_gif/media/thumb.jpg" alt="">
 
     </p>
 </div>

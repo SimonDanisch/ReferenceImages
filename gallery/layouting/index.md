@@ -1,7 +1,7 @@
 ## Layouting
 
 ```julia
-using Makie
+using AbstractPlotting
 
  p1 = scatter(rand(10), markersize = 1)
  p2 = lines(rand(10), rand(10))
@@ -22,7 +22,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/layouting/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerylayouting/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallerylayouting/media/thumb.jpg" alt="">
 
     </p>
 </div>

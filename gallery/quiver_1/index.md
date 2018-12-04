@@ -1,7 +1,7 @@
 ## quiver
 
 ```julia
-using Makie
+using AbstractPlotting
  using ImageFiltering
 
  x = range(-2, stop = 2, length = 21)
@@ -17,7 +17,14 @@ using Makie
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://raw.githubusercontent.com/SimonDanisch/ReferenceImages/master/gallery/quiver_1/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryquiver_1/media/image.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/galleryquiver_1/media/thumb.jpg" alt="">
 
     </p>
 </div>
