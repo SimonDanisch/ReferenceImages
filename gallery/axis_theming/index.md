@@ -47,91 +47,84 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-1.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-10.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-10.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-11.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-11.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-12.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-12.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-2.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-2.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-3.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-3.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-4.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-4.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-5.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-5.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-6.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-6.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-7.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-7.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-8.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-8.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/axis_theming-9.jpg" alt="">
-
-    </p>
-</div>
-
-<div style="display:inline-block">
-    <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryaxis_theming/media/thumb.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis_theming/media/axis_theming-9.jpg" alt="">
 
     </p>
 </div>

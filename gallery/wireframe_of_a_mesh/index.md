@@ -12,14 +12,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallerywireframe_of_a_mesh/media/image.jpg" alt="">
-
-    </p>
-</div>
-
-<div style="display:inline-block">
-    <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallerywireframe_of_a_mesh/media/thumb.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//wireframe_of_a_mesh/media/image.jpg" alt="">
 
     </p>
 </div>

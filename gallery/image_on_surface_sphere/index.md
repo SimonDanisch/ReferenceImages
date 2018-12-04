@@ -19,14 +19,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryimage_on_surface_sphere/media/image.jpg" alt="">
-
-    </p>
-</div>
-
-<div style="display:inline-block">
-    <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/galleryimage_on_surface_sphere/media/thumb.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//image_on_surface_sphere/media/image.jpg" alt="">
 
     </p>
 </div>

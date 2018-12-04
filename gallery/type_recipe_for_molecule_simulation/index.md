@@ -71,15 +71,8 @@ end
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallerytype_recipe_for_molecule_simulation/media/thumb.jpg" alt="">
-
-    </p>
-</div>
-
-<div style="display:inline-block">
-    <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallerytype_recipe_for_molecule_simulation/media/type_recipe_for_molecule_simulation.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallery//type_recipe_for_molecule_simulation/media/type_recipe_for_molecule_simulation.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

@@ -42,21 +42,14 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallerychess_game/media/chess_game-1.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//chess_game/media/chess_game-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallerychess_game/media/chess_game-2.jpg" alt="">
-
-    </p>
-</div>
-
-<div style="display:inline-block">
-    <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallerychess_game/media/thumb.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//chess_game/media/chess_game-2.jpg" alt="">
 
     </p>
 </div>
