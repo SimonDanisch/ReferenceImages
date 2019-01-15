@@ -4,6 +4,7 @@
 using AbstractPlotting
  using FileIO, GeometryTypes, Colors, GDAL
 
+ env = ENV["LD_LIBRARY_PATH"]
  #=
  This example requires the GDAL package, from https://github.com/JuliaGeo/GDAL.jl
  For more information about GDAL, see the official documentation at: https://gdal.org/
@@ -44,11 +45,13 @@ using AbstractPlotting
      """
      if !isfile("$name.zip")
          # This might fail on windows - just try again a couple of times -.-
+         ENV["LD_LIBRARY_PATH"] = ""
          download("http://biogeo.ucdavis.edu/data/worldclim/v2.0/tif/base/wc2.0_10m_$name.zip", "$name.zip")
      end
      if !isdir(name)
          unzip("$name.zip", name)
      end
+     ENV["LD_LIBRARY_PATH"] = env
      loadf0.(filter(istiff, joinpath.(name, readdir(name))))
  end
 
@@ -110,6 +113,7 @@ using AbstractPlotting
         AbstractPlotting.notify!(wplot[:markersize])
     end
  end
+ ENV["LD_LIBRARY_PATH"] = ""
  r
 
 

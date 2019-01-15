@@ -14,7 +14,7 @@ using AbstractPlotting
          scene,
          range(0, stop = 10, length = length(c)),
          range(0, stop = 1, length = length(c)),
-         reshape(c, (1, length(c))),
+         reshape(c, (length(c),1)),
          show_axis = false
      )[end]
      text!(
@@ -23,7 +23,7 @@ using AbstractPlotting
          position = Point2f0(-0.1, 0.5 + h),
          align = (:right, :center),
          show_axis = false,
-         textsize = 0.4
+         textsize = 1
      )
      translate!(cbar, 0, h, 0)
      h -= (1 + offset)
