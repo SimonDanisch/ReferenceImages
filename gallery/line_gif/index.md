@@ -45,14 +45,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//line_gif/media/line_gif.gif" alt="">
-
-    </p>
-</div>
-
-<div style="display:inline-block">
-    <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//line_gif/media/test.gif" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\line_gif\\media\\test.gif" alt="">
 
     </p>
 </div>

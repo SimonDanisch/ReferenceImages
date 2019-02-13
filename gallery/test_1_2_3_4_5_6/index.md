@@ -10,7 +10,7 @@ lines(rand(10), rand(10), color=rand(10), linewidth=10)
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//test_1_2_3_4_5_6/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\test_1_2_3_4_5_6\\media\\image.jpg" alt="">
 
     </p>
 </div>

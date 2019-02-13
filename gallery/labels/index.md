@@ -36,35 +36,35 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//labels/media/labels-1.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\labels\\media\\labels-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//labels/media/labels-2.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\labels\\media\\labels-2.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//labels/media/labels-3.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\labels\\media\\labels-3.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//labels/media/labels-4.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\labels\\media\\labels-4.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//labels/media/labels-5.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\labels\\media\\labels-5.jpg" alt="">
 
     </p>
 </div>
