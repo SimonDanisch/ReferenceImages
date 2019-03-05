@@ -1,7 +1,7 @@
 ## Text Annotation
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  text(
      ". This is an annotation!",
@@ -17,7 +17,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\text_annotation\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//text_annotation/media/image.jpg" alt="">
 
     </p>
 </div>

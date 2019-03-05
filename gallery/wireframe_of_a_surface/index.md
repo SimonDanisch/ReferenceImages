@@ -1,7 +1,7 @@
 ## Wireframe of a Surface
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  function xy_data(x, y)
      r = sqrt(x^2 + y^2)
@@ -19,7 +19,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\wireframe_of_a_surface\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//wireframe_of_a_surface/media/image.jpg" alt="">
 
     </p>
 </div>

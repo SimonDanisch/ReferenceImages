@@ -1,7 +1,7 @@
 ## Text rotation
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  scene = Scene()
  pos = (500, 500)
@@ -26,7 +26,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\text_rotation\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//text_rotation/media/image.jpg" alt="">
 
     </p>
 </div>

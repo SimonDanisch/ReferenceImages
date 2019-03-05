@@ -1,7 +1,7 @@
 ## heatmap interpolation
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using AbstractPlotting: hbox, vbox
 
  data = rand(50, 100)
@@ -21,7 +21,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\heatmap_interpolation\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//heatmap_interpolation/media/image.jpg" alt="">
 
     </p>
 </div>

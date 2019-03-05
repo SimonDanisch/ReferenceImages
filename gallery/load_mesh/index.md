@@ -1,7 +1,7 @@
 ## Load Mesh
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using GLMakie
 
  mesh(GLMakie.loadasset("cat.obj"))
@@ -12,7 +12,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\load_mesh\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//load_mesh/media/image.jpg" alt="">
 
     </p>
 </div>

@@ -1,7 +1,7 @@
 ## Sphere Mesh
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  mesh(Sphere(Point3f0(0), 1f0), color = :blue)
 
@@ -11,7 +11,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\sphere_mesh\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//sphere_mesh/media/image.jpg" alt="">
 
     </p>
 </div>

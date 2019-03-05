@@ -1,7 +1,7 @@
 ## Line GIF
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using GLMakie
 
  us = range(0, stop = 1, length = 100)
@@ -45,7 +45,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\line_gif\\media\\test.gif" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//line_gif/media/test.gif" alt="">
 
     </p>
 </div>

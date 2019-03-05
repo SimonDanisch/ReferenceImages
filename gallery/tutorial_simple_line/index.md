@@ -1,7 +1,7 @@
 ## Tutorial simple line
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  x = range(0, stop = 2pi, length = 40)
  f(x) = sin.(x)
@@ -14,7 +14,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\tutorial_simple_line\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//tutorial_simple_line/media/image.jpg" alt="">
 
     </p>
 </div>

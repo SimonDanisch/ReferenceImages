@@ -1,7 +1,7 @@
 ## Interaction with Mouse
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using LinearAlgebra
 
  scene = Scene(raw = true, camera = cam2d!, resolution = (500, 500))
@@ -60,7 +60,7 @@ using AbstractPlotting
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery/\\interaction_with_mouse\\media\\video.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallery//interaction_with_mouse/media/video.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

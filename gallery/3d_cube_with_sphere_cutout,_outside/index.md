@@ -1,7 +1,7 @@
 ## 3D cube with sphere cutout, outside
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  scene = Scene()
  r = range(-1, stop = 1, length = 100)
@@ -16,7 +16,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\3d_cube_with_sphere_cutout,_outside\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//3d_cube_with_sphere_cutout,_outside/media/image.jpg" alt="">
 
     </p>
 </div>

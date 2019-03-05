@@ -1,7 +1,7 @@
 ## Edit Polygon
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  points = node(:poly, Point2f0[(0, 0), (0.5, 0.5), (1.0, 0.0)])
  scene = Scene(resolution = (500, 500))
@@ -60,7 +60,7 @@ using AbstractPlotting
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery/\\edit_polygon\\media\\video.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallery//edit_polygon/media/video.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

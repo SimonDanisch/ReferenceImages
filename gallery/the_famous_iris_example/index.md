@@ -1,7 +1,7 @@
 ## The famous iris example
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using DataFrames, RDatasets # do Pkg.add.(["DataFrames", "RDatasets"]) if you don't have these packages installed
 
  iris = dataset("datasets", "iris")
@@ -29,7 +29,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\the_famous_iris_example\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//the_famous_iris_example/media/image.jpg" alt="">
 
     </p>
 </div>

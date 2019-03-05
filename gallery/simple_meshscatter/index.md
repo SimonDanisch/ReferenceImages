@@ -1,7 +1,7 @@
 ## Simple meshscatter
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  large_sphere = Sphere(Point3f0(0), 1f0)
  positions = decompose(Point3f0, large_sphere)
@@ -13,7 +13,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\simple_meshscatter\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//simple_meshscatter/media/image.jpg" alt="">
 
     </p>
 </div>

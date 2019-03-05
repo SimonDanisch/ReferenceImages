@@ -1,7 +1,7 @@
 ## Marker sizes + Marker colors
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  scatter(
      rand(20), rand(20),
@@ -15,7 +15,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\marker_sizes___marker_colors\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//marker_sizes___marker_colors/media/image.jpg" alt="">
 
     </p>
 </div>

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>Surface + wireframe + contour</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>Surface + wireframe + contour</h2><pre><code class="language-julia">using AbstractPlotting, GLMakie, GLMakie
 
  N = 51
  x = range(-2, stop = 2, length = N)
@@ -13,15 +13,14 @@
  z = (-x .* exp.(-x .^ 2 .- (y&#39;) .^ 2)) .* 4
  scene = surface(x, y, z)
  xm, ym, zm = minimum(scene.limits[])
- scene = surface!(scene, x, y, z .+ 0.05)
  contour!(scene, x, y, z, levels = 15, linewidth = 2, transformation = (:xy, zm))
- wireframe!(scene, x, y, z)
+ wireframe!(scene, x, y, z, overdraw = true, transparency = true, color = (:black, 0.1))
  scene
 
 </code></pre>
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\surface___wireframe___contour\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//surface___wireframe___contour/media/image.jpg" alt="">
 
     </p>
 </div>

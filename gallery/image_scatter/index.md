@@ -1,7 +1,7 @@
 ## image scatter
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using LinearAlgebra
 
  scatter(
@@ -19,7 +19,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\image_scatter\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//image_scatter/media/image.jpg" alt="">
 
     </p>
 </div>

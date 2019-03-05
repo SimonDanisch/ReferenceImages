@@ -1,7 +1,7 @@
 ## Comparing contours, image, surfaces and heatmaps
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  N = 20
  x = LinRange(-0.3, 1, N)
@@ -26,7 +26,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\comparing_contours,_image,_surfaces_and_heatmaps\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//comparing_contours,_image,_surfaces_and_heatmaps/media/image.jpg" alt="">
 
     </p>
 </div>

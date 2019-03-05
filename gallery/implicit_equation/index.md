@@ -1,7 +1,7 @@
 ## Implicit equation
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  r = range(-5, stop = 5, length = 400)
  (a, b) = -1, 2
@@ -15,7 +15,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\implicit_equation\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//implicit_equation/media/image.jpg" alt="">
 
     </p>
 </div>

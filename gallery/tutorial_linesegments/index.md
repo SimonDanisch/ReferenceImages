@@ -1,7 +1,7 @@
 ## Tutorial linesegments
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  points = [
      Point2f0(0, 0) => Point2f0(5, 5);
@@ -16,7 +16,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\tutorial_linesegments\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//tutorial_linesegments/media/image.jpg" alt="">
 
     </p>
 </div>

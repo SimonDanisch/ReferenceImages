@@ -1,7 +1,7 @@
 ## 3D Contour with 2D contour slices
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using LinearAlgebra
 
  function test(x, y, z)
@@ -26,7 +26,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\3d_contour_with_2d_contour_slices\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//3d_contour_with_2d_contour_slices/media/image.jpg" alt="">
 
     </p>
 </div>

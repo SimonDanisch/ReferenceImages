@@ -1,7 +1,7 @@
 ## Image on Surface Sphere
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  n = 20
  θ = [0;(0.5:n-0.5)/n;1]
@@ -19,7 +19,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\image_on_surface_sphere\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//image_on_surface_sphere/media/image.jpg" alt="">
 
     </p>
 </div>

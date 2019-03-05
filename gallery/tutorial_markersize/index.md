@@ -1,7 +1,7 @@
 ## Tutorial markersize
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  x = 1:10
  y = 1:10
@@ -14,7 +14,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\tutorial_markersize\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//tutorial_markersize/media/image.jpg" alt="">
 
     </p>
 </div>

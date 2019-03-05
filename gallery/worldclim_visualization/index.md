@@ -1,8 +1,8 @@
 ## WorldClim visualization
 
 ```julia
-using AbstractPlotting
- using FileIO, GeometryTypes, Colors, GDAL
+using AbstractPlotting, GLMakie, GLMakie
+ using FileIO, GeometryTypes, Colors, GDAL, ZipFile
 
  env = ENV["LD_LIBRARY_PATH"]
  #=
@@ -17,9 +17,17 @@ using AbstractPlotting
 
 
  # set up 7zip
- exe7z = "7z"
 
- unzip(in, out) = run(`$exe7z x -y $in -o$out`)
+ function unzip(input, out)
+     dir = ZipFile.Reader(input)
+     mkpath(out)
+     for file in dir.files
+         open(joinpath(out, file.name), "w") do io
+             Base.write(io, read(file))
+         end
+     end
+     close(dir)
+ end
 
  # function to read the raster data from the GeoTIFF
  function loadf0(x)
@@ -56,6 +64,7 @@ using AbstractPlotting
  end
 
  # load the actual datasets!
+
  water = load_dataset("prec")
  temperature = load_dataset("tmax")
 
@@ -123,7 +132,7 @@ using AbstractPlotting
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery/\\worldclim_visualization\\media\\worldclim_visualization.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallery//worldclim_visualization/media/worldclim_visualization.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

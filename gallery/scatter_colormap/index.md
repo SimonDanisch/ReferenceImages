@@ -1,7 +1,7 @@
 ## scatter colormap
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  scatter(rand(10), rand(10), color = rand(10))
 
@@ -11,7 +11,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\scatter_colormap\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//scatter_colormap/media/image.jpg" alt="">
 
     </p>
 </div>

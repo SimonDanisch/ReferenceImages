@@ -1,7 +1,7 @@
 ## FEM mesh 2D
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  coordinates = [
      0.0 0.0;
@@ -34,7 +34,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\fem_mesh_2d\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//fem_mesh_2d/media/image.jpg" alt="">
 
     </p>
 </div>

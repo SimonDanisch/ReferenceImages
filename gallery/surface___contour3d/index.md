@@ -1,7 +1,7 @@
 ## surface + contour3d
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  vx = -1:0.01:1
  vy = -1:0.01:1
@@ -22,7 +22,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\surface___contour3d\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//surface___contour3d/media/image.jpg" alt="">
 
     </p>
 </div>

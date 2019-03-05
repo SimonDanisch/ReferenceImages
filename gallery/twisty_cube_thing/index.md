@@ -1,7 +1,7 @@
 ## Twisty cube thing
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  (a, b) = -1, 2
  r = range(-2, stop = 2, length = 100)
@@ -16,7 +16,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\twisty_cube_thing\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//twisty_cube_thing/media/image.jpg" alt="">
 
     </p>
 </div>

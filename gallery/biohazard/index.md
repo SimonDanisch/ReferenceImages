@@ -1,7 +1,7 @@
 ## Biohazard
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  (a, b) = -1, 2
  r = range(-5, stop = 5, length = 100)
@@ -16,7 +16,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\biohazard\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//biohazard/media/image.jpg" alt="">
 
     </p>
 </div>

@@ -1,7 +1,7 @@
 ## Textured Mesh
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using FileIO, GLMakie
 
  scene = Scene(resolution = (500, 500))
@@ -14,7 +14,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\textured_mesh\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//textured_mesh/media/image.jpg" alt="">
 
     </p>
 </div>

@@ -1,7 +1,7 @@
 ## Hbox
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  t = range(-122277.93103448274, stop=-14798.035304081845, length=29542)
  x = -42 .- randn(length(t))
@@ -15,7 +15,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\hbox_1\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//hbox_1/media/image.jpg" alt="">
 
     </p>
 </div>

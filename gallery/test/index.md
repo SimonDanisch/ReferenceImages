@@ -1,13 +1,13 @@
 ## Test
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  scene = Scene(raw = true, camera = campixel!)
  text!(
      scene, "boundingbox",
      align = (:left, :center),
-     position = (200, 50)
+     position = (50, 50)
  )
  scale!(scene, Vec3f0(4, 1, 1))
  linesegments!(boundingbox(scene))
@@ -17,7 +17,7 @@ using AbstractPlotting
      t = text!(
          "boundingbox",
          align = (a_lign, b_lign),
-         position = (200, 100 + offset)
+         position = (50, 100 + offset)
      )[end]
      linesegments!(boundingbox(t))
      offset += 50
@@ -30,7 +30,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\test\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//test/media/image.jpg" alt="">
 
     </p>
 </div>

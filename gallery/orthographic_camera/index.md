@@ -1,7 +1,7 @@
 ## Orthographic Camera
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using GeometryTypes
 
  x = Vec3f0(0); baselen = 0.2f0; dirlen = 1f0
@@ -36,7 +36,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\orthographic_camera\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//orthographic_camera/media/image.jpg" alt="">
 
     </p>
 </div>

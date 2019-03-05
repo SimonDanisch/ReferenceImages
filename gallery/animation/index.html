@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>Animation</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>Animation</h2><pre><code class="language-julia">using AbstractPlotting, GLMakie, GLMakie
 
  scene = Scene()
  f(t, v, s) = (sin(v + t) * s, cos(v + t) * s)
@@ -25,7 +25,7 @@ end
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery/\\animation\\media\\animation.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallery//animation/media/animation.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

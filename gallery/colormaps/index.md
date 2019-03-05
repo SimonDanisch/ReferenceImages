@@ -1,7 +1,7 @@
 ## colormaps
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  h = 0.0
  offset = 0.1
@@ -36,7 +36,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\colormaps\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//colormaps/media/image.jpg" alt="">
 
     </p>
 </div>

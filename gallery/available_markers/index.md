@@ -1,20 +1,16 @@
 ## Available markers
 
 ```julia
-using AbstractPlotting
- using GeometryTypes
+using AbstractPlotting, GLMakie, GLMakie
 
- scene = Scene()
- cam2d!(scene)
  marker = collect(AbstractPlotting._marker_map)
  positions = Point2f0.(0, 1:length(marker))
- scatter!(
-     scene,
+ scene = scatter(
      positions,
      marker = last.(marker),
      markersize = 0.8,
-     raw = true,
-     marker_offset = Vec2f0(0.5, -0.4)
+     marker_offset = Vec2f0(0.5, -0.4),
+     show_axis = false,
  )
  annotations!(
      scene,
@@ -24,6 +20,8 @@ using AbstractPlotting
      textsize = 0.4,
      raw = true
  )
+ update_cam!(scene, FRect(-2.5, 0, 2, length(marker) + 2))
+ scene
 
 
 ```
@@ -31,7 +29,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\available_markers\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//available_markers/media/image.jpg" alt="">
 
     </p>
 </div>

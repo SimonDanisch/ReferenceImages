@@ -1,7 +1,7 @@
 ## Surface with image
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  N = 30
  function xy_data(x, y)
@@ -21,7 +21,7 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\surface_with_image\\media\\image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//surface_with_image/media/image.jpg" alt="">
 
     </p>
 </div>

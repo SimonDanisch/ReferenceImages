@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>WorldClim visualization</h2><pre><code class="language-julia">using AbstractPlotting
- using FileIO, GeometryTypes, Colors, GDAL
+    <div><h2>WorldClim visualization</h2><pre><code class="language-julia">using AbstractPlotting, GLMakie, GLMakie
+ using FileIO, GeometryTypes, Colors, GDAL, ZipFile
 
  env = ENV[&quot;LD_LIBRARY_PATH&quot;]
  #=
@@ -21,9 +21,17 @@
 
 
  # set up 7zip
- exe7z = &quot;7z&quot;
 
- unzip(in, out) = run(`$exe7z x -y $in -o$out`)
+ function unzip(input, out)
+     dir = ZipFile.Reader(input)
+     mkpath(out)
+     for file in dir.files
+         open(joinpath(out, file.name), &quot;w&quot;) do io
+             Base.write(io, read(file))
+         end
+     end
+     close(dir)
+ end
 
  # function to read the raster data from the GeoTIFF
  function loadf0(x)
@@ -60,6 +68,7 @@
  end
 
  # load the actual datasets!
+
  water = load_dataset(&quot;prec&quot;)
  temperature = load_dataset(&quot;tmax&quot;)
 
@@ -124,7 +133,7 @@
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery/\\worldclim_visualization\\media\\worldclim_visualization.mp4" type="video/mp4">
+  <source src="https://simondanisch.github.io/ReferenceImages/gallery//worldclim_visualization/media/worldclim_visualization.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

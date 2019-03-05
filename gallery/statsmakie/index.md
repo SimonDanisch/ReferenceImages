@@ -1,7 +1,7 @@
 ## StatsMakie
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using StatsMakie
  using DataFrames, RDatasets
  using StatsMakie: linear, smooth
@@ -78,7 +78,11 @@ using AbstractPlotting
  plot(Position.stack, histogram, Data(iris), Group(:Species), :SepalLength)
  @substep
 
- wireframe(density(trim=true), Data(iris), Group(:Species), :SepalLength, :SepalWidth)
+ wireframe(
+     density(trim=true),
+     Data(iris), Group(:Species), :SepalLength, :SepalWidth,
+     transparency = true, linewidth = 0.1
+ )
  @substep
 
  scatter(
@@ -90,7 +94,7 @@ using AbstractPlotting
 
  barplot(["hi", "ima", "string"], rand(3))
  @substep
- 
+
 
 
 ```
@@ -98,147 +102,147 @@ using AbstractPlotting
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image10.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image10.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image11.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image11.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image12.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image12.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image14.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image14.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image15.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image15.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image16.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image16.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image17.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image17.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image18.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image18.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image19.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image19.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image2.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image2.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image20.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image20.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image21.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image21.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image22.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image22.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image23.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image23.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image3.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image3.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image4.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image4.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image5.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image5.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image6.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image6.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image7.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image7.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image8.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image8.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery/\\statsmakie\\media\\image9.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//statsmakie/media/image9.jpg" alt="">
 
     </p>
 </div>
