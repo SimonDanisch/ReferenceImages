@@ -1,7 +1,7 @@
 ## Orthographic Camera
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using GeometryTypes
 
  x = Vec3f0(0); baselen = 0.2f0; dirlen = 1f0

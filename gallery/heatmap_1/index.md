@@ -1,7 +1,7 @@
 ## Heatmap
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  heatmap(rand(32, 32))
 

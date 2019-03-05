@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
 arc(Point2f0(0), 10.0f0, 0.0f0, pi, linewidth=20)
 

@@ -1,7 +1,7 @@
 ## Surface + wireframe + contour
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  N = 51
  x = range(-2, stop = 2, length = N)

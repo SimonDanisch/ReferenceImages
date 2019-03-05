@@ -1,7 +1,7 @@
 ## sliders
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  s1 = slider(LinRange(0.01, 1, 100), raw = true, camera = campixel!, start = 0.3)
  s2 = slider(LinRange(-2pi, 2pi, 100), raw = true, camera = campixel!)

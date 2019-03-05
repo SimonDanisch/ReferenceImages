@@ -1,7 +1,7 @@
 ## Labels
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  scene = Scene(resolution = (500, 500))
  x = map([:dot, :dash, :dashdot], [2, 3, 4]) do ls, lw

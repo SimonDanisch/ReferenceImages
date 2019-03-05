@@ -1,7 +1,7 @@
 ## Tutorial adding to a scene
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  x = range(0, stop = 2pi, length = 80)
  f1(x) = sin.(x)

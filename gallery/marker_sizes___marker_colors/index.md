@@ -1,7 +1,7 @@
 ## Marker sizes + Marker colors
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  scatter(
      rand(20), rand(20),

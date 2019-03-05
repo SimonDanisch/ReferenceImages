@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  scene = Scene(raw = true, camera = campixel!)
  text!(

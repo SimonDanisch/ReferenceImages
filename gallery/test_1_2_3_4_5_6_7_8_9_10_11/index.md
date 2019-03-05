@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
 scatter(LinRange(0, 1, 10), rand(10))
 

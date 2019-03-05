@@ -1,7 +1,7 @@
 ## Interaction with Mouse
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using LinearAlgebra
 
  scene = Scene(raw = true, camera = cam2d!, resolution = (500, 500))

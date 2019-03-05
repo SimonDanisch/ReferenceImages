@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>Cube lattice</h2><pre><code class="language-julia">using AbstractPlotting, GLMakie, GLMakie
+    <div><h2>Cube lattice</h2><pre><code class="language-julia">using AbstractPlotting
 
  r = range(-3, stop = 3, length = 100)
  me = [((1 ./ x).^2 + (1 ./ y).^2 + (1 ./ z).^2) for x=r, y=r, z=r]

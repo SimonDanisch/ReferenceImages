@@ -1,7 +1,7 @@
 ## Image on Geometry (Earth)
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using FileIO, Colors
 
  earth = try

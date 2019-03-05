@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
 meshscatter(rand(10), rand(10), rand(10), color=rand(RGBAf0, 10))
 

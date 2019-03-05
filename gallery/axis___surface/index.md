@@ -1,7 +1,7 @@
 ## Axis + Surface
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  vx = -1:0.01:1
  vy = -1:0.01:1

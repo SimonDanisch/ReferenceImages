@@ -1,7 +1,7 @@
 ## Load Mesh
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using GLMakie
 
  mesh(GLMakie.loadasset("cat.obj"))

@@ -1,7 +1,7 @@
 ## Viridis color scheme
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  c = to_colormap(:viridis) # get colors of colormap
 

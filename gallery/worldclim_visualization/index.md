@@ -1,7 +1,7 @@
 ## WorldClim visualization
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using FileIO, GeometryTypes, Colors, GDAL, ZipFile
 
  env = ENV["LD_LIBRARY_PATH"]

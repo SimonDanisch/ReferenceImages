@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  scene = poly([Rect(0, 0, 20, 20)])
  scatter!(Rect(0, 0, 20, 20), color = :red, markersize = 2)

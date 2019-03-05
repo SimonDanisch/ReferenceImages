@@ -1,7 +1,7 @@
 ## Lots of Heatmaps
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  function makeheatmaps(bufs)
      heatmaps = map(bufs) do buf

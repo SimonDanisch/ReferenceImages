@@ -1,7 +1,7 @@
 ## Line with varying colors
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using ColorSchemes      # colormaps galore
 
 

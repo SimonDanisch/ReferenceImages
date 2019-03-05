@@ -1,7 +1,7 @@
 ## Animated surface and wireframe
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  scene = Scene();
  function xy_data(x, y)

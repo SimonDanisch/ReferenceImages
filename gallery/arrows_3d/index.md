@@ -1,7 +1,7 @@
 ## Arrows 3D
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using LinearAlgebra
 
  function SphericalToCartesian(r::T,θ::T,ϕ::T) where T<:AbstractArray

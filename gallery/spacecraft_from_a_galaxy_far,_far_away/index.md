@@ -1,7 +1,7 @@
 ## Spacecraft from a galaxy far, far away
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  N = 100
  r = range(-1, stop = 1, length = N)

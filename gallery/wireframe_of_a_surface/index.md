@@ -1,7 +1,7 @@
 ## Wireframe of a Surface
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  function xy_data(x, y)
      r = sqrt(x^2 + y^2)

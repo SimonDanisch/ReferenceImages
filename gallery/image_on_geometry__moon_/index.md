@@ -1,7 +1,7 @@
 ## Image on Geometry (Moon)
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using FileIO
 
  moon = try

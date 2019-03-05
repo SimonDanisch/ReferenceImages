@@ -1,7 +1,7 @@
 ## colormaps
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  h = 0.0
  offset = 0.1

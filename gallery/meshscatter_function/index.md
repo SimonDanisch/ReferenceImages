@@ -1,7 +1,7 @@
 ## Meshscatter Function
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using GeometryTypes
 
  large_sphere = Sphere(Point3f0(0), 1f0)
