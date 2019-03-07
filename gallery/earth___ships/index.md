@@ -7,6 +7,11 @@ using AbstractPlotting
  using LinearAlgebra
 
 
+ """
+     example by @pbouffard from JuliaPlots/Makie.jl#307
+     https://github.com/pbouffard/miniature-garbanzo/
+ """
+
  const rearth_km = 6371.1f0
  const mearth_kg = 5.972e24
  const rmoon_km = 1738.1f0

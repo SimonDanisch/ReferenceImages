@@ -6,12 +6,17 @@
   </head>
   <body>
     <div><h2>Robot Arm</h2><pre><code class="language-julia">using AbstractPlotting
- using Makie: Mesh, Scene, LineSegments, translate!, rotate!, vbox, hbox, qrotation, mesh!
+ using AbstractPlotting: Mesh, Scene, LineSegments, translate!, rotate!, vbox, hbox, qrotation, mesh!
  using GeometryTypes: HyperRectangle, Vec3f0, Point3f0, Sphere
  using StaticArrays: SVector
  using AbstractPlotting: textslider
  using Observables: on
 
+
+ &quot;&quot;&quot;
+     example by @pbouffard from JuliaPlots/Makie.jl#307
+     https://github.com/pbouffard/miniature-garbanzo/
+ &quot;&quot;&quot;
 
  function triad!(scene, len; translation = (0f0,0f0,0f0), show_axis = false)
      ret = linesegments!(

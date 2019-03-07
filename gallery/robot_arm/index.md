@@ -2,12 +2,17 @@
 
 ```julia
 using AbstractPlotting
- using Makie: Mesh, Scene, LineSegments, translate!, rotate!, vbox, hbox, qrotation, mesh!
+ using AbstractPlotting: Mesh, Scene, LineSegments, translate!, rotate!, vbox, hbox, qrotation, mesh!
  using GeometryTypes: HyperRectangle, Vec3f0, Point3f0, Sphere
  using StaticArrays: SVector
  using AbstractPlotting: textslider
  using Observables: on
 
+
+ """
+     example by @pbouffard from JuliaPlots/Makie.jl#307
+     https://github.com/pbouffard/miniature-garbanzo/
+ """
 
  function triad!(scene, len; translation = (0f0,0f0,0f0), show_axis = false)
      ret = linesegments!(
