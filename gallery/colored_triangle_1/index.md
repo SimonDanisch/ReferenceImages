@@ -1,7 +1,7 @@
 ## colored triangle
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  poly(
      [(0.0, 0.0), (0.5, 1.0), (1.0, 0.0)],

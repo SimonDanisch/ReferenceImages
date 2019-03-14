@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>Marker sizes</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>Marker sizes</h2><pre><code class="language-julia">using AbstractPlotting, GLMakie, GLMakie
 
  scatter(rand(20), rand(20), markersize = rand(20)./20, color = to_colormap(:Spectral, 20))
 

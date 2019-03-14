@@ -1,7 +1,7 @@
 ## Edit Polygon
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  points = node(:poly, Point2f0[(0, 0), (0.5, 0.5), (1.0, 0.0)])
  scene = Scene(resolution = (500, 500))

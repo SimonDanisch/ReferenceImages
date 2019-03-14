@@ -1,7 +1,7 @@
 ## The famous iris example
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using DataFrames, RDatasets # do Pkg.add.(["DataFrames", "RDatasets"]) if you don't have these packages installed
 
  iris = dataset("datasets", "iris")

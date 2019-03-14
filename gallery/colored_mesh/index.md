@@ -1,7 +1,7 @@
 ## Colored Mesh
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  x = [0, 1, 2, 0]
  y = [0, 0, 1, 2]

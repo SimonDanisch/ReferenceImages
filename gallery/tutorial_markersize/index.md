@@ -1,7 +1,7 @@
 ## Tutorial markersize
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  x = 1:10
  y = 1:10

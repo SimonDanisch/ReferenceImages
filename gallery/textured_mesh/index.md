@@ -1,7 +1,7 @@
 ## Textured Mesh
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using FileIO, GLMakie
 
  scene = Scene(resolution = (500, 500))

@@ -1,7 +1,7 @@
 ## Text Annotation
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  text(
      ". This is an annotation!",

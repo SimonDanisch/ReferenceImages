@@ -1,7 +1,7 @@
 ## Polygons
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using GeometryTypes
 
  scene = Scene(resolution = (500, 500))

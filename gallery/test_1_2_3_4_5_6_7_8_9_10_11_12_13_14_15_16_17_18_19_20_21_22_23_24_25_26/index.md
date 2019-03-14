@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
 contour(randn(100, 90), levels=[0.1, 0.5, 0.8])
 

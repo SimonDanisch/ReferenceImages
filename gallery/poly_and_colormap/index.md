@@ -1,7 +1,7 @@
 ## poly and colormap
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  points = Point2f0[[0.0, 0.0], [0.1, 0.0], [0.1, 0.1], [0.0, 0.1]]
  colors = [0.0 ,0.0, 0.5, 0.0]

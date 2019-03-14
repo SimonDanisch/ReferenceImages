@@ -1,7 +1,7 @@
 ## Normals of a Cat
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using LinearAlgebra, GLMakie
 
  x = GLMakie.loadasset("cat.obj")

@@ -1,7 +1,7 @@
 ## Marker offset
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  scene = Scene(resolution = (500, 500))
  points = Point2f0[(0,0), (1,1), (2,2)]

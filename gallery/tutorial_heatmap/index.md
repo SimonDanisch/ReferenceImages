@@ -1,7 +1,7 @@
 ## Tutorial heatmap
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  data = rand(50, 50)
  scene = heatmap(data)

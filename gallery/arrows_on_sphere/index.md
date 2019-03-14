@@ -1,7 +1,7 @@
 ## Arrows on Sphere
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using LinearAlgebra
 
  n = 20

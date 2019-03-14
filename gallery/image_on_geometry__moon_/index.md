@@ -1,7 +1,7 @@
 ## Image on Geometry (Moon)
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using FileIO
 
  moon = try
@@ -12,6 +12,7 @@ using AbstractPlotting
  end
  scene = mesh(Sphere(Point3f0(0), 1f0), color = moon, shading = false, show_axis = false, center = false)
  update_cam!(scene, Vec3f0(-2, 2, 2), Vec3f0(0))
+ scene.center = false # prevent to recenter on display
  scene
 
 

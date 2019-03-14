@@ -1,7 +1,7 @@
 ## Implicit equation
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  r = range(-5, stop = 5, length = 400)
  (a, b) = -1, 2

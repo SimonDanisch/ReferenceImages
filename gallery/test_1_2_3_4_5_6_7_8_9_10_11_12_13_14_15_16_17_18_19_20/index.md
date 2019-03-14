@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
 scatter!(Scene(), Theme(color=:green), rand(10), rand(10))
 

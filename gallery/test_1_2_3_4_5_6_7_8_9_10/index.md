@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
 scatter(0 .. 1, rand(10), markersize=rand(10) .* 0.1)
 

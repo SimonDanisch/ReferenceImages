@@ -1,7 +1,7 @@
 ## quiver
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using ImageFiltering
 
  x = range(-2, stop = 2, length = 21)

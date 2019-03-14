@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>Test heatmap + image overlap</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>Test heatmap + image overlap</h2><pre><code class="language-julia">using AbstractPlotting, GLMakie, GLMakie
 
  heatmap(rand(32, 32))
  image!(map(x-&gt;RGBAf0(x,0.5, 0.5, 0.8), rand(32,32)))

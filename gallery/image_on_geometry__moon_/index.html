@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>Image on Geometry (Moon)</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>Image on Geometry (Moon)</h2><pre><code class="language-julia">using AbstractPlotting, GLMakie, GLMakie
  using FileIO
 
  moon = try
@@ -16,6 +16,7 @@
  end
  scene = mesh(Sphere(Point3f0(0), 1f0), color = moon, shading = false, show_axis = false, center = false)
  update_cam!(scene, Vec3f0(-2, 2, 2), Vec3f0(0))
+ scene.center = false # prevent to recenter on display
  scene
 
 </code></pre>

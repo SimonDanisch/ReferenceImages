@@ -1,7 +1,7 @@
 ## Viridis scatter
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  N = 30
  scatter(1:N, 1:N, markersize = 2, color = to_colormap(:viridis, N))

@@ -1,7 +1,7 @@
 ## Customize Axes
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  x = LinRange(0,3pi,200); y = sin.(x)
  lin = lines(x, y, padding = (0.0, 0.0), axis = (

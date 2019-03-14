@@ -1,7 +1,7 @@
 ## Mouse Picking
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  img = rand(100, 100)
  scene = Scene(resolution = (500, 500))

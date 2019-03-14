@@ -1,7 +1,7 @@
 ## Earth & Ships
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using AbstractPlotting: textslider
  using GeometryTypes, FileIO
  using LinearAlgebra

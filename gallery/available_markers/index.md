@@ -1,7 +1,7 @@
 ## Available markers
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  marker = collect(AbstractPlotting._marker_map)
  positions = Point2f0.(0, 1:length(marker))

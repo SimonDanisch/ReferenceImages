@@ -1,7 +1,7 @@
 ## Comparing contours, image, surfaces and heatmaps
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  N = 20
  x = LinRange(-0.3, 1, N)

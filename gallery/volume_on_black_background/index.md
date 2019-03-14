@@ -1,7 +1,7 @@
 ## Volume on black background
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  r = LinRange(-3, 3, 100);  # our value range
 

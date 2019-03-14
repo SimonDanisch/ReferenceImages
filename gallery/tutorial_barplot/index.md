@@ -1,7 +1,7 @@
 ## Tutorial barplot
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  data = sort(randn(100))
  barplot(data)

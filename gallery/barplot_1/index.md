@@ -1,7 +1,7 @@
 ## barplot
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  barplot(rand(10), color = rand(10))
  # barplot(rand(3), color = [:red, :blue, :green])

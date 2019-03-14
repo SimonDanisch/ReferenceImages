@@ -1,7 +1,7 @@
 ## Subscenes
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  img = rand(RGBAf0, 100, 100)
  scene = image(img, show_axis = false)

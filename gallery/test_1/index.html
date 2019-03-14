@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>Test</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>Test</h2><pre><code class="language-julia">using AbstractPlotting, GLMakie, GLMakie
 
  r = range(-3pi, stop = 3pi, length = 100)
  s = volume(r, r, r, (x, y, z)-&gt; cos(x) + sin(y) + cos(z), algorithm = :iso, isorange = 0.1f0, show_axis = false)

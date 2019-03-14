@@ -1,7 +1,7 @@
 ## Cube lattice
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  r = range(-3, stop = 3, length = 100)
  me = [((1 ./ x).^2 + (1 ./ y).^2 + (1 ./ z).^2) for x=r, y=r, z=r]

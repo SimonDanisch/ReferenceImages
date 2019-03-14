@@ -1,7 +1,7 @@
 ## Moire
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  function cartesian(ll)
      return Point3f0(
@@ -44,6 +44,7 @@ using AbstractPlotting
  eyepos = Vec3f0(5, 1.5, 0.5)
  lookat = Vec3f0(0)
  update_cam!(scene, eyepos, lookat)
+ scene.center = false # prevent scene from recentering on display
  l = scene[1]
  N = 150
  record(scene, "output.mp4", 1:N) do i

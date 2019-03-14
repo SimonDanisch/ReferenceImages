@@ -1,7 +1,7 @@
 ## heatmap interpolation
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using AbstractPlotting: hbox, vbox
 
  data = rand(50, 100)

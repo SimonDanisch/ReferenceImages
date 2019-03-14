@@ -1,7 +1,7 @@
 ## 3D Contour with 2D contour slices
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using LinearAlgebra
 
  function test(x, y, z)

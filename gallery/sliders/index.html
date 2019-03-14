@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>sliders</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>sliders</h2><pre><code class="language-julia">using AbstractPlotting, GLMakie, GLMakie
 
  s1 = slider(LinRange(0.01, 1, 100), raw = true, camera = campixel!, start = 0.3)
  s2 = slider(LinRange(-2pi, 2pi, 100), raw = true, camera = campixel!)

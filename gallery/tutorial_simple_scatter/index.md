@@ -1,7 +1,7 @@
 ## Tutorial simple scatter
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  x = rand(10)
  y = rand(10)

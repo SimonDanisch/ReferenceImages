@@ -1,7 +1,7 @@
 ## Image on Surface Sphere
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  n = 20
  θ = [0;(0.5:n-0.5)/n;1]

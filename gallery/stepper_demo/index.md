@@ -1,7 +1,7 @@
 ## Stepper demo
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  function stepper_demo()
      scene = Scene()

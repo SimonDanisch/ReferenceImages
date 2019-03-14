@@ -1,7 +1,7 @@
 ## Twisty cube thing
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  (a, b) = -1, 2
  r = range(-2, stop = 2, length = 100)

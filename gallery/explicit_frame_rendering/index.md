@@ -1,7 +1,7 @@
 ## Explicit frame rendering
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using ModernGL, GLMakie
  using GLFW
 

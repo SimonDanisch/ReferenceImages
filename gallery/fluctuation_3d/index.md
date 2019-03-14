@@ -1,7 +1,7 @@
 ## Fluctuation 3D
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using GeometryTypes, Colors
 
  scene = Scene()

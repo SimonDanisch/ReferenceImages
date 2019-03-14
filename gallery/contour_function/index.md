@@ -1,7 +1,7 @@
 ## Contour Function
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  r = range(-10, stop = 10, length = 512)
  z = ((x, y)-> sin(x) + cos(y)).(r, r')

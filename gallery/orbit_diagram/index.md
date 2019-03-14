@@ -1,7 +1,7 @@
 ## Orbit Diagram
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using Observables
 
  growth(🐇, 🥕) = 🐇 * 🥕 * (1.0 - 🐇)

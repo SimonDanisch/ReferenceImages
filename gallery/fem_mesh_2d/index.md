@@ -1,7 +1,7 @@
 ## FEM mesh 2D
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  coordinates = [
      0.0 0.0;

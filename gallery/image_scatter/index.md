@@ -1,7 +1,7 @@
 ## image scatter
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using LinearAlgebra
 
  scatter(

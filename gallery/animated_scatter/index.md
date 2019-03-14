@@ -1,7 +1,7 @@
 ## Animated Scatter
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  N = 10
  r = [(rand(7, 2) .- 0.5) .* 25 for i = 1:N]

@@ -1,7 +1,7 @@
 ## Contour3d
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  function xy_data(x, y)
      r = sqrt(x*x + y*y)

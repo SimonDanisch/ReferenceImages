@@ -1,7 +1,7 @@
 ## Chess Game
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using Base.Iterators: repeated
 
  r = 1:8

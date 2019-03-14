@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>WorldClim visualization</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>WorldClim visualization</h2><pre><code class="language-julia">using AbstractPlotting, GLMakie, GLMakie
  using FileIO, GeometryTypes, Colors, GDAL, ZipFile
 
- env = ENV[&quot;LD_LIBRARY_PATH&quot;]
+ env = get(ENV, &quot;LD_LIBRARY_PATH&quot;, &quot;&quot;)
  #=
  This example requires the GDAL package, from https://github.com/JuliaGeo/GDAL.jl
  For more information about GDAL, see the official documentation at: https://gdal.org/
@@ -57,6 +57,8 @@
      &quot;&quot;&quot;
      if !isfile(&quot;$name.zip&quot;)
          # This might fail on windows - just try again a couple of times -.-
+         # download with curl breaks if julia is in LD_LIBRARY_PATH
+         # which GDAL is putting there
          ENV[&quot;LD_LIBRARY_PATH&quot;] = &quot;&quot;
          download(&quot;http://biogeo.ucdavis.edu/data/worldclim/v2.0/tif/base/wc2.0_10m_$name.zip&quot;, &quot;$name.zip&quot;)
      end

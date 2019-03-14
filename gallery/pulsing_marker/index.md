@@ -1,7 +1,7 @@
 ## pulsing marker
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  N = 100
  scene = scatter([0], [0], marker = '❤', markersize = 0.5, color = :red, raw = true)

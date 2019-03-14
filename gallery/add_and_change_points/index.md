@@ -1,7 +1,7 @@
 ## Add and change points
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using LinearAlgebra
 
  img = rand(100, 100)

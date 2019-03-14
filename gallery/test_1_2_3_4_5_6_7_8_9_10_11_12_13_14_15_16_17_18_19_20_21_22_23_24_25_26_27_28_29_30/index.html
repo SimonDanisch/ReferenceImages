@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
   </head>
   <body>
-    <div><h2>Test</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>Test</h2><pre><code class="language-julia">using AbstractPlotting, GLMakie, GLMakie
 
 contour(rand(33, 30) .* 6 .- 3, levels=[-2.5, 0.4, 0.5, 0.6, 2.5], colormap=[(:black, 0.2), :red, :blue, :green, (:black, 0.2)], colorrange=(0.2, 0.8))
 </code></pre>

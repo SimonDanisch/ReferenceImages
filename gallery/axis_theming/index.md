@@ -1,7 +1,7 @@
 ## Axis theming
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  using GeometryTypes
 
  scene = Scene()

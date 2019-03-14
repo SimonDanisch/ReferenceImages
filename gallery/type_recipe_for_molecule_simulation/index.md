@@ -1,7 +1,7 @@
 ## Type recipe for molecule simulation
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
  import AbstractPlotting: Plot, default_theme, plot!, to_value
 
 

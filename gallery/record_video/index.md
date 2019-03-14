@@ -1,7 +1,7 @@
 ## Record Video
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  scene = Scene()
 

@@ -1,7 +1,7 @@
 ## image
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  hbox(
      image(AbstractPlotting.logo(), scale_plot = false),

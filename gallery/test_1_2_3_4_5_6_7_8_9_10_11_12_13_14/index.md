@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  angles = range(0, stop = 2pi, length = 20)
  pos = Point2f0.(sin.(angles), cos.(angles))

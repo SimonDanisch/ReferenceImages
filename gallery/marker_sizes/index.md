@@ -1,7 +1,7 @@
 ## Marker sizes
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  scatter(rand(20), rand(20), markersize = rand(20)./20, color = to_colormap(:Spectral, 20))
 

@@ -1,7 +1,7 @@
 ## Test heatmap + image overlap
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  heatmap(rand(32, 32))
  image!(map(x->RGBAf0(x,0.5, 0.5, 0.8), rand(32,32)))

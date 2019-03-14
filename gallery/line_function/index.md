@@ -1,7 +1,7 @@
 ## Line Function
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  scene = Scene()
  x = range(0, stop = 3pi)

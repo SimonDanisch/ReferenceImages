@@ -1,7 +1,7 @@
 ## Tutorial linesegments
 
 ```julia
-using AbstractPlotting
+using AbstractPlotting, GLMakie, GLMakie
 
  points = [
      Point2f0(0, 0) => Point2f0(5, 5);
