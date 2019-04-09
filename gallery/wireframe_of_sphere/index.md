@@ -1,7 +1,7 @@
 ## Wireframe of Sphere
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  wireframe(Sphere(Point3f0(0), 1f0))
 

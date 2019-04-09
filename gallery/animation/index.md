@@ -1,7 +1,7 @@
 ## Animation
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  scene = Scene()
  f(t, v, s) = (sin(v + t) * s, cos(v + t) * s)

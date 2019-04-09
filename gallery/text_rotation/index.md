@@ -1,7 +1,7 @@
 ## Text rotation
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  scene = Scene()
  pos = (500, 500)

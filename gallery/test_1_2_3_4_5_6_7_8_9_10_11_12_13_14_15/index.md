@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using GeometryTypes
 
  s1 = GLNormalUVMesh(Sphere(Point3f0(0), 1f0))

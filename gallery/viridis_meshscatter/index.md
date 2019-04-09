@@ -1,7 +1,7 @@
 ## Viridis meshscatter
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  N = 30
  R = 2

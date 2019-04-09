@@ -1,7 +1,7 @@
 ## Travelling wave
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  scene = Scene()
  mytime = Node(0.0)

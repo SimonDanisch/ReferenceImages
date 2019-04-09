@@ -1,7 +1,7 @@
 ## Volume Function
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  volume(rand(32, 32, 32), algorithm = :mip)
 

@@ -1,7 +1,7 @@
 ## Sphere Mesh
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  mesh(Sphere(Point3f0(0), 1f0), color = :blue)
 

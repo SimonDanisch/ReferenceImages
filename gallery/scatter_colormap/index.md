@@ -1,7 +1,7 @@
 ## scatter colormap
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  scatter(rand(10), rand(10), color = rand(10))
 

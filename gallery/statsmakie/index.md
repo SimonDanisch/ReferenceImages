@@ -1,7 +1,7 @@
 ## StatsMakie
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using StatsMakie
  using DataFrames, RDatasets
  using StatsMakie: linear, smooth

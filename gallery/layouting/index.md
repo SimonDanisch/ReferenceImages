@@ -1,7 +1,7 @@
 ## Layouting
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  p1 = scatter(rand(10), markersize = 1)
  p2 = lines(rand(10), rand(10))

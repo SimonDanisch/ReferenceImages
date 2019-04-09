@@ -1,7 +1,7 @@
 ## FEM mesh 3D
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using GeometryTypes, GLMakie
 
  cat = GLMakie.loadasset("cat.obj")

@@ -1,7 +1,7 @@
 ## FEM polygon 2D
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  coordinates = [
      0.0 0.0;

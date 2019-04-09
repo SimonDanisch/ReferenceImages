@@ -1,7 +1,7 @@
 ## Robot Arm
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using AbstractPlotting: Mesh, Scene, LineSegments, translate!, rotate!, vbox, hbox, qrotation, mesh!
  using GeometryTypes: HyperRectangle, Vec3f0, Point3f0, Sphere
  using StaticArrays: SVector

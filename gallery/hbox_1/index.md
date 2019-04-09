@@ -1,7 +1,7 @@
 ## Hbox
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  t = range(-122277.93103448274, stop=-14798.035304081845, length=29542)
  x = -42 .- randn(length(t))

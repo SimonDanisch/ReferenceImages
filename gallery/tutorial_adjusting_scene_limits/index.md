@@ -1,7 +1,7 @@
 ## Tutorial adjusting scene limits
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  x = range(0, stop = 10, length = 40)
  y = x

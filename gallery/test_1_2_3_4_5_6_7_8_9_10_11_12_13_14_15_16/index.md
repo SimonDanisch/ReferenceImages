@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
 heatmap(rand(50, 50), colormap=:RdBu, alpha=0.2)
 

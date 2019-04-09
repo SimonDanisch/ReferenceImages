@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  lines(Rect(0, 0, 1, 1), linewidth = 4, scale_plot = false)
  scatter!([Point2f0(0.5, 0.5)], markersize = 1, marker = 'I', scale_plot = false)

@@ -1,7 +1,7 @@
 ## Line GIF
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using GLMakie
 
  us = range(0, stop = 1, length = 100)

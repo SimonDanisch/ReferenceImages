@@ -1,7 +1,7 @@
 ## GUI for exploring Lorenz equation
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using Colors
  using AbstractPlotting: textslider, colorswatch
 

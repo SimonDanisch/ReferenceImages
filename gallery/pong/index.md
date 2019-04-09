@@ -1,7 +1,7 @@
 ## pong
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  xyvec = rand(Point2f0, (2)) .* 5 .+ 1
  velvec = rand(Point2f0, (2)) .* 10

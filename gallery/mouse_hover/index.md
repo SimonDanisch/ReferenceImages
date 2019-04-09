@@ -1,7 +1,7 @@
 ## Mouse Hover
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using Colors, Observables
 
  r = range(0, stop=5pi, length=100)

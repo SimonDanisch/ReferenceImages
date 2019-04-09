@@ -1,7 +1,7 @@
 ## Moire
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  function cartesian(ll)
      return Point3f0(

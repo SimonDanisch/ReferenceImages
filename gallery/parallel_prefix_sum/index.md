@@ -1,7 +1,7 @@
 ## Parallel Prefix Sum
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  import Base: getindex, setindex!, length, size
  import Base.+
  using GeometryTypes

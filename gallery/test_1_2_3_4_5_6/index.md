@@ -1,7 +1,7 @@
 ## Test
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
 lines(rand(10), rand(10), color=rand(10), linewidth=10)
 

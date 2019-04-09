@@ -1,13 +1,13 @@
 ## colormaps
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  h = 0.0
  offset = 0.1
  scene = Scene()
  cam2d!(scene)
- plot = map(AbstractPlotting.colorbrewer_names) do cmap
+ plot = map(collect(AbstractPlotting.all_gradient_names)) do cmap
      global h
      c = to_colormap(cmap)
      cbar = image!(

@@ -1,13 +1,13 @@
 ## Stepper demo
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  function stepper_demo()
      scene = Scene()
      pos = (50, 50)
      steps = ["Step 1", "Step 2", "Step 3"]
-     colors = AbstractPlotting.to_colormap(:Set1, length(steps))
+     colors = AbstractPlotting.ColorBrewer.palette("Set1", length(steps))
      lines!(scene, Rect(0,0,500,500), linewidth = 0.0001)
      # initialize the stepper and give it an output destination
      st = Stepper(scene, "output")

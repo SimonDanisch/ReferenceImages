@@ -1,7 +1,7 @@
 ## Wireframe of a Mesh
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
  using GLMakie
 
  wireframe(GLMakie.loadasset("cat.obj"))

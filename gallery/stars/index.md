@@ -1,7 +1,7 @@
 ## Stars
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  stars = 100_000
  scene = Scene(backgroundcolor = :black)

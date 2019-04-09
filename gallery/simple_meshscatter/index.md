@@ -1,7 +1,7 @@
 ## Simple meshscatter
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  large_sphere = Sphere(Point3f0(0), 1f0)
  positions = decompose(Point3f0, large_sphere)

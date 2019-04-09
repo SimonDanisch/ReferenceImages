@@ -1,7 +1,7 @@
 ## Biohazard
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  (a, b) = -1, 2
  r = range(-5, stop = 5, length = 100)

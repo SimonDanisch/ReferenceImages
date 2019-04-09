@@ -1,7 +1,7 @@
 ## Surface
 
 ```julia
-using AbstractPlotting, GLMakie, GLMakie
+using AbstractPlotting
 
  N = 30
  function xy_data(x, y)
