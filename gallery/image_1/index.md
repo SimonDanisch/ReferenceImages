@@ -3,7 +3,7 @@
 ```julia
 using AbstractPlotting
 
- hbox(
+ vbox(
      image(AbstractPlotting.logo(), scale_plot = false),
      image(rand(100, 500), scale_plot = false),
  )
