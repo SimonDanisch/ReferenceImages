@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Analysis</h2><pre><code class="language-julia">using AbstractPlotting
+ using StatsMakie
+ using DataFrames, RDatasets # for data
+ using StatsMakie: smooth, linear
+
+
+ mtcars = dataset(&quot;datasets&quot;, &quot;mtcars&quot;)    # load dataset of car statistics
+ iris = dataset(&quot;datasets&quot;, &quot;iris&quot;)
+
+ disallowmissing!.([mtcars, iris])  # convert columns from Union{T, Missing} to T
+ # We can use this because the dataset has no missing values.
+
+ @substep
+
+ # kde
+
+ plot(
+     density,           # the type of analysis
+     Data(mtcars),
+     :MPG,
+     Group(color = :Cyl)
+ )
+
+ @substep
+
+ # histogram
+
+ plot(
+     histogram,         # the type of analysis
+     Data(mtcars),
+     :MPG,
+     Group(color = :Cyl)
+ )
+
+ @substep
+
+ # frequency analysis
+
+ plot(
+     frequency,
+     Data(iris),
+     :Species
+ )
+
+ @substep
+ xs = 10 .* rand(100)
+ ys = sin.(xs) .+ 0.5 .* rand.()
+ scatter(xs, ys)
+ plot!(smooth, xs, ys)
+
+ @substep
+ scatter(xs, ys)
+ plot!(linear, xs, ys)
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//analysis/media/image2.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//analysis/media/image3.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//analysis/media/image4.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//analysis/media/image5.jpg" alt="">
+
+    </p>
+</div>
+
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery//analysis/media/image6.jpg" alt="">
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+
