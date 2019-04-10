@@ -5,6 +5,7 @@ using AbstractPlotting
  using StatsMakie
  using DataFrames, RDatasets # for data
  using StatsMakie: smooth, linear
+ using Distributions
 
 
  mtcars = dataset("datasets", "mtcars")    # load dataset of car statistics
@@ -39,19 +40,18 @@ using AbstractPlotting
 
  # frequency analysis
 
- plot(
-     frequency,
-     Data(iris),
-     :Species
- )
+ d = rand(Poisson(), 1000)
+ plot(frequency, d)
 
  @substep
+
  xs = 10 .* rand(100)
  ys = sin.(xs) .+ 0.5 .* rand.()
  scatter(xs, ys)
  plot!(smooth, xs, ys)
 
  @substep
+
  scatter(xs, ys)
  plot!(linear, xs, ys)
 
