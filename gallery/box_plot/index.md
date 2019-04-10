@@ -6,7 +6,6 @@ using AbstractPlotting
 
 
  d = dataset("Ecdat","Fatality")
-
  boxplot(Data(d), :Year, :Perinc)
 
 

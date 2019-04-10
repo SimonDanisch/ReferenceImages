@@ -5,7 +5,7 @@ using AbstractPlotting
  using RDatasets, StatsMakie
 
 
- d = dataset("Ecdat","Fatality");
+ d = dataset("Ecdat", "Fatality");
 
  violin(Data(d), :Year, :Perinc)
 

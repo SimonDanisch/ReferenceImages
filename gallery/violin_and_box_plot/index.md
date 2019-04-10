@@ -7,9 +7,8 @@ using AbstractPlotting
 
  d = dataset("Ecdat","Fatality");
 
- p = violin(Data(d), :Year, :Perinc, color = :gray)
-
- boxplot!(p, Data(d), :Year, :Perinc, color = :black)
+ violin(d.Year, d.Perinc, color = :gray)
+ boxplot!(d.Year, d.Perinc, color = :black)
 
 
 
