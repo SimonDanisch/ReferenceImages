@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+  </head>
+  <body>
+    <div><h2>Line changing colour</h2><pre><code class="language-julia">using AbstractPlotting
+
+ scene = lines(rand(10); linewidth=10)
+
+ record(scene, &quot;output.mp4&quot;, 1:255; framerate = 60) do i
+        scene.plots[2][:color] = RGBf0(i/255, (255 - i)/255, 0) # animate scene
+        # `scene.plots` gives the plots of the Scene.
+        # `scene.plots[1]` is always the Axis if it exists,
+        # and `scene.plots[2]` onward are the user-defined plots.
+end
+
+</code></pre>
+<div style="display:inline-block">
+    <p style="display:inline-block; text-align: center">
+        <video controls autoplay loop muted>
+  <source src="https://simondanisch.github.io/ReferenceImages/gallery//line_changing_colour/media/line_changing_colour.mp4" type="video/mp4">
+  Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
+</video>
+
+    </p>
+</div>
+</div>
+  </body>
+</html>
+

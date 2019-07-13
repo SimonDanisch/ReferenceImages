@@ -13,7 +13,7 @@ using AbstractPlotting
  ]
  meshes = map(GLNormalMesh, rectangles)
  scene = mesh(merge(meshes))
- display(scene)
+ center!(scene)
  cam = cameracontrols(scene)
  dir = scene.limits[].widths ./ 2.
  dir_scaled = Vec3f0(

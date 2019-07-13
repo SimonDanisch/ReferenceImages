@@ -22,7 +22,7 @@ using AbstractPlotting
              Point3f0(0,0,0) => Point3f0(0,0,len)
          ],
          color = [:red, :green, :blue],
-         linewidth = 3, show_axis = show_axis
+         linewidth = 3, show_axis = false, center = false
      )[end]
      translate!(ret, translation)
      return ret
@@ -37,7 +37,7 @@ using AbstractPlotting
      offset::Vec3f0
  end
 
- s = Scene()
+ s = Scene(show_axis = false)
 
  function Joint(s::Scene)
      newscene = Scene(s)
@@ -48,7 +48,10 @@ using AbstractPlotting
  function Joint(j::Joint; offset::Point3f0=(0,0,0), axis=(0, 1, 0), angle=0)
      jnew = Joint(j.scene)
      translate!(jnew.scene, j.offset)
-     linesegments!(jnew.scene, [Point3f0(0) => offset], linewidth=4, color=:magenta, show_axis=false)
+     linesegments!(
+         jnew.scene, [Point3f0(0) => offset], linewidth=4,
+         color=:magenta, show_axis = false, center = false
+     )
      jnew.axis = axis
      jnew.offset = offset
      setangle!(jnew, angle)
@@ -87,9 +90,10 @@ using AbstractPlotting
  end
 
  # Add sphere to end effector:
- mesh!(joints[end].scene, Sphere(Point3f0(0.5, 0, 0), 0.25f0), color=:cyan, show_axis=false)
- center!(s)
- RecordEvents(vbox(hbox(sliders...), s), "output")
+ mesh!(joints[end].scene, Sphere(Point3f0(0.5, 0, 0), 0.25f0), color=:cyan, raw = true)
+ update_cam!(s, Float32[7.0, 4.0, 6.0], Float32[6.0, 2.5, 4.5])
+
+ RecordEvents(vbox(hbox(sliders...), s, parent = Scene(resolution = (1000, 500))), "output")
 
 
 ```

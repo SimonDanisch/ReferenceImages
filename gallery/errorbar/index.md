@@ -2,7 +2,7 @@
 
 ```julia
 using AbstractPlotting
- using StatsMakie, Makie
+ using StatsMakie
 
  x = [1:4;]
  y =  [1:4;]
