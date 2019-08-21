@@ -1,53 +1,56 @@
 ## Axis + Surface
 
-```julia
-using AbstractPlotting
+```@raw html
+<pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
 
- vx = -1:0.01:1
- vy = -1:0.01:1
+ </span><span class='hljl-n'>vx</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>0.01</span><span class='hljl-oB'>:</span><span class='hljl-ni'>1</span><span class='hljl-t'>
+ </span><span class='hljl-n'>vy</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>0.01</span><span class='hljl-oB'>:</span><span class='hljl-ni'>1</span><span class='hljl-t'>
 
- f(x, y) = (sin(x*10) + cos(y*10)) / 4
- scene = Scene(resolution = (500, 500))
- # One way to style the axis is to pass a nested dictionary / named tuple to it.
- surface!(scene, vx, vy, f, axis = (frame = (linewidth = 2.0,),))
- psurf = scene[end] # the surface we last plotted to scene
- # One can also directly get the axis object and manipulate it
- axis = scene[Axis] # get axis
+ </span><span class='hljl-nf'>f</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>y</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-nf'>sin</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-oB'>*</span><span class='hljl-ni'>10</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-nf'>cos</span><span class='hljl-p'>(</span><span class='hljl-n'>y</span><span class='hljl-oB'>*</span><span class='hljl-ni'>10</span><span class='hljl-p'>))</span><span class='hljl-t'> </span><span class='hljl-oB'>/</span><span class='hljl-t'> </span><span class='hljl-ni'>4</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Scene</span><span class='hljl-p'>(</span><span class='hljl-n'>resolution</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>500</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>500</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># One way to style the axis is to pass a nested dictionary / named tuple to it.</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>surface!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>vx</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>vy</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>f</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>frame</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>linewidth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>2.0</span><span class='hljl-p'>,),))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>psurf</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>scene</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-cs'># the surface we last plotted to scene</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># One can also directly get the axis object and manipulate it</span><span class='hljl-t'>
+ </span><span class='hljl-n'>axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>scene</span><span class='hljl-p'>[</span><span class='hljl-n'>Axis</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-cs'># get axis</span><span class='hljl-t'>
 
- # You can access nested attributes likes this:
- axis[:names, :axisnames] = ("\\bf{ℜ}[u]", "\\bf{𝕴}[u]", " OK\n\\bf{δ}\n γ")
- tstyle = axis[:names] # or just get the nested attributes and work directly with them
+ </span><span class='hljl-cs'># You can access nested attributes likes this:</span><span class='hljl-t'>
+ </span><span class='hljl-n'>axis</span><span class='hljl-p'>[</span><span class='hljl-sc'>:names</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:axisnames</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;</span><span class='hljl-se'>\\</span><span class='hljl-s'>bf{ℜ}[u]&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;</span><span class='hljl-se'>\\</span><span class='hljl-s'>bf{𝕴}[u]&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot; OK</span><span class='hljl-se'>\n\\</span><span class='hljl-s'>bf{δ}</span><span class='hljl-se'>\n</span><span class='hljl-s'> γ&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>tstyle</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>axis</span><span class='hljl-p'>[</span><span class='hljl-sc'>:names</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-cs'># or just get the nested attributes and work directly with them</span><span class='hljl-t'>
 
- tstyle[:textsize] = 10
- tstyle[:textcolor] = (:red, :green, :black)
- tstyle[:font] = "helvetica"
+ </span><span class='hljl-n'>tstyle</span><span class='hljl-p'>[</span><span class='hljl-sc'>:textsize</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>10</span><span class='hljl-t'>
+ </span><span class='hljl-n'>tstyle</span><span class='hljl-p'>[</span><span class='hljl-sc'>:textcolor</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-sc'>:red</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:green</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:black</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>tstyle</span><span class='hljl-p'>[</span><span class='hljl-sc'>:font</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;helvetica&quot;</span><span class='hljl-t'>
 
 
- psurf[:colormap] = :RdYlBu
- wh = widths(scene)
- t = text!(
-     campixel(scene),
-     "Multipole Representation of first resonances of U-238",
-     position = (wh[1] / 2.0, wh[2] - 20.0),
-     align = (:center,  :center),
-     textsize = 20,
-     font = "helvetica",
-     raw = :true
- )
- c = lines!(scene, Circle(Point2f0(0.1, 0.5), 0.1f0), color = :red, offset = Vec3f0(0, 0, 1))
- scene
- #update surface
- # TODO explain and improve the situation here
- psurf.converted[3][] = f.(vx .+ 0.5, (vy .+ 0.5)')
- scene
+ </span><span class='hljl-n'>psurf</span><span class='hljl-p'>[</span><span class='hljl-sc'>:colormap</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:RdYlBu</span><span class='hljl-t'>
+ </span><span class='hljl-n'>wh</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>widths</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>t</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>text!</span><span class='hljl-p'>(</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>campixel</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>),</span><span class='hljl-t'>
+     </span><span class='hljl-s'>&quot;Multipole Representation of first resonances of U-238&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>position</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>wh</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>/</span><span class='hljl-t'> </span><span class='hljl-nfB'>2.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>wh</span><span class='hljl-p'>[</span><span class='hljl-ni'>2</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-nfB'>20.0</span><span class='hljl-p'>),</span><span class='hljl-t'>
+     </span><span class='hljl-n'>align</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-sc'>:center</span><span class='hljl-p'>,</span><span class='hljl-t'>  </span><span class='hljl-sc'>:center</span><span class='hljl-p'>),</span><span class='hljl-t'>
+     </span><span class='hljl-n'>textsize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>20</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>font</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;helvetica&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>raw</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:true</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>c</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lines!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Circle</span><span class='hljl-p'>(</span><span class='hljl-nf'>Point2f0</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.1f0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:red</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>offset</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'>
+ </span><span class='hljl-cs'>#update surface</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># TODO explain and improve the situation here</span><span class='hljl-t'>
+ </span><span class='hljl-n'>psurf</span><span class='hljl-oB'>.</span><span class='hljl-n'>converted</span><span class='hljl-p'>[</span><span class='hljl-ni'>3</span><span class='hljl-p'>][]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>f</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>vx</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>vy</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>)</span><span class='hljl-oB'>&#39;</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'>
 
+</span>
+</pre>
 
 ```
 ```@raw html
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//axis___surface/media/image.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//axis___surface/media/image.jpg" alt="">
 
     </p>
 </div>

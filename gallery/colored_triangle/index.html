@@ -3,19 +3,24 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>colored triangle</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>colored triangle</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
 
- mesh(
-     [(0.0, 0.0), (0.5, 1.0), (1.0, 0.0)], color = [:red, :green, :blue],
-     shading = false
- )
+ </span><span class='hljl-nf'>mesh</span><span class='hljl-p'>(</span><span class='hljl-t'>
+     </span><span class='hljl-p'>[(</span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>1.0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-nfB'>1.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>)],</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-sc'>:red</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:green</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:blue</span><span class='hljl-p'>],</span><span class='hljl-t'>
+     </span><span class='hljl-n'>shading</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)</span><span class='hljl-t'>
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//colored_triangle/media/image.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//colored_triangle/media/image.jpg" alt="">
 
     </p>
 </div>

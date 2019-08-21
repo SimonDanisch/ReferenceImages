@@ -3,22 +3,27 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>Text Annotation</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>Text Annotation</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
 
- text(
-     &quot;. This is an annotation!&quot;,
-     position = (300, 200),
-     align = (:center,  :center),
-     textsize = 60,
-     font = &quot;Blackchancery&quot;
- )
+ </span><span class='hljl-nf'>text</span><span class='hljl-p'>(</span><span class='hljl-t'>
+     </span><span class='hljl-s'>&quot;. This is an annotation!&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>position</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>300</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>200</span><span class='hljl-p'>),</span><span class='hljl-t'>
+     </span><span class='hljl-n'>align</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-sc'>:center</span><span class='hljl-p'>,</span><span class='hljl-t'>  </span><span class='hljl-sc'>:center</span><span class='hljl-p'>),</span><span class='hljl-t'>
+     </span><span class='hljl-n'>textsize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>60</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>font</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;Blackchancery&quot;</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)</span><span class='hljl-t'>
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//text_annotation/media/image.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//text_annotation/media/image.jpg" alt="">
 
     </p>
 </div>

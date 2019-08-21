@@ -3,41 +3,46 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>Orthographic Camera</h2><pre><code class="language-julia">using AbstractPlotting
- using GeometryTypes
+    <div><h2>Orthographic Camera</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>GeometryTypes</span><span class='hljl-t'>
 
- x = Vec3f0(0); baselen = 0.2f0; dirlen = 1f0
- # create an array of differently colored boxes in the direction of the 3 axes
- rectangles = [
-     (FRect3D(Vec3f0(x), Vec3f0(dirlen, baselen, baselen)), RGBAf0(1,0,0,1)),
-     (FRect3D(Vec3f0(x), Vec3f0(baselen, dirlen, baselen)), RGBAf0(0,1,0,1)),
-     (FRect3D(Vec3f0(x), Vec3f0(baselen, baselen, dirlen)), RGBAf0(0,0,1,1))
- ]
- meshes = map(GLNormalMesh, rectangles)
- scene = mesh(merge(meshes))
- center!(scene)
- cam = cameracontrols(scene)
- dir = scene.limits[].widths ./ 2.
- dir_scaled = Vec3f0(
-     dir[1] * scene.transformation.scale[][1],
-     0.0,
-     dir[3] * scene.transformation.scale[][2],
- )
- cam.upvector[] = (0.0, 0.0, 1.0)
- cam.lookat[] = scene.limits[].origin + dir_scaled
- cam.eyeposition[] = (cam.lookat[][1], cam.lookat[][2] + 6.3, cam.lookat[][3])
- cam.projectiontype[] = AbstractPlotting.Orthographic
- update_cam!(scene, cam)
- # stop scene display from centering, which would overwrite the camera paramter we just set
- scene.center = false
- scene
+ </span><span class='hljl-n'>x</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>);</span><span class='hljl-t'> </span><span class='hljl-n'>baselen</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.2f0</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>dirlen</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>1f0</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># create an array of differently colored boxes in the direction of the 3 axes</span><span class='hljl-t'>
+ </span><span class='hljl-n'>rectangles</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-t'>
+     </span><span class='hljl-p'>(</span><span class='hljl-nf'>FRect3D</span><span class='hljl-p'>(</span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-n'>dirlen</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>baselen</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>baselen</span><span class='hljl-p'>)),</span><span class='hljl-t'> </span><span class='hljl-nf'>RGBAf0</span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>1</span><span class='hljl-p'>)),</span><span class='hljl-t'>
+     </span><span class='hljl-p'>(</span><span class='hljl-nf'>FRect3D</span><span class='hljl-p'>(</span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-n'>baselen</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>dirlen</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>baselen</span><span class='hljl-p'>)),</span><span class='hljl-t'> </span><span class='hljl-nf'>RGBAf0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>1</span><span class='hljl-p'>)),</span><span class='hljl-t'>
+     </span><span class='hljl-p'>(</span><span class='hljl-nf'>FRect3D</span><span class='hljl-p'>(</span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-n'>baselen</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>baselen</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>dirlen</span><span class='hljl-p'>)),</span><span class='hljl-t'> </span><span class='hljl-nf'>RGBAf0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-ni'>1</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>meshes</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>map</span><span class='hljl-p'>(</span><span class='hljl-n'>GLNormalMesh</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>rectangles</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>mesh</span><span class='hljl-p'>(</span><span class='hljl-nf'>merge</span><span class='hljl-p'>(</span><span class='hljl-n'>meshes</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>center!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>cam</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>cameracontrols</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>dir</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>widths</span><span class='hljl-p'>(</span><span class='hljl-nf'>scene_limits</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>))</span><span class='hljl-t'> </span><span class='hljl-oB'>./</span><span class='hljl-t'> </span><span class='hljl-nfB'>2.</span><span class='hljl-t'>
+ </span><span class='hljl-n'>dir_scaled</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-t'>
+  </span><span class='hljl-n'>dir</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>scene</span><span class='hljl-oB'>.</span><span class='hljl-n'>transformation</span><span class='hljl-oB'>.</span><span class='hljl-n'>scale</span><span class='hljl-p'>[][</span><span class='hljl-ni'>1</span><span class='hljl-p'>],</span><span class='hljl-t'>
+  </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'>
+  </span><span class='hljl-n'>dir</span><span class='hljl-p'>[</span><span class='hljl-ni'>3</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>scene</span><span class='hljl-oB'>.</span><span class='hljl-n'>transformation</span><span class='hljl-oB'>.</span><span class='hljl-n'>scale</span><span class='hljl-p'>[][</span><span class='hljl-ni'>2</span><span class='hljl-p'>],</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>cam</span><span class='hljl-oB'>.</span><span class='hljl-n'>upvector</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>1.0</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>cam</span><span class='hljl-oB'>.</span><span class='hljl-n'>lookat</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>minimum</span><span class='hljl-p'>(</span><span class='hljl-nf'>scene_limits</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>))</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-n'>dir_scaled</span><span class='hljl-t'>
+ </span><span class='hljl-n'>cam</span><span class='hljl-oB'>.</span><span class='hljl-n'>eyeposition</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>cam</span><span class='hljl-oB'>.</span><span class='hljl-n'>lookat</span><span class='hljl-p'>[][</span><span class='hljl-ni'>1</span><span class='hljl-p'>],</span><span class='hljl-t'> </span><span class='hljl-n'>cam</span><span class='hljl-oB'>.</span><span class='hljl-n'>lookat</span><span class='hljl-p'>[][</span><span class='hljl-ni'>2</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-nfB'>6.3</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>cam</span><span class='hljl-oB'>.</span><span class='hljl-n'>lookat</span><span class='hljl-p'>[][</span><span class='hljl-ni'>3</span><span class='hljl-p'>])</span><span class='hljl-t'>
+ </span><span class='hljl-n'>cam</span><span class='hljl-oB'>.</span><span class='hljl-n'>projectiontype</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>.</span><span class='hljl-n'>Orthographic</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>update_cam!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>cam</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># stop scene display from centering, which would overwrite the camera paramter we just set</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-oB'>.</span><span class='hljl-n'>center</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'>
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//orthographic_camera/media/image.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//orthographic_camera/media/image.jpg" alt="">
 
     </p>
 </div>

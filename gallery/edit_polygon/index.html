@@ -3,65 +3,70 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>Edit Polygon</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>Edit Polygon</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
 
- points = node(:poly, Point2f0[(0, 0), (0.5, 0.5), (1.0, 0.0)])
- scene = Scene(resolution = (500, 500))
- poly!(scene, points, strokewidth = 2, strokecolor = :black, color = :skyblue2, show_axis = false, scale_plot = false)
- scatter!(points, color = :white, strokewidth = 10, markersize = 0.05, strokecolor = :black, raw = true)
- pplot = scene[end]
- push!(points[], Point2f0(0.6, -0.3))
- points[] = points[]
- function add_move!(scene, points, pplot)
-     idx = Ref(0); dragstart = Ref(false); startpos = Base.RefValue(Point2f0(0))
-     on(events(scene).mousedrag) do drag
-         if ispressed(scene, Mouse.left)
-             if drag == Mouse.down
-                 plot, _idx = mouse_selection(scene)
-                 if plot == pplot
-                     idx[] = _idx; dragstart[] = true
-                     startpos[] = to_world(scene, Point2f0(scene.events.mouseposition[]))
-                 end
-             elseif drag == Mouse.pressed &amp;&amp; dragstart[] &amp;&amp; checkbounds(Bool, points[], idx[])
-                 pos = to_world(scene, Point2f0(scene.events.mouseposition[]))
-                 points[][idx[]] = pos
-                 points[] = points[]
-             end
-         else
-             dragstart[] = false
-         end
-         return
-     end
- end
+ </span><span class='hljl-n'>points</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>node</span><span class='hljl-p'>(</span><span class='hljl-sc'>:poly</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Point2f0</span><span class='hljl-p'>[(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-nfB'>1.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>)])</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Scene</span><span class='hljl-p'>(</span><span class='hljl-n'>resolution</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>500</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>500</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>poly!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>points</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>strokewidth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>strokecolor</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:black</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:skyblue2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>show_axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>scale_plot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>scatter!</span><span class='hljl-p'>(</span><span class='hljl-n'>points</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:white</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>strokewidth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>10</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.05</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>strokecolor</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:black</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>raw</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>true</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>pplot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>scene</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>points</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-nf'>Point2f0</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.6</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-nfB'>0.3</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>points</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>points</span><span class='hljl-p'>[]</span><span class='hljl-t'>
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>add_move!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>points</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>pplot</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>idx</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Ref</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>);</span><span class='hljl-t'> </span><span class='hljl-n'>dragstart</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Ref</span><span class='hljl-p'>(</span><span class='hljl-kc'>false</span><span class='hljl-p'>);</span><span class='hljl-t'> </span><span class='hljl-n'>startpos</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Base</span><span class='hljl-oB'>.</span><span class='hljl-nf'>RefValue</span><span class='hljl-p'>(</span><span class='hljl-nf'>Point2f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>))</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>on</span><span class='hljl-p'>(</span><span class='hljl-nf'>events</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-oB'>.</span><span class='hljl-n'>mousedrag</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>drag</span><span class='hljl-t'>
+         </span><span class='hljl-k'>if</span><span class='hljl-t'> </span><span class='hljl-nf'>ispressed</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Mouse</span><span class='hljl-oB'>.</span><span class='hljl-n'>left</span><span class='hljl-p'>)</span><span class='hljl-t'>
+             </span><span class='hljl-k'>if</span><span class='hljl-t'> </span><span class='hljl-n'>drag</span><span class='hljl-t'> </span><span class='hljl-oB'>==</span><span class='hljl-t'> </span><span class='hljl-n'>Mouse</span><span class='hljl-oB'>.</span><span class='hljl-n'>down</span><span class='hljl-t'>
+                 </span><span class='hljl-n'>plot</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>_idx</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>mouse_selection</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+                 </span><span class='hljl-k'>if</span><span class='hljl-t'> </span><span class='hljl-n'>plot</span><span class='hljl-t'> </span><span class='hljl-oB'>==</span><span class='hljl-t'> </span><span class='hljl-n'>pplot</span><span class='hljl-t'>
+                     </span><span class='hljl-n'>idx</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>_idx</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>dragstart</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>true</span><span class='hljl-t'>
+                     </span><span class='hljl-n'>startpos</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>to_world</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Point2f0</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-oB'>.</span><span class='hljl-n'>events</span><span class='hljl-oB'>.</span><span class='hljl-n'>mouseposition</span><span class='hljl-p'>[]))</span><span class='hljl-t'>
+                 </span><span class='hljl-k'>end</span><span class='hljl-t'>
+             </span><span class='hljl-k'>elseif</span><span class='hljl-t'> </span><span class='hljl-n'>drag</span><span class='hljl-t'> </span><span class='hljl-oB'>==</span><span class='hljl-t'> </span><span class='hljl-n'>Mouse</span><span class='hljl-oB'>.</span><span class='hljl-n'>pressed</span><span class='hljl-t'> </span><span class='hljl-oB'>&amp;&amp;</span><span class='hljl-t'> </span><span class='hljl-n'>dragstart</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>&amp;&amp;</span><span class='hljl-t'> </span><span class='hljl-nf'>checkbounds</span><span class='hljl-p'>(</span><span class='hljl-n'>Bool</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>points</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-n'>idx</span><span class='hljl-p'>[])</span><span class='hljl-t'>
+                 </span><span class='hljl-n'>pos</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>to_world</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Point2f0</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-oB'>.</span><span class='hljl-n'>events</span><span class='hljl-oB'>.</span><span class='hljl-n'>mouseposition</span><span class='hljl-p'>[]))</span><span class='hljl-t'>
+                 </span><span class='hljl-n'>points</span><span class='hljl-p'>[][</span><span class='hljl-n'>idx</span><span class='hljl-p'>[]]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>pos</span><span class='hljl-t'>
+                 </span><span class='hljl-n'>points</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>points</span><span class='hljl-p'>[]</span><span class='hljl-t'>
+             </span><span class='hljl-k'>end</span><span class='hljl-t'>
+         </span><span class='hljl-k'>else</span><span class='hljl-t'>
+             </span><span class='hljl-n'>dragstart</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-t'>
+         </span><span class='hljl-k'>end</span><span class='hljl-t'>
+         </span><span class='hljl-k'>return</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- function add_remove_add!(scene, points, pplot)
-     on(events(scene).mousebuttons) do but
-         if ispressed(but, Mouse.left) &amp;&amp; ispressed(scene, Keyboard.left_control)
-             pos = to_world(scene, Point2f0(events(scene).mouseposition[]))
-             push!(points[], pos)
-             points[] = points[]
-         elseif ispressed(but, Mouse.right)
-             plot, idx = mouse_selection(scene)
-             if plot == pplot &amp;&amp; checkbounds(Bool, points[], idx)
-                 deleteat!(points[], idx)
-                 points[] = points[]
-             end
-         end
-         return
-     end
- end
- add_move!(scene, points, pplot)
- add_remove_add!(scene, points, pplot)
- center!(scene)
- RecordEvents(scene, &quot;output&quot;)
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>add_remove_add!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>points</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>pplot</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>on</span><span class='hljl-p'>(</span><span class='hljl-nf'>events</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-oB'>.</span><span class='hljl-n'>mousebuttons</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>but</span><span class='hljl-t'>
+         </span><span class='hljl-k'>if</span><span class='hljl-t'> </span><span class='hljl-nf'>ispressed</span><span class='hljl-p'>(</span><span class='hljl-n'>but</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Mouse</span><span class='hljl-oB'>.</span><span class='hljl-n'>left</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>&amp;&amp;</span><span class='hljl-t'> </span><span class='hljl-nf'>ispressed</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Keyboard</span><span class='hljl-oB'>.</span><span class='hljl-n'>left_control</span><span class='hljl-p'>)</span><span class='hljl-t'>
+             </span><span class='hljl-n'>pos</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>to_world</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Point2f0</span><span class='hljl-p'>(</span><span class='hljl-nf'>events</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-oB'>.</span><span class='hljl-n'>mouseposition</span><span class='hljl-p'>[]))</span><span class='hljl-t'>
+             </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>points</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-n'>pos</span><span class='hljl-p'>)</span><span class='hljl-t'>
+             </span><span class='hljl-n'>points</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>points</span><span class='hljl-p'>[]</span><span class='hljl-t'>
+         </span><span class='hljl-k'>elseif</span><span class='hljl-t'> </span><span class='hljl-nf'>ispressed</span><span class='hljl-p'>(</span><span class='hljl-n'>but</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Mouse</span><span class='hljl-oB'>.</span><span class='hljl-n'>right</span><span class='hljl-p'>)</span><span class='hljl-t'>
+             </span><span class='hljl-n'>plot</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>idx</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>mouse_selection</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+             </span><span class='hljl-k'>if</span><span class='hljl-t'> </span><span class='hljl-n'>plot</span><span class='hljl-t'> </span><span class='hljl-oB'>==</span><span class='hljl-t'> </span><span class='hljl-n'>pplot</span><span class='hljl-t'> </span><span class='hljl-oB'>&amp;&amp;</span><span class='hljl-t'> </span><span class='hljl-nf'>checkbounds</span><span class='hljl-p'>(</span><span class='hljl-n'>Bool</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>points</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-n'>idx</span><span class='hljl-p'>)</span><span class='hljl-t'>
+                 </span><span class='hljl-nf'>deleteat!</span><span class='hljl-p'>(</span><span class='hljl-n'>points</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-n'>idx</span><span class='hljl-p'>)</span><span class='hljl-t'>
+                 </span><span class='hljl-n'>points</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>points</span><span class='hljl-p'>[]</span><span class='hljl-t'>
+             </span><span class='hljl-k'>end</span><span class='hljl-t'>
+         </span><span class='hljl-k'>end</span><span class='hljl-t'>
+         </span><span class='hljl-k'>return</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>add_move!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>points</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>pplot</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>add_remove_add!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>points</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>pplot</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>center!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>RecordEvents</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;output&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery//edit_polygon/media/video.mp4" type="video/mp4">
+  <source src="http://juliaplots.org/MakieReferenceImages/gallery//edit_polygon/media/video.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

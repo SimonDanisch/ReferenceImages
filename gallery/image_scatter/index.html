@@ -3,24 +3,29 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>image scatter</h2><pre><code class="language-julia">using AbstractPlotting
- using LinearAlgebra
+    <div><h2>image scatter</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>LinearAlgebra</span><span class='hljl-t'>
 
- scatter(
-     1:10, 1:10, rand(10, 10) .* 10,
-     rotations = normalize.(rand(Quaternionf0, 10*10)),
-     markersize = 1,
-     # can also be an array of images for each point
-     # need to be the same size for best performance, though
-     marker = AbstractPlotting.logo()
- )
+ </span><span class='hljl-nf'>scatter</span><span class='hljl-p'>(</span><span class='hljl-t'>
+     </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>10</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>10</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>rand</span><span class='hljl-p'>(</span><span class='hljl-ni'>10</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>10</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>.*</span><span class='hljl-t'> </span><span class='hljl-ni'>10</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>rotations</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>normalize</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-nf'>rand</span><span class='hljl-p'>(</span><span class='hljl-n'>Quaternionf0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>10</span><span class='hljl-oB'>*</span><span class='hljl-ni'>10</span><span class='hljl-p'>)),</span><span class='hljl-t'>
+     </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># can also be an array of images for each point</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># need to be the same size for best performance, though</span><span class='hljl-t'>
+     </span><span class='hljl-n'>marker</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>.</span><span class='hljl-nf'>logo</span><span class='hljl-p'>()</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)</span><span class='hljl-t'>
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//image_scatter/media/image.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//image_scatter/media/image.jpg" alt="">
 
     </p>
 </div>

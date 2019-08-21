@@ -3,160 +3,165 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>Earth &amp; Ships</h2><pre><code class="language-julia">using AbstractPlotting
- using AbstractPlotting: textslider
- using GeometryTypes, FileIO
- using LinearAlgebra
+    <div><h2>Earth &amp; Ships</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>textslider</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>GeometryTypes</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>FileIO</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>LinearAlgebra</span><span class='hljl-t'>
 
 
- &quot;&quot;&quot;
+ </span><span class='hljl-s'>&quot;&quot;&quot;
      example by @pbouffard from JuliaPlots/Makie.jl#307
      https://github.com/pbouffard/miniature-garbanzo/
- &quot;&quot;&quot;
+ &quot;&quot;&quot;</span><span class='hljl-t'>
 
- const rearth_km = 6371.1f0
- const mearth_kg = 5.972e24
- const rmoon_km = 1738.1f0
- const mmoon_kg = 7.34e22
- const rship_km = 500f0
- const mship_kg = 1000.0
- const dbetween_km = 378_000.0f0
- const radius_mult = 1.0f0
- const timestep = 1.0f0
+ </span><span class='hljl-kd'>const</span><span class='hljl-t'> </span><span class='hljl-n'>rearth_km</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>6371.1f0</span><span class='hljl-t'>
+ </span><span class='hljl-kd'>const</span><span class='hljl-t'> </span><span class='hljl-n'>mearth_kg</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>5.972e24</span><span class='hljl-t'>
+ </span><span class='hljl-kd'>const</span><span class='hljl-t'> </span><span class='hljl-n'>rmoon_km</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>1738.1f0</span><span class='hljl-t'>
+ </span><span class='hljl-kd'>const</span><span class='hljl-t'> </span><span class='hljl-n'>mmoon_kg</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>7.34e22</span><span class='hljl-t'>
+ </span><span class='hljl-kd'>const</span><span class='hljl-t'> </span><span class='hljl-n'>rship_km</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>500f0</span><span class='hljl-t'>
+ </span><span class='hljl-kd'>const</span><span class='hljl-t'> </span><span class='hljl-n'>mship_kg</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>1000.0</span><span class='hljl-t'>
+ </span><span class='hljl-kd'>const</span><span class='hljl-t'> </span><span class='hljl-n'>dbetween_km</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>378_000.0f0</span><span class='hljl-t'>
+ </span><span class='hljl-kd'>const</span><span class='hljl-t'> </span><span class='hljl-n'>radius_mult</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>1.0f0</span><span class='hljl-t'>
+ </span><span class='hljl-kd'>const</span><span class='hljl-t'> </span><span class='hljl-n'>timestep</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>1.0f0</span><span class='hljl-t'>
 
- mutable struct Ship
-     mass_kg::Float32
-     position_m::Vec3f0
-     velocity_mps::Vec3f0
-     color::Symbol
-     mesh::Mesh
- end
-
-
- function moveto!(ship::Ship, (x, y, z))
-     ship.position_m = Vec3f0(x, y, z)
-     translate!(ship.mesh, x, y, z)
-     ship.position_m, ship.velocity_mps
- end
-
- function orbit(r; steps=80)
-     return [Point3f0(r*cos(x), r*sin(x), 0) for x in range(0, stop=2pi, length=steps)]
- end
-
- function loadordownload(localfname, url)
-     return isfile(localfname) ? load(localfname) : load(download(url, localfname))
- end
-
- # http://corysimon.github.io/articles/uniformdistn-on-sphere/
- function makestars(n)
-     return map(1:n) do i
-         v = [0, 0, 0]  # initialize so we go into the while loop
-         while norm(v) &lt; .0001
-             v = randn(Point3f0)
-         end
-         v = v / norm(v)  # normalize to unit norm
-         v
-     end
- end
-
- function makecontrols()
-     orbit_slider, orbit_speed = textslider(0f0:10f0, &quot;Speed&quot;, start=1.0)
-     scale_slider, scale = textslider(1f0:20f0, &quot;Scale&quot;, start=10.0)
-     return orbit_slider, orbit_speed, scale_slider, scale
- end
+ </span><span class='hljl-k'>mutable struct</span><span class='hljl-t'> </span><span class='hljl-n'>Ship</span><span class='hljl-t'>
+     </span><span class='hljl-n'>mass_kg</span><span class='hljl-oB'>::</span><span class='hljl-n'>Float32</span><span class='hljl-t'>
+     </span><span class='hljl-n'>position_m</span><span class='hljl-oB'>::</span><span class='hljl-n'>Vec3f0</span><span class='hljl-t'>
+     </span><span class='hljl-n'>velocity_mps</span><span class='hljl-oB'>::</span><span class='hljl-n'>Vec3f0</span><span class='hljl-t'>
+     </span><span class='hljl-n'>color</span><span class='hljl-oB'>::</span><span class='hljl-n'>Symbol</span><span class='hljl-t'>
+     </span><span class='hljl-n'>mesh</span><span class='hljl-oB'>::</span><span class='hljl-n'>Mesh</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
 
- function makeships(scene, N)
-     return map(1:N) do i
-         sm = mesh!(scene, Sphere(Point3f0(0), rship_km*radius_mult), color=:green, show_axis=false)[end]
-         ship = Ship(mship_kg, [0, 0, 0], [0, 0, 0], :green, sm)
-         moveto!(ship, (100000f0 * randn(Float32), dbetween_km/2 + randn(Float32) * 50000f0, 50000f0*randn(Float32)))
-         ship.velocity_mps = [40000*randn(Float32), -1000*randn(Float32), 1000*randn(Float32)]
-         ship
-     end
- end
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>moveto!</span><span class='hljl-p'>(</span><span class='hljl-n'>ship</span><span class='hljl-oB'>::</span><span class='hljl-n'>Ship</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>y</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>z</span><span class='hljl-p'>))</span><span class='hljl-t'>
+     </span><span class='hljl-n'>ship</span><span class='hljl-oB'>.</span><span class='hljl-n'>position_m</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>y</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>z</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>translate!</span><span class='hljl-p'>(</span><span class='hljl-n'>ship</span><span class='hljl-oB'>.</span><span class='hljl-n'>mesh</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>y</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>z</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>ship</span><span class='hljl-oB'>.</span><span class='hljl-n'>position_m</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>ship</span><span class='hljl-oB'>.</span><span class='hljl-n'>velocity_mps</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- function makeobjects(scene)
-     earthfname = &quot;bluemarble-2048.png&quot;
-     earthurl = &quot;https://svs.gsfc.nasa.gov/vis/a000000/a002900/a002915/&quot; * earthfname
-     earthbitmap = loadordownload(earthfname, earthurl)
-     earth = mesh!(scene, Sphere(Point3f0(0), rearth_km*radius_mult), color=earthbitmap)[end]
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>orbit</span><span class='hljl-p'>(</span><span class='hljl-n'>r</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>steps</span><span class='hljl-oB'>=</span><span class='hljl-ni'>80</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>return</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-n'>r</span><span class='hljl-oB'>*</span><span class='hljl-nf'>cos</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>r</span><span class='hljl-oB'>*</span><span class='hljl-nf'>sin</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-nf'>range</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>stop</span><span class='hljl-oB'>=</span><span class='hljl-ni'>2</span><span class='hljl-n'>pi</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>length</span><span class='hljl-oB'>=</span><span class='hljl-n'>steps</span><span class='hljl-p'>)]</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
-     moonfname = &quot;phases.0001_print.jpg&quot;
-     moonurl = &quot;https://svs.gsfc.nasa.gov/vis/a000000/a004600/a004675/&quot; * moonfname
-     moonbitmap = loadordownload(moonfname, moonurl)
-     moon = mesh!(scene, Sphere(Point3f0(0), rmoon_km*radius_mult), color=moonbitmap)[end]
-     translate!(moon, Vec3f0(0, dbetween_km, 0))
-     orb = lines!(scene, orbit(dbetween_km), color=:gray)
-     # stars = scatter!(1000000*makestars(1000), color=:white, markersize=2000)
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>loadordownload</span><span class='hljl-p'>(</span><span class='hljl-n'>localfname</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>url</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>return</span><span class='hljl-t'> </span><span class='hljl-nf'>isfile</span><span class='hljl-p'>(</span><span class='hljl-n'>localfname</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>?</span><span class='hljl-t'> </span><span class='hljl-nf'>load</span><span class='hljl-p'>(</span><span class='hljl-n'>localfname</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-nf'>load</span><span class='hljl-p'>(</span><span class='hljl-nf'>download</span><span class='hljl-p'>(</span><span class='hljl-n'>url</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>localfname</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
-     return earth, moon #, stars#, ships
- end
+ </span><span class='hljl-cs'># http://corysimon.github.io/articles/uniformdistn-on-sphere/</span><span class='hljl-t'>
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>makestars</span><span class='hljl-p'>(</span><span class='hljl-n'>n</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>return</span><span class='hljl-t'> </span><span class='hljl-nf'>map</span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-n'>n</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'>
+         </span><span class='hljl-n'>v</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>]</span><span class='hljl-t'>  </span><span class='hljl-cs'># initialize so we go into the while loop</span><span class='hljl-t'>
+         </span><span class='hljl-k'>while</span><span class='hljl-t'> </span><span class='hljl-nf'>norm</span><span class='hljl-p'>(</span><span class='hljl-n'>v</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>&lt;</span><span class='hljl-t'> </span><span class='hljl-nfB'>.0001</span><span class='hljl-t'>
+             </span><span class='hljl-n'>v</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>randn</span><span class='hljl-p'>(</span><span class='hljl-n'>Point3f0</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-k'>end</span><span class='hljl-t'>
+         </span><span class='hljl-n'>v</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>v</span><span class='hljl-t'> </span><span class='hljl-oB'>/</span><span class='hljl-t'> </span><span class='hljl-nf'>norm</span><span class='hljl-p'>(</span><span class='hljl-n'>v</span><span class='hljl-p'>)</span><span class='hljl-t'>  </span><span class='hljl-cs'># normalize to unit norm</span><span class='hljl-t'>
+         </span><span class='hljl-n'>v</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- function spin(scene, orbit_speed, scale, moon, earth, ships)
-     center!(scene) # update far / near automatically.
-     # could also be done manually:
-     # cam.near[] = 100
-     # cam.far[] = 1.5*dbetween_km
-     update_cam!(scene, Vec3f0(1.3032e5, 7.12119e5, 3.60022e5), Vec3f0(0, 0, 0))
-     θ = 0.0
-     # wait untill window is open
-     while !isopen(scene)
-         sleep(0.1)
-     end
-     while isopen(scene)
-         scale!(moon, (scale[], scale[], scale[]))
-         scale!(earth, (scale[], scale[], scale[]))
-         for ship in ships
-             scale!(ship.mesh, (scale[], scale[], scale[]))
-         end
-         translate!(moon, Vec3f0(-dbetween_km*sin(θ/28), dbetween_km*cos(θ/28), 0))
-         rotate!(earth, Vec3f0(0, 0, 1), θ)
-         rotate!(moon, Vec3f0(0, 0, 1), π/2 + θ/28)
-         sleep(0.01)
-         θ += 0.05 * orbit_speed[]
-         timestep = 10 * orbit_speed[]
-         gravity(timestep, ships, earth, moon)
-     end
- end
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>makecontrols</span><span class='hljl-p'>()</span><span class='hljl-t'>
+     </span><span class='hljl-n'>orbit_slider</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>orbit_speed</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>textslider</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0f0</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>10f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;Speed&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>start</span><span class='hljl-oB'>=</span><span class='hljl-nfB'>1.0</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>scale_slider</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>scale</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>textslider</span><span class='hljl-p'>(</span><span class='hljl-nfB'>1f0</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>20f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;Scale&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>start</span><span class='hljl-oB'>=</span><span class='hljl-nfB'>10.0</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>return</span><span class='hljl-t'> </span><span class='hljl-n'>orbit_slider</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>orbit_speed</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>scale_slider</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>scale</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- function gravity(timestep, ships, earth, moon)
-     for ship in ships
-         rship = ship.position_m #translation(ship)[]
-         rearth = translation(earth)[]
-         rmoon = translation(moon)[]
-         rship_earth = (rearth - rship) * 1e3 # convert to m
-         rship_moon = (rmoon - rship) * 1e3 # convert to m
-         G = 6.67408e-11 # m^3⋅kg^-2⋅s^-1
-         nrship_earth = max(0.1, norm(rship_earth))
-         nrship_moon = max(0.1, norm(rship_moon))
-         fearth = G * (mship_kg * mearth_kg)/(nrship_earth^2) * rship_earth/nrship_earth
-         fmoon = G * (mship_kg * mmoon_kg)/(nrship_moon^2) * rship_earth/nrship_earth
-         ftot = fearth + fmoon
-         ship.velocity_mps += timestep * ftot
-         drship = timestep * ship.velocity_mps / 1e3
-         rship = rship + drship
-         moveto!(ship, rship)
-     end
- end
- universe = Scene(backgroundcolor=:black, show_axis=false, resolution=(2048,1024))
- ships = makeships(universe, 600)
- earth, moon = makeobjects(universe);
- orbit_slider, orbit_speed, scale_slider, scale = makecontrols();
- controls = (orbit_slider, scale_slider);
- scene = hbox(vbox(controls...), universe)
- universe.center = false
- task = @async spin(universe, orbit_speed, scale, moon, earth, ships)
- scene.center = false
- RecordEvents(scene, &quot;output&quot;)
 
-</code></pre>
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>makeships</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>N</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>return</span><span class='hljl-t'> </span><span class='hljl-nf'>map</span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-n'>N</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'>
+         </span><span class='hljl-n'>sm</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>mesh!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Sphere</span><span class='hljl-p'>(</span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>rship_km</span><span class='hljl-oB'>*</span><span class='hljl-n'>radius_mult</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-oB'>=:</span><span class='hljl-n'>green</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>show_axis</span><span class='hljl-oB'>=</span><span class='hljl-kc'>false</span><span class='hljl-p'>)[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'>
+         </span><span class='hljl-n'>ship</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Ship</span><span class='hljl-p'>(</span><span class='hljl-n'>mship_kg</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>],</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>],</span><span class='hljl-t'> </span><span class='hljl-sc'>:green</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>sm</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>moveto!</span><span class='hljl-p'>(</span><span class='hljl-n'>ship</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-nfB'>100000f0</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-nf'>randn</span><span class='hljl-p'>(</span><span class='hljl-n'>Float32</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>dbetween_km</span><span class='hljl-oB'>/</span><span class='hljl-ni'>2</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-nf'>randn</span><span class='hljl-p'>(</span><span class='hljl-n'>Float32</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-nfB'>50000f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>50000f0</span><span class='hljl-oB'>*</span><span class='hljl-nf'>randn</span><span class='hljl-p'>(</span><span class='hljl-n'>Float32</span><span class='hljl-p'>)))</span><span class='hljl-t'>
+         </span><span class='hljl-n'>ship</span><span class='hljl-oB'>.</span><span class='hljl-n'>velocity_mps</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-ni'>40000</span><span class='hljl-oB'>*</span><span class='hljl-nf'>randn</span><span class='hljl-p'>(</span><span class='hljl-n'>Float32</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-ni'>1000</span><span class='hljl-oB'>*</span><span class='hljl-nf'>randn</span><span class='hljl-p'>(</span><span class='hljl-n'>Float32</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-ni'>1000</span><span class='hljl-oB'>*</span><span class='hljl-nf'>randn</span><span class='hljl-p'>(</span><span class='hljl-n'>Float32</span><span class='hljl-p'>)]</span><span class='hljl-t'>
+         </span><span class='hljl-n'>ship</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>makeobjects</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>earthfname</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;bluemarble-2048.png&quot;</span><span class='hljl-t'>
+     </span><span class='hljl-n'>earthurl</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;https://svs.gsfc.nasa.gov/vis/a000000/a002900/a002915/&quot;</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>earthfname</span><span class='hljl-t'>
+     </span><span class='hljl-n'>earthbitmap</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>loadordownload</span><span class='hljl-p'>(</span><span class='hljl-n'>earthfname</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>earthurl</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>earth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>mesh!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Sphere</span><span class='hljl-p'>(</span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>rearth_km</span><span class='hljl-oB'>*</span><span class='hljl-n'>radius_mult</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-oB'>=</span><span class='hljl-n'>earthbitmap</span><span class='hljl-p'>)[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'>
+
+     </span><span class='hljl-n'>moonfname</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;phases.0001_print.jpg&quot;</span><span class='hljl-t'>
+     </span><span class='hljl-n'>moonurl</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;https://svs.gsfc.nasa.gov/vis/a000000/a004600/a004675/&quot;</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>moonfname</span><span class='hljl-t'>
+     </span><span class='hljl-n'>moonbitmap</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>loadordownload</span><span class='hljl-p'>(</span><span class='hljl-n'>moonfname</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>moonurl</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>moon</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>mesh!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Sphere</span><span class='hljl-p'>(</span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>rmoon_km</span><span class='hljl-oB'>*</span><span class='hljl-n'>radius_mult</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-oB'>=</span><span class='hljl-n'>moonbitmap</span><span class='hljl-p'>)[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>translate!</span><span class='hljl-p'>(</span><span class='hljl-n'>moon</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>dbetween_km</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>))</span><span class='hljl-t'>
+     </span><span class='hljl-n'>orb</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lines!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>orbit</span><span class='hljl-p'>(</span><span class='hljl-n'>dbetween_km</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-oB'>=:</span><span class='hljl-n'>gray</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># stars = scatter!(1000000*makestars(1000), color=:white, markersize=2000)</span><span class='hljl-t'>
+
+     </span><span class='hljl-k'>return</span><span class='hljl-t'> </span><span class='hljl-n'>earth</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>moon</span><span class='hljl-t'> </span><span class='hljl-cs'>#, stars#, ships</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>spin</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>orbit_speed</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>scale</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>moon</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>earth</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>ships</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>center!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-cs'># update far / near automatically.</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># could also be done manually:</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># cam.near[] = 100</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># cam.far[] = 1.5*dbetween_km</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>update_cam!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-nfB'>1.3032e5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>7.12119e5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>3.60022e5</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>))</span><span class='hljl-t'>
+     </span><span class='hljl-n'>θ</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># wait untill window is open</span><span class='hljl-t'>
+     </span><span class='hljl-k'>while</span><span class='hljl-t'> </span><span class='hljl-oB'>!</span><span class='hljl-nf'>isopen</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>sleep</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-k'>while</span><span class='hljl-t'> </span><span class='hljl-nf'>isopen</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>scale!</span><span class='hljl-p'>(</span><span class='hljl-n'>moon</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>scale</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-n'>scale</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-n'>scale</span><span class='hljl-p'>[]))</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>scale!</span><span class='hljl-p'>(</span><span class='hljl-n'>earth</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>scale</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-n'>scale</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-n'>scale</span><span class='hljl-p'>[]))</span><span class='hljl-t'>
+         </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>ship</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-n'>ships</span><span class='hljl-t'>
+             </span><span class='hljl-nf'>scale!</span><span class='hljl-p'>(</span><span class='hljl-n'>ship</span><span class='hljl-oB'>.</span><span class='hljl-n'>mesh</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>scale</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-n'>scale</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-n'>scale</span><span class='hljl-p'>[]))</span><span class='hljl-t'>
+         </span><span class='hljl-k'>end</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>translate!</span><span class='hljl-p'>(</span><span class='hljl-n'>moon</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-oB'>-</span><span class='hljl-n'>dbetween_km</span><span class='hljl-oB'>*</span><span class='hljl-nf'>sin</span><span class='hljl-p'>(</span><span class='hljl-n'>θ</span><span class='hljl-oB'>/</span><span class='hljl-ni'>28</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>dbetween_km</span><span class='hljl-oB'>*</span><span class='hljl-nf'>cos</span><span class='hljl-p'>(</span><span class='hljl-n'>θ</span><span class='hljl-oB'>/</span><span class='hljl-ni'>28</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>))</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>rotate!</span><span class='hljl-p'>(</span><span class='hljl-n'>earth</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>θ</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>rotate!</span><span class='hljl-p'>(</span><span class='hljl-n'>moon</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>π</span><span class='hljl-oB'>/</span><span class='hljl-ni'>2</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-n'>θ</span><span class='hljl-oB'>/</span><span class='hljl-ni'>28</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>sleep</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.01</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-n'>θ</span><span class='hljl-t'> </span><span class='hljl-oB'>+=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.05</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>orbit_speed</span><span class='hljl-p'>[]</span><span class='hljl-t'>
+         </span><span class='hljl-n'>timestep</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>10</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>orbit_speed</span><span class='hljl-p'>[]</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>gravity</span><span class='hljl-p'>(</span><span class='hljl-n'>timestep</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>ships</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>earth</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>moon</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>gravity</span><span class='hljl-p'>(</span><span class='hljl-n'>timestep</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>ships</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>earth</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>moon</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>ship</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-n'>ships</span><span class='hljl-t'>
+         </span><span class='hljl-n'>rship</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>ship</span><span class='hljl-oB'>.</span><span class='hljl-n'>position_m</span><span class='hljl-t'> </span><span class='hljl-cs'>#translation(ship)[]</span><span class='hljl-t'>
+         </span><span class='hljl-n'>rearth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>translation</span><span class='hljl-p'>(</span><span class='hljl-n'>earth</span><span class='hljl-p'>)[]</span><span class='hljl-t'>
+         </span><span class='hljl-n'>rmoon</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>translation</span><span class='hljl-p'>(</span><span class='hljl-n'>moon</span><span class='hljl-p'>)[]</span><span class='hljl-t'>
+         </span><span class='hljl-n'>rship_earth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>rearth</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-n'>rship</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-nfB'>1e3</span><span class='hljl-t'> </span><span class='hljl-cs'># convert to m</span><span class='hljl-t'>
+         </span><span class='hljl-n'>rship_moon</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>rmoon</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-n'>rship</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-nfB'>1e3</span><span class='hljl-t'> </span><span class='hljl-cs'># convert to m</span><span class='hljl-t'>
+         </span><span class='hljl-n'>G</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>6.67408e-11</span><span class='hljl-t'> </span><span class='hljl-cs'># m^3⋅kg^-2⋅s^-1</span><span class='hljl-t'>
+         </span><span class='hljl-n'>nrship_earth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>max</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>norm</span><span class='hljl-p'>(</span><span class='hljl-n'>rship_earth</span><span class='hljl-p'>))</span><span class='hljl-t'>
+         </span><span class='hljl-n'>nrship_moon</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>max</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>norm</span><span class='hljl-p'>(</span><span class='hljl-n'>rship_moon</span><span class='hljl-p'>))</span><span class='hljl-t'>
+         </span><span class='hljl-n'>fearth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>G</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>mship_kg</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>mearth_kg</span><span class='hljl-p'>)</span><span class='hljl-oB'>/</span><span class='hljl-p'>(</span><span class='hljl-n'>nrship_earth</span><span class='hljl-oB'>^</span><span class='hljl-ni'>2</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>rship_earth</span><span class='hljl-oB'>/</span><span class='hljl-n'>nrship_earth</span><span class='hljl-t'>
+         </span><span class='hljl-n'>fmoon</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>G</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>mship_kg</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>mmoon_kg</span><span class='hljl-p'>)</span><span class='hljl-oB'>/</span><span class='hljl-p'>(</span><span class='hljl-n'>nrship_moon</span><span class='hljl-oB'>^</span><span class='hljl-ni'>2</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>rship_earth</span><span class='hljl-oB'>/</span><span class='hljl-n'>nrship_earth</span><span class='hljl-t'>
+         </span><span class='hljl-n'>ftot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>fearth</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-n'>fmoon</span><span class='hljl-t'>
+         </span><span class='hljl-n'>ship</span><span class='hljl-oB'>.</span><span class='hljl-n'>velocity_mps</span><span class='hljl-t'> </span><span class='hljl-oB'>+=</span><span class='hljl-t'> </span><span class='hljl-n'>timestep</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>ftot</span><span class='hljl-t'>
+         </span><span class='hljl-n'>drship</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>timestep</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>ship</span><span class='hljl-oB'>.</span><span class='hljl-n'>velocity_mps</span><span class='hljl-t'> </span><span class='hljl-oB'>/</span><span class='hljl-t'> </span><span class='hljl-nfB'>1e3</span><span class='hljl-t'>
+         </span><span class='hljl-n'>rship</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>rship</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-n'>drship</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>moveto!</span><span class='hljl-p'>(</span><span class='hljl-n'>ship</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>rship</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-n'>universe</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Scene</span><span class='hljl-p'>(</span><span class='hljl-n'>backgroundcolor</span><span class='hljl-oB'>=:</span><span class='hljl-n'>black</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>show_axis</span><span class='hljl-oB'>=</span><span class='hljl-kc'>false</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>resolution</span><span class='hljl-oB'>=</span><span class='hljl-p'>(</span><span class='hljl-ni'>2048</span><span class='hljl-p'>,</span><span class='hljl-ni'>1024</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>ships</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>makeships</span><span class='hljl-p'>(</span><span class='hljl-n'>universe</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>600</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>earth</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>moon</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>makeobjects</span><span class='hljl-p'>(</span><span class='hljl-n'>universe</span><span class='hljl-p'>);</span><span class='hljl-t'>
+ </span><span class='hljl-n'>orbit_slider</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>orbit_speed</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>scale_slider</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>scale</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>makecontrols</span><span class='hljl-p'>();</span><span class='hljl-t'>
+ </span><span class='hljl-n'>controls</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>orbit_slider</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>scale_slider</span><span class='hljl-p'>);</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>hbox</span><span class='hljl-p'>(</span><span class='hljl-nf'>vbox</span><span class='hljl-p'>(</span><span class='hljl-n'>controls</span><span class='hljl-oB'>...</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>universe</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>universe</span><span class='hljl-oB'>.</span><span class='hljl-n'>center</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-t'>
+ </span><span class='hljl-n'>task</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nd'>@async</span><span class='hljl-t'> </span><span class='hljl-nf'>spin</span><span class='hljl-p'>(</span><span class='hljl-n'>universe</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>orbit_speed</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>scale</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>moon</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>earth</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>ships</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-oB'>.</span><span class='hljl-n'>center</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>RecordEvents</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;output&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
+
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery//earth___ships/media/video.mp4" type="video/mp4">
+  <source src="http://juliaplots.org/MakieReferenceImages/gallery//earth___ships/media/video.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

@@ -1,28 +1,31 @@
 ## Layouting
 
-```julia
-using AbstractPlotting
+```@raw html
+<pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
 
- p1 = scatter(rand(10), markersize = 1)
- p2 = lines(rand(10), rand(10))
- p3 = surface(0..1, 0..1, rand(100, 100))
- p4 = heatmap(rand(100, 100))
- x = 0:0.1:10
- p5 = lines(0:0.1:10, sin.(x))
- pscene = vbox(
-     hbox(p1, p2),
-     p3,
-     hbox(p4, p5, sizes = [0.7, 0.3]),
-     sizes = [0.2, 0.6, 0.2]
- )
+ </span><span class='hljl-n'>p1</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>scatter</span><span class='hljl-p'>(</span><span class='hljl-nf'>rand</span><span class='hljl-p'>(</span><span class='hljl-ni'>10</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>p2</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lines</span><span class='hljl-p'>(</span><span class='hljl-nf'>rand</span><span class='hljl-p'>(</span><span class='hljl-ni'>10</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nf'>rand</span><span class='hljl-p'>(</span><span class='hljl-ni'>10</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>p3</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>surface</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0..1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0..1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>rand</span><span class='hljl-p'>(</span><span class='hljl-ni'>100</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>100</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>p4</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>heatmap</span><span class='hljl-p'>(</span><span class='hljl-nf'>rand</span><span class='hljl-p'>(</span><span class='hljl-ni'>100</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>100</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>x</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>0.1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>10</span><span class='hljl-t'>
+ </span><span class='hljl-n'>p5</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lines</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>0.1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>10</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>sin</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>pscene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>vbox</span><span class='hljl-p'>(</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>hbox</span><span class='hljl-p'>(</span><span class='hljl-n'>p1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>p2</span><span class='hljl-p'>),</span><span class='hljl-t'>
+     </span><span class='hljl-n'>p3</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>hbox</span><span class='hljl-p'>(</span><span class='hljl-n'>p4</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>p5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>sizes</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-nfB'>0.7</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.3</span><span class='hljl-p'>]),</span><span class='hljl-t'>
+     </span><span class='hljl-n'>sizes</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-nfB'>0.2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.6</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.2</span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)</span><span class='hljl-t'>
 
+</span>
+</pre>
 
 ```
 ```@raw html
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//layouting/media/image.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//layouting/media/image.jpg" alt="">
 
     </p>
 </div>

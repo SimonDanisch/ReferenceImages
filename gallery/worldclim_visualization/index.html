@@ -3,139 +3,144 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>WorldClim visualization</h2><pre><code class="language-julia">using AbstractPlotting
- using FileIO, GeometryTypes, Colors, GDAL, ZipFile
+    <div><h2>WorldClim visualization</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>FileIO</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>GeometryTypes</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Colors</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>GDAL</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>ZipFile</span><span class='hljl-t'>
 
- env = get(ENV, &quot;LD_LIBRARY_PATH&quot;, &quot;&quot;)
- #=
+ </span><span class='hljl-n'>env</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>get</span><span class='hljl-p'>(</span><span class='hljl-n'>ENV</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;LD_LIBRARY_PATH&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-cm'>#=
  This example requires the GDAL package, from https://github.com/JuliaGeo/GDAL.jl
  For more information about GDAL, see the official documentation at: https://gdal.org/
- =#
- # register GDAL drivers
- GDAL.allregister()
+ =#</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># register GDAL drivers</span><span class='hljl-t'>
+ </span><span class='hljl-n'>GDAL</span><span class='hljl-oB'>.</span><span class='hljl-nf'>allregister</span><span class='hljl-p'>()</span><span class='hljl-t'>
 
- # function to check if a file is a .tif file
- istiff(x) = endswith(x, &quot;.tif&quot;)
+ </span><span class='hljl-cs'># function to check if a file is a .tif file</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>istiff</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>endswith</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;.tif&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
 
- # set up 7zip
+ </span><span class='hljl-cs'># set up 7zip</span><span class='hljl-t'>
 
- function unzip(input, out)
-     dir = ZipFile.Reader(input)
-     mkpath(out)
-     for file in dir.files
-         open(joinpath(out, file.name), &quot;w&quot;) do io
-             Base.write(io, read(file))
-         end
-     end
-     close(dir)
- end
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>unzip</span><span class='hljl-p'>(</span><span class='hljl-n'>input</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>out</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>dir</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>ZipFile</span><span class='hljl-oB'>.</span><span class='hljl-nf'>Reader</span><span class='hljl-p'>(</span><span class='hljl-n'>input</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>mkpath</span><span class='hljl-p'>(</span><span class='hljl-n'>out</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>file</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-n'>dir</span><span class='hljl-oB'>.</span><span class='hljl-n'>files</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>open</span><span class='hljl-p'>(</span><span class='hljl-nf'>joinpath</span><span class='hljl-p'>(</span><span class='hljl-n'>out</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>file</span><span class='hljl-oB'>.</span><span class='hljl-n'>name</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;w&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>io</span><span class='hljl-t'>
+             </span><span class='hljl-n'>Base</span><span class='hljl-oB'>.</span><span class='hljl-nf'>write</span><span class='hljl-p'>(</span><span class='hljl-n'>io</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>read</span><span class='hljl-p'>(</span><span class='hljl-n'>file</span><span class='hljl-p'>))</span><span class='hljl-t'>
+         </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>close</span><span class='hljl-p'>(</span><span class='hljl-n'>dir</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- # function to read the raster data from the GeoTIFF
- function loadf0(x)
-     img = GDAL.open(x, GDAL.GA_ReadOnly)
-     band = GDAL.getrasterband(img, 1)
-     xsize = GDAL.getrasterbandxsize(band)
-     ysize = GDAL.getrasterbandysize(band)
-     data = Array{Float32}(undef, xsize, ysize)
-     GDAL.rasterio(band, GDAL.GF_Read, 0, 0, xsize, ysize, data, xsize, ysize, GDAL.GDT_Float32, 0, 0)
-     data&#39;
- end
+ </span><span class='hljl-cs'># function to read the raster data from the GeoTIFF</span><span class='hljl-t'>
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>loadf0</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>img</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>GDAL</span><span class='hljl-oB'>.</span><span class='hljl-nf'>open</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>GDAL</span><span class='hljl-oB'>.</span><span class='hljl-n'>GA_ReadOnly</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>band</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>GDAL</span><span class='hljl-oB'>.</span><span class='hljl-nf'>getrasterband</span><span class='hljl-p'>(</span><span class='hljl-n'>img</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>xsize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>GDAL</span><span class='hljl-oB'>.</span><span class='hljl-nf'>getrasterbandxsize</span><span class='hljl-p'>(</span><span class='hljl-n'>band</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>ysize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>GDAL</span><span class='hljl-oB'>.</span><span class='hljl-nf'>getrasterbandysize</span><span class='hljl-p'>(</span><span class='hljl-n'>band</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>data</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Array</span><span class='hljl-p'>{</span><span class='hljl-n'>Float32</span><span class='hljl-p'>}(</span><span class='hljl-n'>undef</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>xsize</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>ysize</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>GDAL</span><span class='hljl-oB'>.</span><span class='hljl-nf'>rasterio</span><span class='hljl-p'>(</span><span class='hljl-n'>band</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>GDAL</span><span class='hljl-oB'>.</span><span class='hljl-n'>GF_Read</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>xsize</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>ysize</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>data</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>xsize</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>ysize</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>GDAL</span><span class='hljl-oB'>.</span><span class='hljl-n'>GDT_Float32</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>data</span><span class='hljl-oB'>&#39;</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- # since we cannot re-distribute the dataset, this function grabs the dataset from the host server
- function load_dataset(name)
-     # get the dataset from:
-     # http://worldclim.org/version2
+ </span><span class='hljl-cs'># since we cannot re-distribute the dataset, this function grabs the dataset from the host server</span><span class='hljl-t'>
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>load_dataset</span><span class='hljl-p'>(</span><span class='hljl-n'>name</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># get the dataset from:</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># http://worldclim.org/version2</span><span class='hljl-t'>
 
-     &quot;&quot;&quot;
+     </span><span class='hljl-s'>&quot;&quot;&quot;
      This is WorldClim 2.0 Beta version 1 (June 2016) downloaded from http://worldclim.org
      They represent average monthly climate data for 1970-2000.
      The data were created by Steve Fick and Robert Hijmans
      You are not allowed to redistribute these data.
-     &quot;&quot;&quot;
-     if !isfile(&quot;$name.zip&quot;)
-         # This might fail on windows - just try again a couple of times -.-
-         # download with curl breaks if julia is in LD_LIBRARY_PATH
-         # which GDAL is putting there
-         ENV[&quot;LD_LIBRARY_PATH&quot;] = &quot;&quot;
-         download(&quot;http://biogeo.ucdavis.edu/data/worldclim/v2.0/tif/base/wc2.0_10m_$name.zip&quot;, &quot;$name.zip&quot;)
-     end
-     if !isdir(name)
-         unzip(&quot;$name.zip&quot;, name)
-     end
-     ENV[&quot;LD_LIBRARY_PATH&quot;] = env
-     loadf0.(filter(istiff, joinpath.(name, readdir(name))))
- end
+     &quot;&quot;&quot;</span><span class='hljl-t'>
+     </span><span class='hljl-k'>if</span><span class='hljl-t'> </span><span class='hljl-oB'>!</span><span class='hljl-nf'>isfile</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;</span><span class='hljl-si'>$name</span><span class='hljl-s'>.zip&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-cs'># This might fail on windows - just try again a couple of times -.-</span><span class='hljl-t'>
+         </span><span class='hljl-cs'># download with curl breaks if julia is in LD_LIBRARY_PATH</span><span class='hljl-t'>
+         </span><span class='hljl-cs'># which GDAL is putting there</span><span class='hljl-t'>
+         </span><span class='hljl-n'>ENV</span><span class='hljl-p'>[</span><span class='hljl-s'>&quot;LD_LIBRARY_PATH&quot;</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;&quot;</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>download</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;http://biogeo.ucdavis.edu/data/worldclim/v2.0/tif/base/wc2.0_10m_</span><span class='hljl-si'>$name</span><span class='hljl-s'>.zip&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;</span><span class='hljl-si'>$name</span><span class='hljl-s'>.zip&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-k'>if</span><span class='hljl-t'> </span><span class='hljl-oB'>!</span><span class='hljl-nf'>isdir</span><span class='hljl-p'>(</span><span class='hljl-n'>name</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>unzip</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;</span><span class='hljl-si'>$name</span><span class='hljl-s'>.zip&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>name</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>ENV</span><span class='hljl-p'>[</span><span class='hljl-s'>&quot;LD_LIBRARY_PATH&quot;</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>env</span><span class='hljl-t'>
+     </span><span class='hljl-n'>loadf0</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-nf'>filter</span><span class='hljl-p'>(</span><span class='hljl-n'>istiff</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>joinpath</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>name</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>readdir</span><span class='hljl-p'>(</span><span class='hljl-n'>name</span><span class='hljl-p'>))))</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- # load the actual datasets!
+ </span><span class='hljl-cs'># load the actual datasets!</span><span class='hljl-t'>
 
- water = load_dataset(&quot;prec&quot;)
- temperature = load_dataset(&quot;tmax&quot;)
+ </span><span class='hljl-n'>water</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>load_dataset</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;prec&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>temperature</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>load_dataset</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;tmax&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
- # calculate geometries
- m = GLNormalUVMesh(Sphere(Point3f0(0), 1f0), 200)
- p = decompose(Point3f0, m)
- uv = decompose(UV{Float32}, m)
- norms = decompose(Normal{3, Float32}, m)
+ </span><span class='hljl-cs'># calculate geometries</span><span class='hljl-t'>
+ </span><span class='hljl-n'>m</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>GLNormalUVMesh</span><span class='hljl-p'>(</span><span class='hljl-nf'>Sphere</span><span class='hljl-p'>(</span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nfB'>1f0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-ni'>200</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>p</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>decompose</span><span class='hljl-p'>(</span><span class='hljl-n'>Point3f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>m</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>uv</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>decompose</span><span class='hljl-p'>(</span><span class='hljl-nf'>UV</span><span class='hljl-p'>{</span><span class='hljl-n'>Float32</span><span class='hljl-p'>},</span><span class='hljl-t'> </span><span class='hljl-n'>m</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>norms</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>decompose</span><span class='hljl-p'>(</span><span class='hljl-nf'>Normal</span><span class='hljl-p'>{</span><span class='hljl-ni'>3</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Float32</span><span class='hljl-p'>},</span><span class='hljl-t'> </span><span class='hljl-n'>m</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
- # plot the temperature as color map on the globe
- cmap = [:darkblue, :deepskyblue2, :deepskyblue, :gold, :tomato3, :red, :darkred]
+ </span><span class='hljl-cs'># plot the temperature as color map on the globe</span><span class='hljl-t'>
+ </span><span class='hljl-n'>cmap</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-sc'>:darkblue</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:deepskyblue2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:deepskyblue</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:gold</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:tomato3</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:red</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:darkred</span><span class='hljl-p'>]</span><span class='hljl-t'>
 
- # function to scale precipitation to a suitable marker size
- function watermap(uv, water, normalization = 908f0 * 4f0)
-     markersize = map(uv) do uv
-         wsize = reverse(size(water))
-         wh = wsize .- 1
-         x, y = round.(Int, Tuple(uv) .* wh) .+ 1
-         val = water[size(water)[1] - (y - 1), x] / normalization
-         val &lt; 0.0 ? -1f0 : val
-     end
- end
+ </span><span class='hljl-cs'># function to scale precipitation to a suitable marker size</span><span class='hljl-t'>
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>watermap</span><span class='hljl-p'>(</span><span class='hljl-n'>uv</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>water</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>normalization</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>908f0</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-nfB'>4f0</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>map</span><span class='hljl-p'>(</span><span class='hljl-n'>uv</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>uv</span><span class='hljl-t'>
+         </span><span class='hljl-n'>wsize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>reverse</span><span class='hljl-p'>(</span><span class='hljl-nf'>size</span><span class='hljl-p'>(</span><span class='hljl-n'>water</span><span class='hljl-p'>))</span><span class='hljl-t'>
+         </span><span class='hljl-n'>wh</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>wsize</span><span class='hljl-t'> </span><span class='hljl-oB'>.-</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-t'>
+         </span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>y</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>round</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>Int</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Tuple</span><span class='hljl-p'>(</span><span class='hljl-n'>uv</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>.*</span><span class='hljl-t'> </span><span class='hljl-n'>wh</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-t'>
+         </span><span class='hljl-n'>val</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>water</span><span class='hljl-p'>[</span><span class='hljl-nf'>size</span><span class='hljl-p'>(</span><span class='hljl-n'>water</span><span class='hljl-p'>)[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>y</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>/</span><span class='hljl-t'> </span><span class='hljl-n'>normalization</span><span class='hljl-t'>
+         </span><span class='hljl-n'>val</span><span class='hljl-t'> </span><span class='hljl-oB'>&lt;</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-t'> </span><span class='hljl-oB'>?</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-nfB'>1f0</span><span class='hljl-t'> </span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>val</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- scene = Scene(resolution = (800, 800))
- scene = mesh!(m, color = temperature[10], colorrange = (-50, 50), colormap = cmap, shading = true, show_axis = false)
- temp_plot = scene[end];
- # plot precipitation as vertical bars
- watervals = watermap(uv, water[1])
- extrema(watervals)
- xyw = 0.01
- meshscatter!(scene,
-     p, rotations = norms,
-     marker = Rect3D(Vec3f0(0), Vec3f0(1)),
-     markersize = Vec3f0.(xyw, xyw, watervals), raw = true,
-     color = watervals, colormap = [(:black, 0.0), (:skyblue2, 0.6)],
-     shading = false
- )
- wplot = scene[end]
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Scene</span><span class='hljl-p'>(</span><span class='hljl-n'>resolution</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>800</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>800</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>mesh!</span><span class='hljl-p'>(</span><span class='hljl-n'>m</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>temperature</span><span class='hljl-p'>[</span><span class='hljl-ni'>10</span><span class='hljl-p'>],</span><span class='hljl-t'> </span><span class='hljl-n'>colorrange</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-oB'>-</span><span class='hljl-ni'>50</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>50</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>colormap</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>cmap</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>shading</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>true</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>show_axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>temp_plot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>scene</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>];</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># plot precipitation as vertical bars</span><span class='hljl-t'>
+ </span><span class='hljl-n'>watervals</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>watermap</span><span class='hljl-p'>(</span><span class='hljl-n'>uv</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>water</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>])</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>extrema</span><span class='hljl-p'>(</span><span class='hljl-n'>watervals</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>xyw</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.01</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>meshscatter!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>p</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>rotations</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>norms</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>marker</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Rect3D</span><span class='hljl-p'>(</span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-p'>)),</span><span class='hljl-t'>
+     </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Vec3f0</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>xyw</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>xyw</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>watervals</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>raw</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>true</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>watervals</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>colormap</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[(</span><span class='hljl-sc'>:black</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-sc'>:skyblue2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.6</span><span class='hljl-p'>)],</span><span class='hljl-t'>
+     </span><span class='hljl-n'>shading</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>wplot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>scene</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'>
 
- # update eye position
- eye_position, lookat, upvector = Vec3f0(0.5, 0.8, 2.5), Vec3f0(0), Vec3f0(0, 1, 0)
- update_cam!(scene, eye_position, lookat, upvector)
- scene
- scene.center = false
- # save animation
- r = record(scene, &quot;output.mp4&quot;, 0:(11*4)) do i
-    # Make simulation slower. TODO figure out how do this nicely with ffmpeg
-    if i % 4 == 0
-        i2 = (i ÷ 4) + 1
-        temp_plot[:color] = temperature[i2]
-        watervals = watermap(uv, water[i2])
-        wplot[:color] = watervals
-        wplot[:markersize][] .= Vec3f0.(xyw, xyw, watervals)
-        # since we modify markersize inplace above, we need to notify the signal
-        AbstractPlotting.notify!(wplot[:markersize])
-    end
- end
- ENV[&quot;LD_LIBRARY_PATH&quot;] = &quot;&quot;
- r
+ </span><span class='hljl-cs'># update eye position</span><span class='hljl-t'>
+ </span><span class='hljl-n'>eye_position</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>lookat</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>upvector</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.8</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>2.5</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>update_cam!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>eye_position</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>lookat</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>upvector</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-oB'>.</span><span class='hljl-n'>center</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># save animation</span><span class='hljl-t'>
+ </span><span class='hljl-n'>r</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>record</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;output.mp4&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-oB'>:</span><span class='hljl-p'>(</span><span class='hljl-ni'>11</span><span class='hljl-oB'>*</span><span class='hljl-ni'>4</span><span class='hljl-p'>))</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'>
+    </span><span class='hljl-cs'># Make simulation slower. TODO figure out how do this nicely with ffmpeg</span><span class='hljl-t'>
+    </span><span class='hljl-k'>if</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>%</span><span class='hljl-t'> </span><span class='hljl-ni'>4</span><span class='hljl-t'> </span><span class='hljl-oB'>==</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-t'>
+        </span><span class='hljl-n'>i2</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>÷</span><span class='hljl-t'> </span><span class='hljl-ni'>4</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-t'>
+        </span><span class='hljl-n'>temp_plot</span><span class='hljl-p'>[</span><span class='hljl-sc'>:color</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>temperature</span><span class='hljl-p'>[</span><span class='hljl-n'>i2</span><span class='hljl-p'>]</span><span class='hljl-t'>
+        </span><span class='hljl-n'>watervals</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>watermap</span><span class='hljl-p'>(</span><span class='hljl-n'>uv</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>water</span><span class='hljl-p'>[</span><span class='hljl-n'>i2</span><span class='hljl-p'>])</span><span class='hljl-t'>
+        </span><span class='hljl-n'>wplot</span><span class='hljl-p'>[</span><span class='hljl-sc'>:color</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>watervals</span><span class='hljl-t'>
+        </span><span class='hljl-n'>wplot</span><span class='hljl-p'>[</span><span class='hljl-sc'>:markersize</span><span class='hljl-p'>][]</span><span class='hljl-t'> </span><span class='hljl-oB'>.=</span><span class='hljl-t'> </span><span class='hljl-n'>Vec3f0</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>xyw</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>xyw</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>watervals</span><span class='hljl-p'>)</span><span class='hljl-t'>
+        </span><span class='hljl-cs'># since we modify markersize inplace above, we need to notify the signal</span><span class='hljl-t'>
+        </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>.</span><span class='hljl-nf'>notify!</span><span class='hljl-p'>(</span><span class='hljl-n'>wplot</span><span class='hljl-p'>[</span><span class='hljl-sc'>:markersize</span><span class='hljl-p'>])</span><span class='hljl-t'>
+    </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-n'>ENV</span><span class='hljl-p'>[</span><span class='hljl-s'>&quot;LD_LIBRARY_PATH&quot;</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;&quot;</span><span class='hljl-t'>
+ </span><span class='hljl-n'>r</span><span class='hljl-t'>
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery//worldclim_visualization/media/worldclim_visualization.mp4" type="video/mp4">
+  <source src="http://juliaplots.org/MakieReferenceImages/gallery//worldclim_visualization/media/worldclim_visualization.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

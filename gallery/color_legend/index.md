@@ -1,59 +1,62 @@
 ## Color Legend
 
-```julia
-using AbstractPlotting
+```@raw html
+<pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
 
- s = surface(0..1, 0..1, rand(100, 100))
- ls = colorlegend(s[end], raw = true, camera = campixel!)
- st = Stepper(vbox(s, ls), "output")
- l = ls[end]
- l[:textcolor] = :blue
- step!(st)
- l[:strokecolor] = :green
- step!(st)
- l[:strokewidth] = 4
- step!(st)
- l[:textsize] = 12
- step!(st)
- l[:textgap] = 5
- step!(st)
- st
+ </span><span class='hljl-n'>s</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>surface</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0..1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0..1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>rand</span><span class='hljl-p'>(</span><span class='hljl-ni'>100</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>100</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>ls</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>colorlegend</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>],</span><span class='hljl-t'> </span><span class='hljl-n'>raw</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>true</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>camera</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>campixel!</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>st</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Stepper</span><span class='hljl-p'>(</span><span class='hljl-nf'>vbox</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>ls</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;output&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>l</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>ls</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>l</span><span class='hljl-p'>[</span><span class='hljl-sc'>:textcolor</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:blue</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>step!</span><span class='hljl-p'>(</span><span class='hljl-n'>st</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>l</span><span class='hljl-p'>[</span><span class='hljl-sc'>:strokecolor</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:green</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>step!</span><span class='hljl-p'>(</span><span class='hljl-n'>st</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>l</span><span class='hljl-p'>[</span><span class='hljl-sc'>:strokewidth</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>4</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>step!</span><span class='hljl-p'>(</span><span class='hljl-n'>st</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>l</span><span class='hljl-p'>[</span><span class='hljl-sc'>:textsize</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>12</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>step!</span><span class='hljl-p'>(</span><span class='hljl-n'>st</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>l</span><span class='hljl-p'>[</span><span class='hljl-sc'>:textgap</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>5</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>step!</span><span class='hljl-p'>(</span><span class='hljl-n'>st</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>st</span><span class='hljl-t'>
 
+</span>
+</pre>
 
 ```
 ```@raw html
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//color_legend/media/color_legend-1.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//color_legend/media/color_legend-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//color_legend/media/color_legend-2.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//color_legend/media/color_legend-2.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//color_legend/media/color_legend-3.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//color_legend/media/color_legend-3.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//color_legend/media/color_legend-4.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//color_legend/media/color_legend-4.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//color_legend/media/color_legend-5.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//color_legend/media/color_legend-5.jpg" alt="">
 
     </p>
 </div>

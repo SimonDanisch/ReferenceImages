@@ -3,22 +3,27 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>Violin and box plot</h2><pre><code class="language-julia">using AbstractPlotting
- using RDatasets, StatsMakie
+    <div><h2>Violin and box plot</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>RDatasets</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>StatsMakie</span><span class='hljl-t'>
 
 
- d = dataset(&quot;Ecdat&quot;,&quot;Fatality&quot;);
+ </span><span class='hljl-n'>d</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>dataset</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;Ecdat&quot;</span><span class='hljl-p'>,</span><span class='hljl-s'>&quot;Fatality&quot;</span><span class='hljl-p'>);</span><span class='hljl-t'>
 
- violin(d.Year, d.Perinc, color = :gray)
- boxplot!(d.Year, d.Perinc, color = :black)
+ </span><span class='hljl-nf'>violin</span><span class='hljl-p'>(</span><span class='hljl-n'>d</span><span class='hljl-oB'>.</span><span class='hljl-n'>Year</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>d</span><span class='hljl-oB'>.</span><span class='hljl-n'>Perinc</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:gray</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>boxplot!</span><span class='hljl-p'>(</span><span class='hljl-n'>d</span><span class='hljl-oB'>.</span><span class='hljl-n'>Year</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>d</span><span class='hljl-oB'>.</span><span class='hljl-n'>Perinc</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:black</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//violin_and_box_plot/media/image.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//violin_and_box_plot/media/image.jpg" alt="">
 
     </p>
 </div>

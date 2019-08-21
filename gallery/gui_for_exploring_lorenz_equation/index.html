@@ -3,61 +3,66 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>GUI for exploring Lorenz equation</h2><pre><code class="language-julia">using AbstractPlotting
- using Colors
- using AbstractPlotting: textslider, colorswatch
+    <div><h2>GUI for exploring Lorenz equation</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Colors</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>textslider</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>colorswatch</span><span class='hljl-t'>
 
- s1, a = textslider(0f0:50f0, &quot;a&quot;, start = 13)
- s2, b = textslider(-20f0:20f0, &quot;b&quot;, start = 10)
- s3, c = textslider(0f0:20f0, &quot;c&quot;, start = 2)
- s4, d = textslider(range(0.0, stop = 0.02, length = 100), &quot;d&quot;, start = 0.01)
- s5, scales = textslider(range(0.01, stop = 0.5, length = 100), &quot;scale&quot;, start = 0.1)
- s6, colorsw, pop = colorswatch()
+ </span><span class='hljl-n'>s1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>textslider</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0f0</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>50f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;a&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>start</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>13</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>s2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>b</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>textslider</span><span class='hljl-p'>(</span><span class='hljl-oB'>-</span><span class='hljl-nfB'>20f0</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>20f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;b&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>start</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>10</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>s3</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>c</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>textslider</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0f0</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>20f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;c&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>start</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>s4</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>d</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>textslider</span><span class='hljl-p'>(</span><span class='hljl-nf'>range</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>stop</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.02</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>length</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>100</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;d&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>start</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.01</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>s5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>scales</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>textslider</span><span class='hljl-p'>(</span><span class='hljl-nf'>range</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.01</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>stop</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>length</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>100</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;scale&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>start</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>s6</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>colorsw</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>pop</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>colorswatch</span><span class='hljl-p'>()</span><span class='hljl-t'>
 
- function lorenz(t0, a, b, c, h)
-     Point3f0(
-         t0[1] + h * a * (t0[2] - t0[1]),
-         t0[2] + h * (t0[1] * (b - t0[3]) - t0[2]),
-         t0[3] + h * (t0[1] * t0[2] - c * t0[3]),
-     )
- end
- # step through the `time`
- function lorenz(array::Vector, a = 5.0 ,b = 2.0, c = 6.0, d = 0.01)
-     t0 = Point3f0(0.1, 0, 0)
-     for i = eachindex(array)
-         t0 = lorenz(t0, a,b,c,d)
-         array[i] = t0
-     end
-     array
- end
- n1, n2 = 18, 30
- N = n1*n2
- args_n = (a, b, c, d)
- v0 = lorenz(zeros(Point3f0, N), to_value.(args_n)...)
- positions = lift(lorenz, Node(v0), args_n...)
- rotations = lift(diff, positions)
- rotations = lift(x-&gt; push!(x, x[end]), rotations)
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>lorenz</span><span class='hljl-p'>(</span><span class='hljl-n'>t0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>b</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>c</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>h</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-t'>
+         </span><span class='hljl-n'>t0</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-n'>h</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>t0</span><span class='hljl-p'>[</span><span class='hljl-ni'>2</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-n'>t0</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]),</span><span class='hljl-t'>
+         </span><span class='hljl-n'>t0</span><span class='hljl-p'>[</span><span class='hljl-ni'>2</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-n'>h</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>t0</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>b</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-n'>t0</span><span class='hljl-p'>[</span><span class='hljl-ni'>3</span><span class='hljl-p'>])</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-n'>t0</span><span class='hljl-p'>[</span><span class='hljl-ni'>2</span><span class='hljl-p'>]),</span><span class='hljl-t'>
+         </span><span class='hljl-n'>t0</span><span class='hljl-p'>[</span><span class='hljl-ni'>3</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-n'>h</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>t0</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>t0</span><span class='hljl-p'>[</span><span class='hljl-ni'>2</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-n'>c</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>t0</span><span class='hljl-p'>[</span><span class='hljl-ni'>3</span><span class='hljl-p'>]),</span><span class='hljl-t'>
+     </span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># step through the `time`</span><span class='hljl-t'>
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>lorenz</span><span class='hljl-p'>(</span><span class='hljl-n'>array</span><span class='hljl-oB'>::</span><span class='hljl-n'>Vector</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>5.0</span><span class='hljl-t'> </span><span class='hljl-p'>,</span><span class='hljl-n'>b</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>2.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>c</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>6.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>d</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.01</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>t0</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>eachindex</span><span class='hljl-p'>(</span><span class='hljl-n'>array</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-n'>t0</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lorenz</span><span class='hljl-p'>(</span><span class='hljl-n'>t0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-p'>,</span><span class='hljl-n'>b</span><span class='hljl-p'>,</span><span class='hljl-n'>c</span><span class='hljl-p'>,</span><span class='hljl-n'>d</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-n'>array</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>t0</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>array</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-n'>n1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>n2</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>18</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>30</span><span class='hljl-t'>
+ </span><span class='hljl-n'>N</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>n1</span><span class='hljl-oB'>*</span><span class='hljl-n'>n2</span><span class='hljl-t'>
+ </span><span class='hljl-n'>args_n</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>a</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>b</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>c</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>d</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>v0</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lorenz</span><span class='hljl-p'>(</span><span class='hljl-nf'>zeros</span><span class='hljl-p'>(</span><span class='hljl-n'>Point3f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>N</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>to_value</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>args_n</span><span class='hljl-p'>)</span><span class='hljl-oB'>...</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>positions</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lift</span><span class='hljl-p'>(</span><span class='hljl-n'>lorenz</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Node</span><span class='hljl-p'>(</span><span class='hljl-n'>v0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>args_n</span><span class='hljl-oB'>...</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>rotations</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lift</span><span class='hljl-p'>(</span><span class='hljl-n'>diff</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>positions</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>rotations</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lift</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-oB'>-&gt;</span><span class='hljl-t'> </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>]),</span><span class='hljl-t'> </span><span class='hljl-n'>rotations</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
- mesh_scene = meshscatter(
-     positions,
-     markersize = scales, rotation = rotations,
-     intensity = collect(range(0f0, stop = 1f0, length = length(positions[]))),
-     color = colorsw
- )
- parent = Scene(resolution = (1000, 800))
- vbox(
-     hbox(s1, s2, s3, s4, s5, s6),
-     mesh_scene, parent = parent
- )
- RecordEvents(parent, &quot;output&quot;)
+ </span><span class='hljl-n'>mesh_scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>meshscatter</span><span class='hljl-p'>(</span><span class='hljl-t'>
+     </span><span class='hljl-n'>positions</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>scales</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>rotation</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>rotations</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>intensity</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>collect</span><span class='hljl-p'>(</span><span class='hljl-nf'>range</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>stop</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>1f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>length</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>length</span><span class='hljl-p'>(</span><span class='hljl-n'>positions</span><span class='hljl-p'>[]))),</span><span class='hljl-t'>
+     </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>colorsw</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>parent</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Scene</span><span class='hljl-p'>(</span><span class='hljl-n'>resolution</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>1000</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>800</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>vbox</span><span class='hljl-p'>(</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>hbox</span><span class='hljl-p'>(</span><span class='hljl-n'>s1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>s2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>s3</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>s4</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>s5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>s6</span><span class='hljl-p'>),</span><span class='hljl-t'>
+     </span><span class='hljl-n'>mesh_scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>parent</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>parent</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>RecordEvents</span><span class='hljl-p'>(</span><span class='hljl-n'>parent</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;output&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery//gui_for_exploring_lorenz_equation/media/video.mp4" type="video/mp4">
+  <source src="http://juliaplots.org/MakieReferenceImages/gallery//gui_for_exploring_lorenz_equation/media/video.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

@@ -1,100 +1,103 @@
 ## Parallel Prefix Sum
 
-```julia
-using AbstractPlotting
- import Base: getindex, setindex!, length, size
- import Base.+
- using GeometryTypes
+```@raw html
+<pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>import</span><span class='hljl-t'> </span><span class='hljl-n'>Base</span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>getindex</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>setindex!</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>length</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>size</span><span class='hljl-t'>
+ </span><span class='hljl-k'>import</span><span class='hljl-t'> </span><span class='hljl-n'>Base</span><span class='hljl-oB'>.+</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>GeometryTypes</span><span class='hljl-t'>
 
- function prefix_sum(y, func)
-     l = length(y)
-     k = ceil(Int, log2(l))
-     for j=1:k, i=2^j:2^j:min(l, 2^k)
-         y[i] = func(y[i-2^(j-1)], y[i])
-     end
-     for j=(k-1):-1:1, i=3*2^(j-1):2^j:min(l, 2^k)
-         y[i] = func(y[i-2^(j-1)], y[i])
-     end
-     y
- end
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>prefix_sum</span><span class='hljl-p'>(</span><span class='hljl-n'>y</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>func</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>l</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>length</span><span class='hljl-p'>(</span><span class='hljl-n'>y</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>k</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>ceil</span><span class='hljl-p'>(</span><span class='hljl-n'>Int</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>log2</span><span class='hljl-p'>(</span><span class='hljl-n'>l</span><span class='hljl-p'>))</span><span class='hljl-t'>
+     </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>j</span><span class='hljl-oB'>=</span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-n'>k</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-oB'>=</span><span class='hljl-ni'>2</span><span class='hljl-oB'>^</span><span class='hljl-n'>j</span><span class='hljl-oB'>:</span><span class='hljl-ni'>2</span><span class='hljl-oB'>^</span><span class='hljl-n'>j</span><span class='hljl-oB'>:</span><span class='hljl-nf'>min</span><span class='hljl-p'>(</span><span class='hljl-n'>l</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-oB'>^</span><span class='hljl-n'>k</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-n'>y</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>func</span><span class='hljl-p'>(</span><span class='hljl-n'>y</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-oB'>-</span><span class='hljl-ni'>2</span><span class='hljl-oB'>^</span><span class='hljl-p'>(</span><span class='hljl-n'>j</span><span class='hljl-oB'>-</span><span class='hljl-ni'>1</span><span class='hljl-p'>)],</span><span class='hljl-t'> </span><span class='hljl-n'>y</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>])</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>j</span><span class='hljl-oB'>=</span><span class='hljl-p'>(</span><span class='hljl-n'>k</span><span class='hljl-oB'>-</span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-oB'>:-</span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-oB'>=</span><span class='hljl-ni'>3</span><span class='hljl-oB'>*</span><span class='hljl-ni'>2</span><span class='hljl-oB'>^</span><span class='hljl-p'>(</span><span class='hljl-n'>j</span><span class='hljl-oB'>-</span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-oB'>:</span><span class='hljl-ni'>2</span><span class='hljl-oB'>^</span><span class='hljl-n'>j</span><span class='hljl-oB'>:</span><span class='hljl-nf'>min</span><span class='hljl-p'>(</span><span class='hljl-n'>l</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-oB'>^</span><span class='hljl-n'>k</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-n'>y</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>func</span><span class='hljl-p'>(</span><span class='hljl-n'>y</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-oB'>-</span><span class='hljl-ni'>2</span><span class='hljl-oB'>^</span><span class='hljl-p'>(</span><span class='hljl-n'>j</span><span class='hljl-oB'>-</span><span class='hljl-ni'>1</span><span class='hljl-p'>)],</span><span class='hljl-t'> </span><span class='hljl-n'>y</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>])</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>y</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- mutable struct AccessArray <: AbstractArray{Nothing, 1}
-     length::Int
-     read::Vector
-     history::Vector
- end
+ </span><span class='hljl-k'>mutable struct</span><span class='hljl-t'> </span><span class='hljl-n'>AccessArray</span><span class='hljl-t'> </span><span class='hljl-oB'>&lt;:</span><span class='hljl-t'> </span><span class='hljl-nf'>AbstractArray</span><span class='hljl-p'>{</span><span class='hljl-n'>Nothing</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>}</span><span class='hljl-t'>
+     </span><span class='hljl-n'>length</span><span class='hljl-oB'>::</span><span class='hljl-n'>Int</span><span class='hljl-t'>
+     </span><span class='hljl-n'>read</span><span class='hljl-oB'>::</span><span class='hljl-n'>Vector</span><span class='hljl-t'>
+     </span><span class='hljl-n'>history</span><span class='hljl-oB'>::</span><span class='hljl-n'>Vector</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- function AccessArray(length, read = [], history = [])
-     AccessArray(length, read, history)
- end
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>AccessArray</span><span class='hljl-p'>(</span><span class='hljl-n'>length</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>read</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-n'>history</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[])</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>AccessArray</span><span class='hljl-p'>(</span><span class='hljl-n'>length</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>read</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>history</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- length(A::AccessArray) = A.length
- size(A::AccessArray) = (A.length,)
+ </span><span class='hljl-nf'>length</span><span class='hljl-p'>(</span><span class='hljl-n'>A</span><span class='hljl-oB'>::</span><span class='hljl-n'>AccessArray</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>A</span><span class='hljl-oB'>.</span><span class='hljl-n'>length</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>size</span><span class='hljl-p'>(</span><span class='hljl-n'>A</span><span class='hljl-oB'>::</span><span class='hljl-n'>AccessArray</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>A</span><span class='hljl-oB'>.</span><span class='hljl-n'>length</span><span class='hljl-p'>,)</span><span class='hljl-t'>
 
- function getindex(A::AccessArray, i)
-     push!(A.read, i)
-     return
- end
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>getindex</span><span class='hljl-p'>(</span><span class='hljl-n'>A</span><span class='hljl-oB'>::</span><span class='hljl-n'>AccessArray</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>A</span><span class='hljl-oB'>.</span><span class='hljl-n'>read</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>return</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- function setindex!(A::AccessArray, x, i)
-     push!(A.history, (A.read, [i]))
-     A.read = []
- end
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>setindex!</span><span class='hljl-p'>(</span><span class='hljl-n'>A</span><span class='hljl-oB'>::</span><span class='hljl-n'>AccessArray</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>A</span><span class='hljl-oB'>.</span><span class='hljl-n'>history</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>A</span><span class='hljl-oB'>.</span><span class='hljl-n'>read</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>]))</span><span class='hljl-t'>
+     </span><span class='hljl-n'>A</span><span class='hljl-oB'>.</span><span class='hljl-n'>read</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[]</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- +(a::Nothing, b::Nothing)=a
- A = prefix_sum(AccessArray(8), +)
+ </span><span class='hljl-oB'>+</span><span class='hljl-p'>(</span><span class='hljl-n'>a</span><span class='hljl-oB'>::</span><span class='hljl-n'>Nothing</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>b</span><span class='hljl-oB'>::</span><span class='hljl-n'>Nothing</span><span class='hljl-p'>)</span><span class='hljl-oB'>=</span><span class='hljl-n'>a</span><span class='hljl-t'>
+ </span><span class='hljl-n'>A</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>prefix_sum</span><span class='hljl-p'>(</span><span class='hljl-nf'>AccessArray</span><span class='hljl-p'>(</span><span class='hljl-ni'>8</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
- function render(A::AccessArray)
-     olast = depth = 0
-     for y in A.history
-         (any(y[1] .≤ olast)) && (depth += 1)
-         olast = maximum(y[2])
-     end
-     maxdepth = depth
-     olast = depth = 0
-     C = []
-     for y in A.history
-         (any(y[1] .≤ olast)) && (depth += 1)
-         push!(C, ((y...,), A.length, maxdepth, depth))
-         olast = maximum(y[2])
-     end
-     msize = 0.1
-     outsize = 0.15
-     x1 = Point2f0.(first.(first.(first.(C))), last.(C) .+ outsize .+ 0.05)
-     x2 = Point2f0.(last.(first.(first.(C))), last.(C) .+ outsize .+ 0.05)
-     x3 = Point2f0.(first.(last.(first.(C))), last.(C) .+ 1)
-     connections = Point2f0[]
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>render</span><span class='hljl-p'>(</span><span class='hljl-n'>A</span><span class='hljl-oB'>::</span><span class='hljl-n'>AccessArray</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>olast</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>depth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-t'>
+     </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>y</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-n'>A</span><span class='hljl-oB'>.</span><span class='hljl-n'>history</span><span class='hljl-t'>
+         </span><span class='hljl-p'>(</span><span class='hljl-nf'>any</span><span class='hljl-p'>(</span><span class='hljl-n'>y</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>.≤</span><span class='hljl-t'> </span><span class='hljl-n'>olast</span><span class='hljl-p'>))</span><span class='hljl-t'> </span><span class='hljl-oB'>&amp;&amp;</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>depth</span><span class='hljl-t'> </span><span class='hljl-oB'>+=</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-n'>olast</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>maximum</span><span class='hljl-p'>(</span><span class='hljl-n'>y</span><span class='hljl-p'>[</span><span class='hljl-ni'>2</span><span class='hljl-p'>])</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>maxdepth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>depth</span><span class='hljl-t'>
+     </span><span class='hljl-n'>olast</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>depth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-t'>
+     </span><span class='hljl-n'>C</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[]</span><span class='hljl-t'>
+     </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>y</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-n'>A</span><span class='hljl-oB'>.</span><span class='hljl-n'>history</span><span class='hljl-t'>
+         </span><span class='hljl-p'>(</span><span class='hljl-nf'>any</span><span class='hljl-p'>(</span><span class='hljl-n'>y</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>.≤</span><span class='hljl-t'> </span><span class='hljl-n'>olast</span><span class='hljl-p'>))</span><span class='hljl-t'> </span><span class='hljl-oB'>&amp;&amp;</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>depth</span><span class='hljl-t'> </span><span class='hljl-oB'>+=</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>C</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>((</span><span class='hljl-n'>y</span><span class='hljl-oB'>...</span><span class='hljl-p'>,),</span><span class='hljl-t'> </span><span class='hljl-n'>A</span><span class='hljl-oB'>.</span><span class='hljl-n'>length</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>maxdepth</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>depth</span><span class='hljl-p'>))</span><span class='hljl-t'>
+         </span><span class='hljl-n'>olast</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>maximum</span><span class='hljl-p'>(</span><span class='hljl-n'>y</span><span class='hljl-p'>[</span><span class='hljl-ni'>2</span><span class='hljl-p'>])</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>msize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.1</span><span class='hljl-t'>
+     </span><span class='hljl-n'>outsize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.15</span><span class='hljl-t'>
+     </span><span class='hljl-n'>x1</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Point2f0</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>first</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>first</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>first</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>C</span><span class='hljl-p'>))),</span><span class='hljl-t'> </span><span class='hljl-n'>last</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>C</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-n'>outsize</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.05</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>x2</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Point2f0</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>last</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>first</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>first</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>C</span><span class='hljl-p'>))),</span><span class='hljl-t'> </span><span class='hljl-n'>last</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>C</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-n'>outsize</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.05</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>x3</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Point2f0</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>first</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>last</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>first</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>C</span><span class='hljl-p'>))),</span><span class='hljl-t'> </span><span class='hljl-n'>last</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>C</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>connections</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Point2f0</span><span class='hljl-p'>[]</span><span class='hljl-t'>
 
-     yoff = Point2f0(0, msize / 2)
-     ooff = Point2f0(0, outsize / 2 + 0.05)
-     for i = 1:length(x3)
-         push!(connections, x3[i] .- ooff, x1[i] .+ yoff, x3[i] .- ooff, x2[i] .+ yoff)
-     end
-     node_theme = Theme(
-         markersize = msize, strokewidth = 3,
-         strokecolor = :black, color = (:white, 0.0),
-         axis = (
-             ticks = (ranges = (1:8, 1:5),),
-             names = (axisnames = ("Array Index", "Depth"),),
-             frame = (axis_position = :none,)
-         )
-     )
-     s = scatter(node_theme, x1)
-     scatter!(node_theme, x2)
-     scatter!(x3, color = :white, markersize = 0.2, strokewidth = 4, strokecolor = :black)
-     scatter!(x3, color = :red, marker = '+', markersize = outsize)
-     linesegments!(connections, color = :red)
-     s
- end
- render(A)
+     </span><span class='hljl-n'>yoff</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Point2f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>msize</span><span class='hljl-t'> </span><span class='hljl-oB'>/</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>ooff</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Point2f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>outsize</span><span class='hljl-t'> </span><span class='hljl-oB'>/</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.05</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-nf'>length</span><span class='hljl-p'>(</span><span class='hljl-n'>x3</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>connections</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>x3</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>.-</span><span class='hljl-t'> </span><span class='hljl-n'>ooff</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>x1</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-n'>yoff</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>x3</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>.-</span><span class='hljl-t'> </span><span class='hljl-n'>ooff</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>x2</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-n'>yoff</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>node_theme</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Theme</span><span class='hljl-p'>(</span><span class='hljl-t'>
+         </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>msize</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>strokewidth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-p'>,</span><span class='hljl-t'>
+         </span><span class='hljl-n'>strokecolor</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:black</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-sc'>:white</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>),</span><span class='hljl-t'>
+         </span><span class='hljl-n'>axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-t'>
+             </span><span class='hljl-n'>ticks</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>ranges</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>8</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>5</span><span class='hljl-p'>),),</span><span class='hljl-t'>
+             </span><span class='hljl-n'>names</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>axisnames</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;Array Index&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;Depth&quot;</span><span class='hljl-p'>),),</span><span class='hljl-t'>
+             </span><span class='hljl-n'>frame</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>axis_position</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:none</span><span class='hljl-p'>,)</span><span class='hljl-t'>
+         </span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>s</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>scatter</span><span class='hljl-p'>(</span><span class='hljl-n'>node_theme</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>x1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>scatter!</span><span class='hljl-p'>(</span><span class='hljl-n'>node_theme</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>x2</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>scatter!</span><span class='hljl-p'>(</span><span class='hljl-n'>x3</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:white</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>strokewidth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>4</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>strokecolor</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:black</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>scatter!</span><span class='hljl-p'>(</span><span class='hljl-n'>x3</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:red</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>marker</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>&#39;+&#39;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>outsize</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>linesegments!</span><span class='hljl-p'>(</span><span class='hljl-n'>connections</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:red</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>s</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>render</span><span class='hljl-p'>(</span><span class='hljl-n'>A</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
+</span>
+</pre>
 
 ```
 ```@raw html
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//parallel_prefix_sum/media/image.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//parallel_prefix_sum/media/image.jpg" alt="">
 
     </p>
 </div>

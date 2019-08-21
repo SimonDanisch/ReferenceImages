@@ -1,70 +1,73 @@
 ## Type recipe for molecule simulation
 
-```julia
-using AbstractPlotting
- import AbstractPlotting: Plot, default_theme, plot!, to_value
+```@raw html
+<pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>import</span><span class='hljl-t'> </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>Plot</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>default_theme</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>plot!</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>to_value</span><span class='hljl-t'>
 
 
- struct Simulation
-     grid::Vector{Point3f0}
- end
- # Probably worth having a macro for this!
- function default_theme(scene::SceneLike, ::Type{<: Plot(Simulation)})
-     Theme(
-         advance = 0,
-         molecule_sizes = [0.08, 0.04, 0.04],
-         molecule_colors = [:maroon, :deepskyblue2, :deepskyblue2]
-     )
- end
+ </span><span class='hljl-k'>struct</span><span class='hljl-t'> </span><span class='hljl-n'>Simulation</span><span class='hljl-t'>
+     </span><span class='hljl-n'>grid</span><span class='hljl-oB'>::</span><span class='hljl-nf'>Vector</span><span class='hljl-p'>{</span><span class='hljl-n'>Point3f0</span><span class='hljl-p'>}</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># Probably worth having a macro for this!</span><span class='hljl-t'>
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>default_theme</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-oB'>::</span><span class='hljl-n'>SceneLike</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-oB'>::</span><span class='hljl-nf'>Type</span><span class='hljl-p'>{</span><span class='hljl-oB'>&lt;:</span><span class='hljl-t'> </span><span class='hljl-nf'>Plot</span><span class='hljl-p'>(</span><span class='hljl-n'>Simulation</span><span class='hljl-p'>)})</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>Theme</span><span class='hljl-p'>(</span><span class='hljl-t'>
+         </span><span class='hljl-n'>advance</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'>
+         </span><span class='hljl-n'>molecule_sizes</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-nfB'>0.08</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.04</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.04</span><span class='hljl-p'>],</span><span class='hljl-t'>
+         </span><span class='hljl-n'>molecule_colors</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-sc'>:maroon</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:deepskyblue2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:deepskyblue2</span><span class='hljl-p'>]</span><span class='hljl-t'>
+     </span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- # The recipe! - will get called for plot(!)(x::SimulationResult)
- function AbstractPlotting.plot!(p::Plot(Simulation))
-     sim = to_value(p[1]) # first argument is the SimulationResult
-     # when advance changes, get new positions from the simulation
-     mpos = lift(p[:advance]) do i
-         sim.grid .+ rand(Point3f0, length(sim.grid)) .* 0.01f0
-     end
-     # size shouldn't change, so we might as well get the value instead of signal
-     pos = to_value(mpos)
-     N = length(pos)
-     sizes = lift(p[:molecule_sizes]) do s
-         repeat(s, outer = N ÷ 3)
-     end
-     sizes = lift(p[:molecule_sizes]) do s
-         repeat(s, outer = N ÷ 3)
-     end
-     colors = lift(p[:molecule_colors]) do c
-         repeat(c, outer = N ÷ 3)
-     end
-     scene = meshscatter!(p, mpos, markersize = sizes, color = colors)
-     indices = Int[]
-     for i in 1:3:N
-         push!(indices, i, i + 1, i, i + 2)
-     end
-     meshplot = p.plots[end] # meshplot is the last plot we added to p
-     # meshplot[1] -> the positions (first argument) converted to points, so
-     # we don't do the conversion 2 times for linesegments!
-     linesegments!(p, lift(x-> view(x, indices), meshplot[1]))
- end
+ </span><span class='hljl-cs'># The recipe! - will get called for plot(!)(x::SimulationResult)</span><span class='hljl-t'>
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>.</span><span class='hljl-nf'>plot!</span><span class='hljl-p'>(</span><span class='hljl-n'>p</span><span class='hljl-oB'>::</span><span class='hljl-nf'>Plot</span><span class='hljl-p'>(</span><span class='hljl-n'>Simulation</span><span class='hljl-p'>))</span><span class='hljl-t'>
+     </span><span class='hljl-n'>sim</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>to_value</span><span class='hljl-p'>(</span><span class='hljl-n'>p</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>])</span><span class='hljl-t'> </span><span class='hljl-cs'># first argument is the SimulationResult</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># when advance changes, get new positions from the simulation</span><span class='hljl-t'>
+     </span><span class='hljl-n'>mpos</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lift</span><span class='hljl-p'>(</span><span class='hljl-n'>p</span><span class='hljl-p'>[</span><span class='hljl-sc'>:advance</span><span class='hljl-p'>])</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'>
+         </span><span class='hljl-n'>sim</span><span class='hljl-oB'>.</span><span class='hljl-n'>grid</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-nf'>rand</span><span class='hljl-p'>(</span><span class='hljl-n'>Point3f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>length</span><span class='hljl-p'>(</span><span class='hljl-n'>sim</span><span class='hljl-oB'>.</span><span class='hljl-n'>grid</span><span class='hljl-p'>))</span><span class='hljl-t'> </span><span class='hljl-oB'>.*</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.01f0</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># size shouldn&#39;t change, so we might as well get the value instead of signal</span><span class='hljl-t'>
+     </span><span class='hljl-n'>pos</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>to_value</span><span class='hljl-p'>(</span><span class='hljl-n'>mpos</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>N</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>length</span><span class='hljl-p'>(</span><span class='hljl-n'>pos</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>sizes</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lift</span><span class='hljl-p'>(</span><span class='hljl-n'>p</span><span class='hljl-p'>[</span><span class='hljl-sc'>:molecule_sizes</span><span class='hljl-p'>])</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>s</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>repeat</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>outer</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>N</span><span class='hljl-t'> </span><span class='hljl-oB'>÷</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>sizes</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lift</span><span class='hljl-p'>(</span><span class='hljl-n'>p</span><span class='hljl-p'>[</span><span class='hljl-sc'>:molecule_sizes</span><span class='hljl-p'>])</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>s</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>repeat</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>outer</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>N</span><span class='hljl-t'> </span><span class='hljl-oB'>÷</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>colors</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lift</span><span class='hljl-p'>(</span><span class='hljl-n'>p</span><span class='hljl-p'>[</span><span class='hljl-sc'>:molecule_colors</span><span class='hljl-p'>])</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>c</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>repeat</span><span class='hljl-p'>(</span><span class='hljl-n'>c</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>outer</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>N</span><span class='hljl-t'> </span><span class='hljl-oB'>÷</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>meshscatter!</span><span class='hljl-p'>(</span><span class='hljl-n'>p</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>mpos</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>sizes</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>colors</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>indices</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Int</span><span class='hljl-p'>[]</span><span class='hljl-t'>
+     </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>3</span><span class='hljl-oB'>:</span><span class='hljl-n'>N</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>indices</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>meshplot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>p</span><span class='hljl-oB'>.</span><span class='hljl-n'>plots</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-cs'># meshplot is the last plot we added to p</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># meshplot[1] -&gt; the positions (first argument) converted to points, so</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># we don&#39;t do the conversion 2 times for linesegments!</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>linesegments!</span><span class='hljl-p'>(</span><span class='hljl-n'>p</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>lift</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-oB'>-&gt;</span><span class='hljl-t'> </span><span class='hljl-nf'>view</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>indices</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>meshplot</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]))</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- # To write out a video of the whole simulation
- n = 5
- r = range(-1, stop = 1, length = n)
- grid = Point3f0.(r, reshape(r, (1, n, 1)), reshape(r, (1, 1, n)))
- molecules = map(1:(n^3) * 3) do i
-     i3 = ((i - 1) ÷ 3) + 1
-     xy = 0.1; z = 0.08
-     i % 3 == 1 && return grid[i3]
-     i % 3 == 2 && return grid[i3] + Point3f0(xy, xy, z)
-     i % 3 == 0 && return grid[i3] + Point3f0(-xy, xy, z)
- end
- result = Simulation(molecules)
- scene = plot(result)
- N = 100
- record(scene, "output.mp4", 1:N) do i
-     scene[end][:advance] = i
-end
+ </span><span class='hljl-cs'># To write out a video of the whole simulation</span><span class='hljl-t'>
+ </span><span class='hljl-n'>n</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>5</span><span class='hljl-t'>
+ </span><span class='hljl-n'>r</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>range</span><span class='hljl-p'>(</span><span class='hljl-oB'>-</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>stop</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>length</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>n</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>grid</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Point3f0</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>r</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>reshape</span><span class='hljl-p'>(</span><span class='hljl-n'>r</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>n</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>)),</span><span class='hljl-t'> </span><span class='hljl-nf'>reshape</span><span class='hljl-p'>(</span><span class='hljl-n'>r</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>n</span><span class='hljl-p'>)))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>molecules</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>map</span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-p'>(</span><span class='hljl-n'>n</span><span class='hljl-oB'>^</span><span class='hljl-ni'>3</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'>
+     </span><span class='hljl-n'>i3</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>((</span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>÷</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-t'>
+     </span><span class='hljl-n'>xy</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.1</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>z</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.08</span><span class='hljl-t'>
+     </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>%</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-t'> </span><span class='hljl-oB'>==</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-t'> </span><span class='hljl-oB'>&amp;&amp;</span><span class='hljl-t'> </span><span class='hljl-k'>return</span><span class='hljl-t'> </span><span class='hljl-n'>grid</span><span class='hljl-p'>[</span><span class='hljl-n'>i3</span><span class='hljl-p'>]</span><span class='hljl-t'>
+     </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>%</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-t'> </span><span class='hljl-oB'>==</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-t'> </span><span class='hljl-oB'>&amp;&amp;</span><span class='hljl-t'> </span><span class='hljl-k'>return</span><span class='hljl-t'> </span><span class='hljl-n'>grid</span><span class='hljl-p'>[</span><span class='hljl-n'>i3</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-n'>xy</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>xy</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>z</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>%</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-t'> </span><span class='hljl-oB'>==</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-t'> </span><span class='hljl-oB'>&amp;&amp;</span><span class='hljl-t'> </span><span class='hljl-k'>return</span><span class='hljl-t'> </span><span class='hljl-n'>grid</span><span class='hljl-p'>[</span><span class='hljl-n'>i3</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-oB'>-</span><span class='hljl-n'>xy</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>xy</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>z</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-n'>result</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Simulation</span><span class='hljl-p'>(</span><span class='hljl-n'>molecules</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>plot</span><span class='hljl-p'>(</span><span class='hljl-n'>result</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>N</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>100</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>record</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;output.mp4&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-n'>N</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'>
+     </span><span class='hljl-n'>scene</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>][</span><span class='hljl-sc'>:advance</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'>
+</span><span class='hljl-k'>end</span><span class='hljl-t'>
 
+</span>
+</pre>
 
 ```
 ```@raw html
@@ -72,7 +75,7 @@ end
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery//type_recipe_for_molecule_simulation/media/type_recipe_for_molecule_simulation.mp4" type="video/mp4">
+  <source src="http://juliaplots.org/MakieReferenceImages/gallery//type_recipe_for_molecule_simulation/media/type_recipe_for_molecule_simulation.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

@@ -3,38 +3,43 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>FEM polygon 2D</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>FEM polygon 2D</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
 
- coordinates = [
-     0.0 0.0;
-     0.5 0.0;
-     1.0 0.0;
-     0.0 0.5;
-     0.5 0.5;
-     1.0 0.5;
-     0.0 1.0;
-     0.5 1.0;
-     1.0 1.0;
- ]
- connectivity = [
-     1 2 5;
-     1 4 5;
-     2 3 6;
-     2 5 6;
-     4 5 8;
-     4 7 8;
-     5 6 9;
-     5 8 9;
- ]
- color = [0.0, 0.0, 0.0, 0.0, -0.375, 0.0, 0.0, 0.0, 0.0]
- poly(coordinates, connectivity, color = color, strokecolor = (:black, 0.6), strokewidth = 4)
+ </span><span class='hljl-n'>coordinates</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-t'>
+     </span><span class='hljl-nfB'>0.0</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-nfB'>0.5</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-nfB'>1.0</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-nfB'>0.0</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-nfB'>0.5</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-nfB'>1.0</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-nfB'>0.0</span><span class='hljl-t'> </span><span class='hljl-nfB'>1.0</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-nfB'>0.5</span><span class='hljl-t'> </span><span class='hljl-nfB'>1.0</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-nfB'>1.0</span><span class='hljl-t'> </span><span class='hljl-nfB'>1.0</span><span class='hljl-p'>;</span><span class='hljl-t'>
+ </span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>connectivity</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-t'>
+     </span><span class='hljl-ni'>1</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-t'> </span><span class='hljl-ni'>5</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-ni'>1</span><span class='hljl-t'> </span><span class='hljl-ni'>4</span><span class='hljl-t'> </span><span class='hljl-ni'>5</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-ni'>2</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-t'> </span><span class='hljl-ni'>6</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-ni'>2</span><span class='hljl-t'> </span><span class='hljl-ni'>5</span><span class='hljl-t'> </span><span class='hljl-ni'>6</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-ni'>4</span><span class='hljl-t'> </span><span class='hljl-ni'>5</span><span class='hljl-t'> </span><span class='hljl-ni'>8</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-ni'>4</span><span class='hljl-t'> </span><span class='hljl-ni'>7</span><span class='hljl-t'> </span><span class='hljl-ni'>8</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-ni'>5</span><span class='hljl-t'> </span><span class='hljl-ni'>6</span><span class='hljl-t'> </span><span class='hljl-ni'>9</span><span class='hljl-p'>;</span><span class='hljl-t'>
+     </span><span class='hljl-ni'>5</span><span class='hljl-t'> </span><span class='hljl-ni'>8</span><span class='hljl-t'> </span><span class='hljl-ni'>9</span><span class='hljl-p'>;</span><span class='hljl-t'>
+ </span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-nfB'>0.375</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>poly</span><span class='hljl-p'>(</span><span class='hljl-n'>coordinates</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>connectivity</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>strokecolor</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-sc'>:black</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.6</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>strokewidth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>4</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//fem_polygon_2d/media/image.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//fem_polygon_2d/media/image.jpg" alt="">
 
     </p>
 </div>

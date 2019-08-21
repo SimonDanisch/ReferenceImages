@@ -3,65 +3,70 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>Electrostatic repulsion</h2><pre><code class="language-julia">using AbstractPlotting
- using LinearAlgebra
+    <div><h2>Electrostatic repulsion</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>LinearAlgebra</span><span class='hljl-t'>
 
 
- clip11(x) = max(-1.0, min(1.0, x))
+ </span><span class='hljl-nf'>clip11</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>max</span><span class='hljl-p'>(</span><span class='hljl-oB'>-</span><span class='hljl-nfB'>1.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>min</span><span class='hljl-p'>(</span><span class='hljl-nfB'>1.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-p'>))</span><span class='hljl-t'>
 
- function repel(particles_node, N)
-     particles = particles_node[]
-     @inbounds for i in 1:N
-         ftot = Vec3f0(0)
-         p1 = particles[i]
-         for j in 1:N
-             if i != j
-                 p2 = particles[j]
-                 Δσ = acos(clip11(dot(p1, p2))) # great circle distance
-                 ftot += (p1 - p2)/max(1e-3, Δσ^2)
-             end
-         end
-         particles[i] = normalize(p1 + 0.001 * ftot)
-     end
-     particles_node[] = particles
- end
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>repel</span><span class='hljl-p'>(</span><span class='hljl-n'>particles_node</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>N</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>particles</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>particles_node</span><span class='hljl-p'>[]</span><span class='hljl-t'>
+     </span><span class='hljl-nd'>@inbounds</span><span class='hljl-t'> </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-n'>N</span><span class='hljl-t'>
+         </span><span class='hljl-n'>ftot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-n'>p1</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>particles</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>]</span><span class='hljl-t'>
+         </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>j</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-n'>N</span><span class='hljl-t'>
+             </span><span class='hljl-k'>if</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>!=</span><span class='hljl-t'> </span><span class='hljl-n'>j</span><span class='hljl-t'>
+                 </span><span class='hljl-n'>p2</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>particles</span><span class='hljl-p'>[</span><span class='hljl-n'>j</span><span class='hljl-p'>]</span><span class='hljl-t'>
+                 </span><span class='hljl-n'>Δσ</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>acos</span><span class='hljl-p'>(</span><span class='hljl-nf'>clip11</span><span class='hljl-p'>(</span><span class='hljl-nf'>dot</span><span class='hljl-p'>(</span><span class='hljl-n'>p1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>p2</span><span class='hljl-p'>)))</span><span class='hljl-t'> </span><span class='hljl-cs'># great circle distance</span><span class='hljl-t'>
+                 </span><span class='hljl-n'>ftot</span><span class='hljl-t'> </span><span class='hljl-oB'>+=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>p1</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-n'>p2</span><span class='hljl-p'>)</span><span class='hljl-oB'>/</span><span class='hljl-nf'>max</span><span class='hljl-p'>(</span><span class='hljl-nfB'>1e-3</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Δσ</span><span class='hljl-oB'>^</span><span class='hljl-ni'>2</span><span class='hljl-p'>)</span><span class='hljl-t'>
+             </span><span class='hljl-k'>end</span><span class='hljl-t'>
+         </span><span class='hljl-k'>end</span><span class='hljl-t'>
+         </span><span class='hljl-n'>particles</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>normalize</span><span class='hljl-p'>(</span><span class='hljl-n'>p1</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.001</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>ftot</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>particles_node</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>particles</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- function addparticle!(particles, colors, nparticles)
-     nparticles[] = nparticles[] + 1
-     particles[][nparticles[]] = normalize(randn(Point3f0))
-     colors[][nparticles[]] = to_color(:green)
-     particles[] = particles[]
-     colors[] = colors[]
- end
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>addparticle!</span><span class='hljl-p'>(</span><span class='hljl-n'>particles</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>colors</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>nparticles</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>nparticles</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>nparticles</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-t'>
+     </span><span class='hljl-n'>particles</span><span class='hljl-p'>[][</span><span class='hljl-n'>nparticles</span><span class='hljl-p'>[]]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>normalize</span><span class='hljl-p'>(</span><span class='hljl-nf'>randn</span><span class='hljl-p'>(</span><span class='hljl-n'>Point3f0</span><span class='hljl-p'>))</span><span class='hljl-t'>
+     </span><span class='hljl-n'>colors</span><span class='hljl-p'>[][</span><span class='hljl-n'>nparticles</span><span class='hljl-p'>[]]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>to_color</span><span class='hljl-p'>(</span><span class='hljl-sc'>:green</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>particles</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>particles</span><span class='hljl-p'>[]</span><span class='hljl-t'>
+     </span><span class='hljl-n'>colors</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>colors</span><span class='hljl-p'>[]</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- s = Scene(show_axis = false)
- mesh!(s, Sphere(Point3f0(0), 1f0), color = :gray)
+ </span><span class='hljl-n'>s</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Scene</span><span class='hljl-p'>(</span><span class='hljl-n'>show_axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>mesh!</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Sphere</span><span class='hljl-p'>(</span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nfB'>1f0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:gray</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
- max_particles = 5000
- # Sadly, you currently can&#39;t resize 3D mesh particles, so we need to
- # implement resize on our own...
- particles = Node(fill(Point3f0(NaN), max_particles))
- colors = Node(fill(RGBAf0(0, 0, 0, 0), max_particles))
- meshscatter!(s, particles, color = colors, markersize = 0.05)
- nparticles = Node(0)
- for i=1:10
-     addparticle!(particles, colors, nparticles)
- end
- update_cam!(s, FRect3D(Vec3f0(0), Vec3f0(1)))
- s.center = false # don&#39;t reset the camera by display
- N = 1000 # N gets replaced by 100 for testing
- record(s, &quot;output.mp4&quot;, 1:N) do iter
-     isodd(iter) &amp;&amp; addparticle!(particles, colors, nparticles)
-     repel(particles, nparticles[])
-end
+ </span><span class='hljl-n'>max_particles</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>5000</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># Sadly, you currently can&#39;t resize 3D mesh particles, so we need to</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># implement resize on our own...</span><span class='hljl-t'>
+ </span><span class='hljl-n'>particles</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Node</span><span class='hljl-p'>(</span><span class='hljl-nf'>fill</span><span class='hljl-p'>(</span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-n'>NaN</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>max_particles</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>colors</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Node</span><span class='hljl-p'>(</span><span class='hljl-nf'>fill</span><span class='hljl-p'>(</span><span class='hljl-nf'>RGBAf0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>max_particles</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>meshscatter!</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>particles</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>colors</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.05</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>nparticles</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Node</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-oB'>=</span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>10</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>addparticle!</span><span class='hljl-p'>(</span><span class='hljl-n'>particles</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>colors</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>nparticles</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>update_cam!</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>FRect3D</span><span class='hljl-p'>(</span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-p'>)))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>s</span><span class='hljl-oB'>.</span><span class='hljl-n'>center</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-t'> </span><span class='hljl-cs'># don&#39;t reset the camera by display</span><span class='hljl-t'>
+ </span><span class='hljl-n'>N</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1000</span><span class='hljl-t'> </span><span class='hljl-cs'># N gets replaced by 100 for testing</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>record</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;output.mp4&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-n'>N</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>iter</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>isodd</span><span class='hljl-p'>(</span><span class='hljl-n'>iter</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>&amp;&amp;</span><span class='hljl-t'> </span><span class='hljl-nf'>addparticle!</span><span class='hljl-p'>(</span><span class='hljl-n'>particles</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>colors</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>nparticles</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>repel</span><span class='hljl-p'>(</span><span class='hljl-n'>particles</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>nparticles</span><span class='hljl-p'>[])</span><span class='hljl-t'>
+</span><span class='hljl-k'>end</span><span class='hljl-t'>
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery//electrostatic_repulsion/media/electrostatic_repulsion.mp4" type="video/mp4">
+  <source src="http://juliaplots.org/MakieReferenceImages/gallery//electrostatic_repulsion/media/electrostatic_repulsion.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

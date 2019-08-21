@@ -1,100 +1,107 @@
 ## Robot Arm
 
-```julia
-using AbstractPlotting
- using AbstractPlotting: Mesh, Scene, LineSegments, translate!, rotate!, vbox, hbox, qrotation, mesh!
- using GeometryTypes: HyperRectangle, Vec3f0, Point3f0, Sphere
- using StaticArrays: SVector
- using AbstractPlotting: textslider
- using Observables: on
+```@raw html
+<pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>Mesh</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>LineSegments</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>translate!</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>rotate!</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>vbox</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>hbox</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>qrotation</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>mesh!</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>GeometryTypes</span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>HyperRectangle</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Vec3f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Point3f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>Sphere</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>StaticArrays</span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>SVector</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>textslider</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Observables</span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>on</span><span class='hljl-t'>
 
 
- """
-     example by @pbouffard from JuliaPlots/Makie.jl#307
-     https://github.com/pbouffard/miniature-garbanzo/
- """
+ </span><span class='hljl-s'>&quot;&quot;&quot;
+   example by @pbouffard from JuliaPlots/Makie.jl#307
+   https://github.com/pbouffard/miniature-garbanzo/
+ &quot;&quot;&quot;</span><span class='hljl-t'>
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>triad!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>len</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>translation</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-nfB'>0f0</span><span class='hljl-p'>,</span><span class='hljl-nfB'>0f0</span><span class='hljl-p'>,</span><span class='hljl-nfB'>0f0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>show_axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>ret</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>linesegments!</span><span class='hljl-p'>(</span><span class='hljl-t'>
+         </span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-t'>
+             </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>=&gt;</span><span class='hljl-t'> </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-n'>len</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'>
+             </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>=&gt;</span><span class='hljl-t'> </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>len</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'>
+             </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>=&gt;</span><span class='hljl-t'> </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>len</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-p'>],</span><span class='hljl-t'>
+         </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-sc'>:red</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:green</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>:blue</span><span class='hljl-p'>],</span><span class='hljl-t'>
+         </span><span class='hljl-n'>linewidth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-t'>
+     </span><span class='hljl-p'>)[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>translate!</span><span class='hljl-p'>(</span><span class='hljl-n'>ret</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>translation</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>return</span><span class='hljl-t'> </span><span class='hljl-n'>ret</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># Joint vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv</span><span class='hljl-t'>
+ </span><span class='hljl-k'>mutable struct</span><span class='hljl-t'> </span><span class='hljl-n'>Joint</span><span class='hljl-t'>
+     </span><span class='hljl-n'>scene</span><span class='hljl-oB'>::</span><span class='hljl-n'>Scene</span><span class='hljl-t'>
+     </span><span class='hljl-n'>triad</span><span class='hljl-oB'>::</span><span class='hljl-n'>LineSegments</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># link::Mesh</span><span class='hljl-t'>
+     </span><span class='hljl-n'>angle</span><span class='hljl-oB'>::</span><span class='hljl-n'>Float32</span><span class='hljl-t'>
+     </span><span class='hljl-n'>axis</span><span class='hljl-oB'>::</span><span class='hljl-n'>Vec3f0</span><span class='hljl-t'>
+     </span><span class='hljl-n'>offset</span><span class='hljl-oB'>::</span><span class='hljl-n'>Vec3f0</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- function triad!(scene, len; translation = (0f0,0f0,0f0), show_axis = false)
-     ret = linesegments!(
-         scene, [
-             Point3f0(0,0,0) => Point3f0(len,0,0),
-             Point3f0(0,0,0) => Point3f0(0,len,0),
-             Point3f0(0,0,0) => Point3f0(0,0,len)
-         ],
-         color = [:red, :green, :blue],
-         linewidth = 3, show_axis = false, center = false
-     )[end]
-     translate!(ret, translation)
-     return ret
- end
- # Joint vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
- mutable struct Joint
-     scene::Scene
-     triad::LineSegments
-     # link::Mesh
-     angle::Float32
-     axis::Vec3f0
-     offset::Vec3f0
- end
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>Joint</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-oB'>::</span><span class='hljl-n'>Scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>newscene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Scene</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>triad</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>triad!</span><span class='hljl-p'>(</span><span class='hljl-n'>newscene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>Joint</span><span class='hljl-p'>(</span><span class='hljl-n'>newscene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>triad</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- s = Scene(show_axis = false)
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>Joint</span><span class='hljl-p'>(</span><span class='hljl-t'>
+         </span><span class='hljl-n'>j</span><span class='hljl-oB'>::</span><span class='hljl-n'>Joint</span><span class='hljl-p'>;</span><span class='hljl-t'>
+         </span><span class='hljl-n'>offset</span><span class='hljl-oB'>::</span><span class='hljl-n'>Point3f0</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>angle</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-t'>
+     </span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>jnew</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Joint</span><span class='hljl-p'>(</span><span class='hljl-n'>j</span><span class='hljl-oB'>.</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>translate!</span><span class='hljl-p'>(</span><span class='hljl-n'>jnew</span><span class='hljl-oB'>.</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>j</span><span class='hljl-oB'>.</span><span class='hljl-n'>offset</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>linesegments!</span><span class='hljl-p'>(</span><span class='hljl-t'>
+         </span><span class='hljl-n'>jnew</span><span class='hljl-oB'>.</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>=&gt;</span><span class='hljl-t'> </span><span class='hljl-n'>offset</span><span class='hljl-p'>],</span><span class='hljl-t'> </span><span class='hljl-n'>linewidth</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>4</span><span class='hljl-p'>,</span><span class='hljl-t'>
+         </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:magenta</span><span class='hljl-t'>
+     </span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>jnew</span><span class='hljl-oB'>.</span><span class='hljl-n'>axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>axis</span><span class='hljl-t'>
+     </span><span class='hljl-n'>jnew</span><span class='hljl-oB'>.</span><span class='hljl-n'>offset</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>offset</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>setangle!</span><span class='hljl-p'>(</span><span class='hljl-n'>jnew</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>angle</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>return</span><span class='hljl-t'> </span><span class='hljl-n'>jnew</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- function Joint(s::Scene)
-     newscene = Scene(s)
-     triad = triad!(newscene, 1)
-     Joint(newscene, triad, 0f0, (0, 1, 0), (0, 0, 0))
- end
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>setangle!</span><span class='hljl-p'>(</span><span class='hljl-n'>j</span><span class='hljl-oB'>::</span><span class='hljl-n'>Joint</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>angle</span><span class='hljl-oB'>::</span><span class='hljl-n'>Real</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>j</span><span class='hljl-oB'>.</span><span class='hljl-n'>angle</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>angle</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>rotate!</span><span class='hljl-p'>(</span><span class='hljl-n'>j</span><span class='hljl-oB'>.</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>qrotation</span><span class='hljl-p'>(</span><span class='hljl-n'>j</span><span class='hljl-oB'>.</span><span class='hljl-n'>axis</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>angle</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- function Joint(j::Joint; offset::Point3f0=(0,0,0), axis=(0, 1, 0), angle=0)
-     jnew = Joint(j.scene)
-     translate!(jnew.scene, j.offset)
-     linesegments!(
-         jnew.scene, [Point3f0(0) => offset], linewidth=4,
-         color=:magenta, show_axis = false, center = false
-     )
-     jnew.axis = axis
-     jnew.offset = offset
-     setangle!(jnew, angle)
-     return jnew
- end
+ </span><span class='hljl-cs'># Joint ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span><span class='hljl-t'>
 
- function setangle!(j::Joint, angle::Real)
-     j.angle = angle
-     rotate!(j.scene, qrotation(j.axis, angle))
- end
+ </span><span class='hljl-n'>joints</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Vector</span><span class='hljl-p'>{</span><span class='hljl-n'>Joint</span><span class='hljl-p'>}()</span><span class='hljl-t'>
+ </span><span class='hljl-n'>links</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Float32</span><span class='hljl-p'>[</span><span class='hljl-ni'>5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>5</span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>s</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Scene</span><span class='hljl-p'>(</span><span class='hljl-n'>center</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>show_axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Joint</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>joints</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]</span><span class='hljl-oB'>.</span><span class='hljl-n'>axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-cs'># first joint is yaw</span><span class='hljl-t'>
+ </span><span class='hljl-n'>joints</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]</span><span class='hljl-oB'>.</span><span class='hljl-n'>offset</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Joint</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>];</span><span class='hljl-t'> </span><span class='hljl-n'>offset</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>3</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>angle</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-n'>pi</span><span class='hljl-oB'>/</span><span class='hljl-ni'>4</span><span class='hljl-p'>))</span><span class='hljl-t'> </span><span class='hljl-cs'># Pitch</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Joint</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>];</span><span class='hljl-t'> </span><span class='hljl-n'>offset</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>3</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>angle</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>pi</span><span class='hljl-oB'>/</span><span class='hljl-ni'>2</span><span class='hljl-p'>))</span><span class='hljl-t'> </span><span class='hljl-cs'># Pitch</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Joint</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>];</span><span class='hljl-t'> </span><span class='hljl-n'>offset</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>angle</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-n'>pi</span><span class='hljl-oB'>/</span><span class='hljl-ni'>4</span><span class='hljl-p'>))</span><span class='hljl-t'> </span><span class='hljl-cs'># Pitch</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Joint</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>];</span><span class='hljl-t'> </span><span class='hljl-n'>offset</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>1</span><span class='hljl-p'>)))</span><span class='hljl-t'> </span><span class='hljl-cs'># Yaw</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Joint</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>];</span><span class='hljl-t'> </span><span class='hljl-n'>offset</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-ni'>0</span><span class='hljl-p'>)))</span><span class='hljl-t'> </span><span class='hljl-cs'># Roll</span><span class='hljl-t'>
 
- # Joint ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ </span><span class='hljl-n'>sliders</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>vals</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[]</span><span class='hljl-t'>
+ </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-nf'>length</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>slider</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>val</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>textslider</span><span class='hljl-p'>(</span><span class='hljl-t'>
+         </span><span class='hljl-oB'>-</span><span class='hljl-nfB'>180.0</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>1.0</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>180.0</span><span class='hljl-p'>,</span><span class='hljl-t'>
+         </span><span class='hljl-s'>&quot;Joint </span><span class='hljl-si'>$</span><span class='hljl-p'>(</span><span class='hljl-n'>i</span><span class='hljl-p'>)</span><span class='hljl-s'>&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'>
+         </span><span class='hljl-n'>start</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>rad2deg</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>]</span><span class='hljl-oB'>.</span><span class='hljl-n'>angle</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>sliders</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>slider</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>push!</span><span class='hljl-p'>(</span><span class='hljl-n'>vals</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>val</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>on</span><span class='hljl-p'>(</span><span class='hljl-n'>val</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-t'>
+         </span><span class='hljl-nf'>setangle!</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>[</span><span class='hljl-n'>i</span><span class='hljl-p'>],</span><span class='hljl-t'> </span><span class='hljl-nf'>deg2rad</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>))</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
- joints = Vector{Joint}()
- links = Float32[5, 5]
- #triad!(s, 10; show_axis=true)
+ </span><span class='hljl-cs'># Add sphere to end effector:</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>mesh!</span><span class='hljl-p'>(</span><span class='hljl-n'>joints</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-oB'>.</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Sphere</span><span class='hljl-p'>(</span><span class='hljl-nf'>Point3f0</span><span class='hljl-p'>(</span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.25f0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-sc'>:cyan</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>update_cam!</span><span class='hljl-p'>(</span><span class='hljl-n'>s</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-nfB'>7.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>4.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>6.0</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec3f0</span><span class='hljl-p'>(</span><span class='hljl-nfB'>6.0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>2.5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>4.5</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>parent</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Scene</span><span class='hljl-p'>(</span><span class='hljl-n'>resolution</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>1000</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>500</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>vbox</span><span class='hljl-p'>(</span><span class='hljl-nf'>hbox</span><span class='hljl-p'>(</span><span class='hljl-n'>sliders</span><span class='hljl-oB'>...</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>s</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>parent</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>parent</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>RecordEvents</span><span class='hljl-p'>(</span><span class='hljl-n'>parent</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;output&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
- push!(joints, Joint(s))
- joints[1].axis = (0,0,1) # first joint is yaw
- joints[1].offset = (0, 0, 1)
- push!(joints, Joint(joints[end]; offset=Point3f0(3,0,0), axis=(0,1,0), angle=-pi/4)) # Pitch
- push!(joints, Joint(joints[end]; offset=Point3f0(3,0,0), axis=(0,1,0), angle=pi/2)) # Pitch
- push!(joints, Joint(joints[end]; offset=Point3f0(1,0,0), axis=(0,1,0), angle=-pi/4)) # Pitch
- push!(joints, Joint(joints[end]; offset=Point3f0(1,0,0), axis=(0,0,1))) # Yaw
- push!(joints, Joint(joints[end]; offset=Point3f0(0,0,0), axis=(1,0,0))) # Roll
-
- sliders = []
- vals = []
- for i = 1:length(joints)
-     slider, val = textslider(-180.0:1.0:180.0, "Joint $(i)", start=rad2deg(joints[i].angle))
-     push!(sliders, slider)
-     push!(vals, val)
-     on(val) do x
-         setangle!(joints[i], deg2rad(x))
-     end
- end
-
- # Add sphere to end effector:
- mesh!(joints[end].scene, Sphere(Point3f0(0.5, 0, 0), 0.25f0), color=:cyan, raw = true)
- update_cam!(s, Float32[7.0, 4.0, 6.0], Float32[6.0, 2.5, 4.5])
-
- RecordEvents(vbox(hbox(sliders...), s, parent = Scene(resolution = (1000, 500))), "output")
-
+</span>
+</pre>
 
 ```
 ```@raw html
@@ -102,7 +109,7 @@ using AbstractPlotting
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery//robot_arm/media/video.mp4" type="video/mp4">
+  <source src="http://juliaplots.org/MakieReferenceImages/gallery//robot_arm/media/video.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

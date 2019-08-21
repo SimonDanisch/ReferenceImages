@@ -3,61 +3,66 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>Orbit Diagram</h2><pre><code class="language-julia">using AbstractPlotting
- using Observables
+    <div><h2>Orbit Diagram</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Observables</span><span class='hljl-t'>
 
- growth(🐇, 🥕) = 🐇 * 🥕 * (1.0 - 🐇)
- function orbitdiagram(growth, r1, r2, n = 500, a = zeros(1000, n); T = 1000)
-     rs = range(r1, stop = r2, length = 1000)
-     for (j, r) in enumerate(rs)
-         x = 0.5
-         for _ in 1:T; x = growth(x, r); end
-         for i in 1:n
-             x = growth(x, r)
-             @inbounds a[j, i] = x
-         end
-     end
-     rs, a
- end
- r1 = slider(0:0.001:4, raw = true, camera=campixel!, start = 0.0)
- r2 = slider(0:0.001:4, raw = true, camera=campixel!, start = 4)
- n1 = 500; n2 = 1000; a = zeros(n2, n1)
- positions = Vector{Point2f0}(undef, n1 * n2)
- r1node, r2node = r1[end][:value], r2[end][:value]
- r1r2 = async_latest(lift(tuple, r1node, r2node))
- pos = lift(r1r2) do (r1, r2,)
-     global a
-     rs, a = orbitdiagram(growth, r1, r2, size(a, 2), a)
-     dim = size(a, 2)
-     for (i, r) in enumerate(rs)
-         positions[((i-1)*dim) + 1 : (i*dim)] .= Point2f0.(r, view(a, i, :))
-     end
-     positions
- end
- p = scatter(
-     pos, markersize = 0.006, color = (:black, 0.2),
-     show_axis = false
- )
- onany(pos) do pos
-     # faster to give the boundingbox ourselves, since otherwise we&#39;ll need to
-     # loop over pos!
-     #AbstractPlotting.update_limits!(p) # &lt;- would calculate bb
-     AbstractPlotting.update_limits!(p, FRect(r1node[], 0, r2node[] - r1node[], 1))
-     AbstractPlotting.update!(p)
- end
- scene = hbox(
-     p,
-     vbox(r1, r2)
- )
- RecordEvents(scene, &quot;output&quot;)
+ </span><span class='hljl-nf'>growth</span><span class='hljl-p'>(</span><span class='hljl-n'>🐇</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>🥕</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>🐇</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>🥕</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-nfB'>1.0</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-n'>🐇</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>orbitdiagram</span><span class='hljl-p'>(</span><span class='hljl-n'>growth</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>n</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>500</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>zeros</span><span class='hljl-p'>(</span><span class='hljl-ni'>1000</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>n</span><span class='hljl-p'>);</span><span class='hljl-t'> </span><span class='hljl-n'>T</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1000</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>rs</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>range</span><span class='hljl-p'>(</span><span class='hljl-n'>r1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>stop</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>r2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>length</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1000</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>j</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-nf'>enumerate</span><span class='hljl-p'>(</span><span class='hljl-n'>rs</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-n'>x</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.5</span><span class='hljl-t'>
+         </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>_</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-n'>T</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>growth</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r</span><span class='hljl-p'>);</span><span class='hljl-t'> </span><span class='hljl-k'>end</span><span class='hljl-t'>
+         </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-n'>n</span><span class='hljl-t'>
+             </span><span class='hljl-n'>x</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>growth</span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r</span><span class='hljl-p'>)</span><span class='hljl-t'>
+             </span><span class='hljl-nd'>@inbounds</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-p'>[</span><span class='hljl-n'>j</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-t'>
+         </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>rs</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-n'>r1</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>slider</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>0.001</span><span class='hljl-oB'>:</span><span class='hljl-ni'>4</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>raw</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>true</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>camera</span><span class='hljl-oB'>=</span><span class='hljl-n'>campixel!</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>start</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.0</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>r2</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>slider</span><span class='hljl-p'>(</span><span class='hljl-ni'>0</span><span class='hljl-oB'>:</span><span class='hljl-nfB'>0.001</span><span class='hljl-oB'>:</span><span class='hljl-ni'>4</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>raw</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>true</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>camera</span><span class='hljl-oB'>=</span><span class='hljl-n'>campixel!</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>start</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>4</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>n1</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>500</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>n2</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1000</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>zeros</span><span class='hljl-p'>(</span><span class='hljl-n'>n2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>n1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>positions</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Vector</span><span class='hljl-p'>{</span><span class='hljl-n'>Point2f0</span><span class='hljl-p'>}(</span><span class='hljl-n'>undef</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>n1</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-n'>n2</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>r1node</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r2node</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>r1</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>][</span><span class='hljl-sc'>:value</span><span class='hljl-p'>],</span><span class='hljl-t'> </span><span class='hljl-n'>r2</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>][</span><span class='hljl-sc'>:value</span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>r1r2</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>async_latest</span><span class='hljl-p'>(</span><span class='hljl-nf'>lift</span><span class='hljl-p'>(</span><span class='hljl-n'>tuple</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r1node</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r2node</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>pos</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lift</span><span class='hljl-p'>(</span><span class='hljl-n'>r1r2</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>r1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r2</span><span class='hljl-p'>,)</span><span class='hljl-t'>
+     </span><span class='hljl-kd'>global</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-t'>
+     </span><span class='hljl-n'>rs</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>orbitdiagram</span><span class='hljl-p'>(</span><span class='hljl-n'>growth</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>size</span><span class='hljl-p'>(</span><span class='hljl-n'>a</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-n'>a</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>dim</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>size</span><span class='hljl-p'>(</span><span class='hljl-n'>a</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-k'>for</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>i</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-kp'>in</span><span class='hljl-t'> </span><span class='hljl-nf'>enumerate</span><span class='hljl-p'>(</span><span class='hljl-n'>rs</span><span class='hljl-p'>)</span><span class='hljl-t'>
+         </span><span class='hljl-n'>positions</span><span class='hljl-p'>[((</span><span class='hljl-n'>i</span><span class='hljl-oB'>-</span><span class='hljl-ni'>1</span><span class='hljl-p'>)</span><span class='hljl-oB'>*</span><span class='hljl-n'>dim</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>+</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-t'> </span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>i</span><span class='hljl-oB'>*</span><span class='hljl-n'>dim</span><span class='hljl-p'>)]</span><span class='hljl-t'> </span><span class='hljl-oB'>.=</span><span class='hljl-t'> </span><span class='hljl-n'>Point2f0</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>r</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>view</span><span class='hljl-p'>(</span><span class='hljl-n'>a</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-oB'>:</span><span class='hljl-p'>))</span><span class='hljl-t'>
+     </span><span class='hljl-k'>end</span><span class='hljl-t'>
+     </span><span class='hljl-n'>positions</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-n'>p</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>scatter</span><span class='hljl-p'>(</span><span class='hljl-t'>
+     </span><span class='hljl-n'>pos</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.006</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-sc'>:black</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.2</span><span class='hljl-p'>),</span><span class='hljl-t'>
+     </span><span class='hljl-n'>show_axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>onany</span><span class='hljl-p'>(</span><span class='hljl-n'>pos</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>pos</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># faster to give the boundingbox ourselves, since otherwise we&#39;ll need to</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># loop over pos!</span><span class='hljl-t'>
+     </span><span class='hljl-cs'>#AbstractPlotting.update_limits!(p) # &lt;- would calculate bb</span><span class='hljl-t'>
+     </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>.</span><span class='hljl-nf'>update_limits!</span><span class='hljl-p'>(</span><span class='hljl-n'>p</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>FRect</span><span class='hljl-p'>(</span><span class='hljl-n'>r1node</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r2node</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-t'> </span><span class='hljl-n'>r1node</span><span class='hljl-p'>[],</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>))</span><span class='hljl-t'>
+     </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>.</span><span class='hljl-nf'>update!</span><span class='hljl-p'>(</span><span class='hljl-n'>p</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>hbox</span><span class='hljl-p'>(</span><span class='hljl-t'>
+     </span><span class='hljl-n'>p</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>vbox</span><span class='hljl-p'>(</span><span class='hljl-n'>r1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>r2</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>RecordEvents</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;output&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery//orbit_diagram/media/video.mp4" type="video/mp4">
+  <source src="http://juliaplots.org/MakieReferenceImages/gallery//orbit_diagram/media/video.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

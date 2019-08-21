@@ -3,39 +3,44 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuliaDocs/Documenter.jl/assets/html/documenter.css">
+    <link rel="stylesheet" href="..\syntaxtheme.css">
+
   </head>
   <body>
-    <div><h2>Animated time series</h2><pre><code class="language-julia">using AbstractPlotting
+    <div><h2>Animated time series</h2><pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
 
- f0 = 1/2; fs = 100;
- winsec = 4; hopsec = 1/60
- nwin = round(Integer, winsec*fs)
- nhop = round(Integer, hopsec*fs)
- # do the loop
- frame_start = -winsec
- frame_time = collect((0:(nwin-1)) * (1/fs))
- aframe = sin.(2*pi*f0.*(frame_start .+ frame_time))
- scene = lines(frame_start .+ frame_time, aframe)
- center!(scene)
- lineplot = scene[end]
- fix = 0
- record(scene, &quot;output.mp4&quot;, 1:50) do i
-     global frame_start
-     aframe .= sin.(2*pi*f0.*(frame_start .+ frame_time))
-     # append!(aframe, randn(nhop)); deleteat!(aframe, 1:nhop)
-     lineplot[1] = frame_start .+ frame_time
-     lineplot[2] = aframe
-     AbstractPlotting.update_limits!(scene)
-     AbstractPlotting.update!(scene)
-     sleep(hopsec)
-     frame_start += hopsec
-end
+ </span><span class='hljl-n'>f0</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>/</span><span class='hljl-ni'>2</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>fs</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>100</span><span class='hljl-p'>;</span><span class='hljl-t'>
+ </span><span class='hljl-n'>winsec</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>4</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>hopsec</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>/</span><span class='hljl-ni'>60</span><span class='hljl-t'>
+ </span><span class='hljl-n'>nwin</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>round</span><span class='hljl-p'>(</span><span class='hljl-n'>Integer</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>winsec</span><span class='hljl-oB'>*</span><span class='hljl-n'>fs</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>nhop</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>round</span><span class='hljl-p'>(</span><span class='hljl-n'>Integer</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>hopsec</span><span class='hljl-oB'>*</span><span class='hljl-n'>fs</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-cs'># do the loop</span><span class='hljl-t'>
+ </span><span class='hljl-n'>frame_start</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-oB'>-</span><span class='hljl-n'>winsec</span><span class='hljl-t'>
+ </span><span class='hljl-n'>frame_time</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>collect</span><span class='hljl-p'>((</span><span class='hljl-ni'>0</span><span class='hljl-oB'>:</span><span class='hljl-p'>(</span><span class='hljl-n'>nwin</span><span class='hljl-oB'>-</span><span class='hljl-ni'>1</span><span class='hljl-p'>))</span><span class='hljl-t'> </span><span class='hljl-oB'>*</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-oB'>/</span><span class='hljl-n'>fs</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>aframe</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>sin</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-ni'>2</span><span class='hljl-oB'>*</span><span class='hljl-n'>pi</span><span class='hljl-oB'>*</span><span class='hljl-n'>f0</span><span class='hljl-oB'>.*</span><span class='hljl-p'>(</span><span class='hljl-n'>frame_start</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-n'>frame_time</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>lines</span><span class='hljl-p'>(</span><span class='hljl-n'>frame_start</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-n'>frame_time</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>aframe</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>center!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>lineplot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>scene</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>fix</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>0</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>record</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;output.mp4&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>50</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-k'>do</span><span class='hljl-t'> </span><span class='hljl-n'>i</span><span class='hljl-t'>
+     </span><span class='hljl-kd'>global</span><span class='hljl-t'> </span><span class='hljl-n'>frame_start</span><span class='hljl-t'>
+     </span><span class='hljl-n'>aframe</span><span class='hljl-t'> </span><span class='hljl-oB'>.=</span><span class='hljl-t'> </span><span class='hljl-n'>sin</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-ni'>2</span><span class='hljl-oB'>*</span><span class='hljl-n'>pi</span><span class='hljl-oB'>*</span><span class='hljl-n'>f0</span><span class='hljl-oB'>.*</span><span class='hljl-p'>(</span><span class='hljl-n'>frame_start</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-n'>frame_time</span><span class='hljl-p'>))</span><span class='hljl-t'>
+     </span><span class='hljl-cs'># append!(aframe, randn(nhop)); deleteat!(aframe, 1:nhop)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>lineplot</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>frame_start</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-n'>frame_time</span><span class='hljl-t'>
+     </span><span class='hljl-n'>lineplot</span><span class='hljl-p'>[</span><span class='hljl-ni'>2</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>aframe</span><span class='hljl-t'>
+     </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>.</span><span class='hljl-nf'>update_limits!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>.</span><span class='hljl-nf'>update!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-nf'>sleep</span><span class='hljl-p'>(</span><span class='hljl-n'>hopsec</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>frame_start</span><span class='hljl-t'> </span><span class='hljl-oB'>+=</span><span class='hljl-t'> </span><span class='hljl-n'>hopsec</span><span class='hljl-t'>
+</span><span class='hljl-k'>end</span><span class='hljl-t'>
 
-</code></pre>
+</span>
+</pre>
+
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery//animated_time_series/media/animated_time_series.mp4" type="video/mp4">
+  <source src="http://juliaplots.org/MakieReferenceImages/gallery//animated_time_series/media/animated_time_series.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

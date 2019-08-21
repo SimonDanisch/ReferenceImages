@@ -1,55 +1,58 @@
 ## Chess Game
 
-```julia
-using AbstractPlotting
- using Base.Iterators: repeated
+```@raw html
+<pre class='hljl'>
+<span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Makie</span><span class='hljl-t'>
+ </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Base</span><span class='hljl-oB'>.</span><span class='hljl-n'>Iterators</span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>repeated</span><span class='hljl-t'>
 
- r = 1:8
- board = isodd.(r .+ r')
- scene = Scene(resolution = (1000, 1000))
- heatmap!(scene, board, scale_plot = false, show_axis = false)
- white = ['♕', '♔', '♖', '♖', '♗', '♗', '♘', '♘', repeated('♙', 8)...]
- wx_positions = [4, 5, 1, 8, 3, 6, 2, 7, (1:8)...]
- wy_positions = [repeated(1, 8)..., repeated(2, 8)...]
- w_positions = Point2.(wx_positions, wy_positions)
- white_game = scatter!(
-     scene, w_positions, marker = white,
-     scale_plot = false, show_axis = false,
-     markersize = 0.5, marker_offset = Vec2f0(-0.7)
- )[end]
- black = Char.(Int.(white) .+ 6)
- b_positions = Point2f0.(wx_positions, [repeated(8, 8)..., repeated(7, 8)...])
- black_game = scatter!(
-     scene, b_positions, marker = black,
-     scale_plot = false, show_axis = false,
-     markersize = 0.5, marker_offset = Vec2f0(-0.7)
- )[end]
+ </span><span class='hljl-n'>r</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>8</span><span class='hljl-t'>
+ </span><span class='hljl-n'>board</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>isodd</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>r</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-n'>r</span><span class='hljl-oB'>&#39;</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Scene</span><span class='hljl-p'>(</span><span class='hljl-n'>resolution</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>1000</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1000</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>heatmap!</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>board</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>scale_plot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>show_axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>white</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-sc'>&#39;♕&#39;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>&#39;♔&#39;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>&#39;♖&#39;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>&#39;♖&#39;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>&#39;♗&#39;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>&#39;♗&#39;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>&#39;♘&#39;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-sc'>&#39;♘&#39;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>repeated</span><span class='hljl-p'>(</span><span class='hljl-sc'>&#39;♙&#39;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>8</span><span class='hljl-p'>)</span><span class='hljl-oB'>...</span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>wx_positions</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-ni'>4</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>8</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>6</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>7</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-oB'>:</span><span class='hljl-ni'>8</span><span class='hljl-p'>)</span><span class='hljl-oB'>...</span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>wy_positions</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-nf'>repeated</span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>8</span><span class='hljl-p'>)</span><span class='hljl-oB'>...</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>repeated</span><span class='hljl-p'>(</span><span class='hljl-ni'>2</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>8</span><span class='hljl-p'>)</span><span class='hljl-oB'>...</span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>w_positions</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Point2</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>wx_positions</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>wy_positions</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>white_game</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>scatter!</span><span class='hljl-p'>(</span><span class='hljl-t'>
+     </span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>w_positions</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>marker</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>white</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>scale_plot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>show_axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>marker_offset</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec2f0</span><span class='hljl-p'>(</span><span class='hljl-oB'>-</span><span class='hljl-nfB'>0.7</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'>
+ </span><span class='hljl-n'>black</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Char</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>Int</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>white</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>.+</span><span class='hljl-t'> </span><span class='hljl-ni'>6</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>b_positions</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>Point2f0</span><span class='hljl-oB'>.</span><span class='hljl-p'>(</span><span class='hljl-n'>wx_positions</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-nf'>repeated</span><span class='hljl-p'>(</span><span class='hljl-ni'>8</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>8</span><span class='hljl-p'>)</span><span class='hljl-oB'>...</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>repeated</span><span class='hljl-p'>(</span><span class='hljl-ni'>7</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>8</span><span class='hljl-p'>)</span><span class='hljl-oB'>...</span><span class='hljl-p'>])</span><span class='hljl-t'>
+ </span><span class='hljl-n'>black_game</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>scatter!</span><span class='hljl-p'>(</span><span class='hljl-t'>
+     </span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>b_positions</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>marker</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>black</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>scale_plot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>show_axis</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-kc'>false</span><span class='hljl-p'>,</span><span class='hljl-t'>
+     </span><span class='hljl-n'>markersize</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.5</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>marker_offset</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Vec2f0</span><span class='hljl-p'>(</span><span class='hljl-oB'>-</span><span class='hljl-nfB'>0.7</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-p'>)[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'>
 
- function move_fig!(color, figure, target)
-     game = color == :white ? white_game : black_game
-     game[1][][figure] = target
-     game[1][] = game[1][]
- end
- st = Stepper(scene, "output")
- step!(st)
- move_fig!(:white, 9, (1, 4))
- step!(st)
- st
+ </span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>move_fig!</span><span class='hljl-p'>(</span><span class='hljl-n'>color</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>figure</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>target</span><span class='hljl-p'>)</span><span class='hljl-t'>
+     </span><span class='hljl-n'>game</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>color</span><span class='hljl-t'> </span><span class='hljl-oB'>==</span><span class='hljl-t'> </span><span class='hljl-sc'>:white</span><span class='hljl-t'> </span><span class='hljl-oB'>?</span><span class='hljl-t'> </span><span class='hljl-n'>white_game</span><span class='hljl-t'> </span><span class='hljl-oB'>:</span><span class='hljl-t'> </span><span class='hljl-n'>black_game</span><span class='hljl-t'>
+     </span><span class='hljl-n'>game</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>][][</span><span class='hljl-n'>figure</span><span class='hljl-p'>]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>target</span><span class='hljl-t'>
+     </span><span class='hljl-n'>game</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>][]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>game</span><span class='hljl-p'>[</span><span class='hljl-ni'>1</span><span class='hljl-p'>][]</span><span class='hljl-t'>
+ </span><span class='hljl-k'>end</span><span class='hljl-t'>
+ </span><span class='hljl-n'>st</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>Stepper</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;output&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>step!</span><span class='hljl-p'>(</span><span class='hljl-n'>st</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>move_fig!</span><span class='hljl-p'>(</span><span class='hljl-sc'>:white</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>9</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>4</span><span class='hljl-p'>))</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>step!</span><span class='hljl-p'>(</span><span class='hljl-n'>st</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>st</span><span class='hljl-t'>
 
+</span>
+</pre>
 
 ```
 ```@raw html
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//chess_game/media/chess_game-1.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//chess_game/media/chess_game-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="https://simondanisch.github.io/ReferenceImages/gallery//chess_game/media/chess_game-2.jpg" alt="">
+        <img src="http://juliaplots.org/MakieReferenceImages/gallery//chess_game/media/chess_game-2.jpg" alt="">
 
     </p>
 </div>
