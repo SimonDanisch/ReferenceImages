@@ -18,14 +18,11 @@
      </span><span class='hljl-k'>end</span><span class='hljl-t'>
  </span><span class='hljl-k'>end</span><span class='hljl-t'>
  </span><span class='hljl-n'>scene</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>meshscatter</span><span class='hljl-p'>(</span><span class='hljl-nf'>rand</span><span class='hljl-p'>(</span><span class='hljl-n'>Point3f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>10</span><span class='hljl-oB'>^</span><span class='hljl-ni'>4</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>.*</span><span class='hljl-t'> </span><span class='hljl-nfB'>20f0</span><span class='hljl-p'>)</span><span class='hljl-t'>
- </span><span class='hljl-nf'>display</span><span class='hljl-p'>(</span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-n'>screen</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>AbstractPlotting</span><span class='hljl-oB'>.</span><span class='hljl-nf'>backend_display</span><span class='hljl-p'>(</span><span class='hljl-n'>GLMakie</span><span class='hljl-oB'>.</span><span class='hljl-nf'>GLBackend</span><span class='hljl-p'>(),</span><span class='hljl-t'> </span><span class='hljl-n'>scene</span><span class='hljl-p'>)</span><span class='hljl-t'>
  </span><span class='hljl-n'>meshplot</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>scene</span><span class='hljl-p'>[</span><span class='hljl-k'>end</span><span class='hljl-p'>]</span><span class='hljl-t'>
  </span><span class='hljl-n'>buff</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>rand</span><span class='hljl-p'>(</span><span class='hljl-n'>Point3f0</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>10</span><span class='hljl-oB'>^</span><span class='hljl-ni'>4</span><span class='hljl-p'>)</span><span class='hljl-t'> </span><span class='hljl-oB'>.*</span><span class='hljl-t'> </span><span class='hljl-nfB'>20f0</span><span class='hljl-p'>;</span><span class='hljl-t'>
- </span><span class='hljl-n'>screen</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>GLMakie</span><span class='hljl-oB'>.</span><span class='hljl-nf'>global_gl_screen</span><span class='hljl-p'>();</span><span class='hljl-t'>
- </span><span class='hljl-nd'>@time</span><span class='hljl-t'> </span><span class='hljl-nf'>update_loop</span><span class='hljl-p'>(</span><span class='hljl-n'>meshplot</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>buff</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>screen</span><span class='hljl-p'>)</span><span class='hljl-t'>
+ </span><span class='hljl-nf'>update_loop</span><span class='hljl-p'>(</span><span class='hljl-n'>meshplot</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>buff</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>screen</span><span class='hljl-p'>)</span><span class='hljl-t'>
  </span><span class='hljl-n'>GLMakie</span><span class='hljl-oB'>.</span><span class='hljl-n'>opengl_renderloop</span><span class='hljl-p'>[]</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>GLMakie</span><span class='hljl-oB'>.</span><span class='hljl-n'>renderloop</span><span class='hljl-t'> </span><span class='hljl-cs'># restore previous loop</span><span class='hljl-t'>
- </span><span class='hljl-cs'># when done:</span><span class='hljl-t'>
- </span><span class='hljl-n'>GLMakie</span><span class='hljl-oB'>.</span><span class='hljl-nf'>destroy!</span><span class='hljl-p'>(</span><span class='hljl-n'>screen</span><span class='hljl-p'>)</span><span class='hljl-t'>
  </span><span class='hljl-n'>scene</span><span class='hljl-t'>
 
 </span>
@@ -36,7 +33,7 @@
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="http://juliaplots.org/MakieReferenceImages/gallery//explicit_frame_rendering/media/image.jpg" alt="">
+        <img src="https://simondanisch.github.io/ReferenceImages/gallery/explicit_frame_rendering/media/image.jpg" alt="">
 
     </p>
 </div>
