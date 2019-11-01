@@ -26,7 +26,7 @@
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery/travelling_wave/media/travelling_wave.mp4" type="video/mp4">
+  <source src="http://juliaplots.org/MakieReferenceImages/gallery//travelling_wave/media/travelling_wave.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 

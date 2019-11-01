@@ -27,7 +27,7 @@
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
         <video controls autoplay loop muted>
-  <source src="https://simondanisch.github.io/ReferenceImages/gallery/line_changing_colour_with_observables/media/line_changing_colour_with_observables.mp4" type="video/mp4">
+  <source src="http://juliaplots.org/MakieReferenceImages/gallery//line_changing_colour_with_observables/media/line_changing_colour_with_observables.mp4" type="video/mp4">
   Your browser does not support mp4. Please use a modern browser like Chrome or Firefox.
 </video>
 
