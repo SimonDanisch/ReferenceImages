@@ -39,21 +39,21 @@
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="http://juliaplots.org/MakieReferenceImages/gallery//stepper_demo/media/stepper_demo-1.jpg" alt="">
+        <img src="http://simondanisch.github.io/ReferenceImages/gallery/stepper_demo/media/stepper_demo-1.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="http://juliaplots.org/MakieReferenceImages/gallery//stepper_demo/media/stepper_demo-2.jpg" alt="">
+        <img src="http://simondanisch.github.io/ReferenceImages/gallery/stepper_demo/media/stepper_demo-2.jpg" alt="">
 
     </p>
 </div>
 
 <div style="display:inline-block">
     <p style="display:inline-block; text-align: center">
-        <img src="http://juliaplots.org/MakieReferenceImages/gallery//stepper_demo/media/stepper_demo-3.jpg" alt="">
+        <img src="http://simondanisch.github.io/ReferenceImages/gallery/stepper_demo/media/stepper_demo-3.jpg" alt="">
 
     </p>
 </div>
